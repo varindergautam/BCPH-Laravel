@@ -1,0 +1,145 @@
+@extends('layouts.front_layout')
+
+@section('title')
+Registeration Form
+@endsection
+
+@section('content')
+<div class="main_padding application_form">
+    <div class="container  ">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="form_section border p-3 rounded-1">
+<form method="post" action="" enctype="mutlipart/form-data" id="register-form">
+    @csrf
+    <div class="form_heading">
+        <img src="{{ asset('front/images/logo.png') }}" class="mx-auto d-block mb-2">
+        <h3>Enrolment Registration Form</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="applicant_name">Name of the Applicant</label>
+            <input type="text" class="form-control" name="applicant_name" id="applicant_name"
+            placeholder="Enter Name">
+            <strong id="applicant_name-error" class="error"></strong>
+        </div>
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="father_name">Name Of Father's/Husband's </label>
+            <input type="text" class="form-control" name="father_name" id="father_name"
+            placeholder="Enter Father/Husband Name">
+            <strong id="father_name-error" class="error"></strong>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="email">E-Mail ID </label>
+            <input type="email" class="form-control" name="email" id="email"
+            placeholder="Enter Email">
+            <strong id="email-error" class="error"></strong>
+        </div>
+        <div class="col-md-6  mb-3">
+            <label class="numeric-only text-dark" for="mobile_number">Mobile No. </label>
+            <input type="text" class="form-control number" name="mobile_number" id="mobile_number"
+            placeholder="Enter Number">
+            <strong id="mobile_number-error" class="error"></strong>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6  mb-3">									
+            <label class="text-dark" for="category">Category (General/BC/SC)</label>
+            <select class="form-control form-select" name="category" id="category" >
+                <option selected="" disabled="">Select Category</option>
+                <option value="General">General</option>
+                <option value="OBC">OBC</option>
+                <option value="SC/ST/BPL">SC/ST/BPL</option>
+                <option value="Handicaps/Blinds">Handicaps/Blinds</option>
+            </select>
+            <strong id="category-error" class="error"></strong>
+        </div>
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="nationality">Nationality</label>
+            <input class="form-control" name="nationality" id="nationality" value="India" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="country">Country</label>
+            <input class="form-control" name="nationality" id="country" value="India" readonly>
+        </div>
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="state">State </label>
+            <input type="text" class="form-control" name="state" id="state"
+            placeholder="Enter state Name">
+            <strong id="state-error" class="error"></strong>
+        </div>
+    </div>
+
+
+    <div class="row ">
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="country">City</label>
+            <input type="text" class="form-control" name="city" id="city"
+            placeholder="Enter City Name">
+            <strong id="city-error" class="error"></strong>
+        </div>
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="state">District </label>
+            <input type="text" class="form-control" name="district" id="district"
+            placeholder="Enter District Name">
+            <strong id="district-error" class="error"></strong>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="date_of_birth">Date of Birth</label>
+            <input type="date" class="form-control" name="date_of_birth" id="date_of_birth"
+            placeholder="">	
+            <strong id="date_of_birth-error" class="error"></strong>			
+        </div>
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="adhaarno">Adhaar No. </label>
+            <input type="text" class="form-control" name="adhaarno" id="adhaarno"
+            placeholder="Enter Adhaar No.">
+            <strong id="adhaarno-error" class="error"></strong>			
+        </div>
+    </div>
+    <div class="row">
+        <div class="col ">
+            <div class=" margin_top_33">
+                <a href="{{ url('login') }}" name="" class="custom_btn previous_btn_padding">Login</a>
+            </div>
+        </div>
+        <div class="col ">
+            <div class="submit_btn">
+                <input type="submit" name="" value="Register" class="float-end">
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+@endsection
+
+@section('script')
+<script>
+    jQuery(document).ready(function(){
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            
+            var url = baseUrl+'/storeRegister';
+            var method = $(this).attr('method');
+            var formData = new FormData(this);
+
+            postAjax(url, method, formData)
+        });
+    });
+</script>
+@endsection

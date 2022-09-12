@@ -13,10 +13,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+    'login' => false,
+  ]);
 
-Auth::routes();
+  Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+  Route::controller(App\Http\Controllers\Front\UserController::class)
+    // ->prefix('placements')
+    // ->as('placements.')
+    ->group(function () {
+        Route::get('/', 'register')->name('register');
+        Route::post('/storeRegister', 'storeRegister')->name('storeRegister');
+        Route::get('/login', 'login')->name('login');
+        Route::post('/loginUser', 'loginUser')->name('loginUser');
+        Route::get('/testEmail', 'testEmail')->name('testEmail');
+    });
+
+  Route::group(['middleware' => ['auth']], function () {
+    Route::controller(App\Http\Controllers\Front\ApplicationFormController::class)
+    ->group(function () {
+        Route::get('application-form', 'applicationForm')->name('applicationForm');
+        Route::post('orderid-generate', 'orderIdGenerate')->name('orderIdGenerate');
+        Route::get('paysuccess', 'paysuccess')->name('paysuccess');
+    });
+  });
+
