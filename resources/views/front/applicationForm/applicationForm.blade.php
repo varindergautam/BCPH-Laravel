@@ -87,7 +87,7 @@ Application Form
                                 <label class="text-dark" for="permanent_address">5. Permanent address of the applicant, any change of address in future is to be intimated to the Bar Council at once (in Block Letter)</label>
                             </div>
                             <div class="col-md-6">
-                                <textarea class="form-control" name="permanent_address" id="permanent_address" placeholder="Enter permanent address"></textarea>
+                                <textarea class="form-control" name="permanent_address" id="permanent_address" placeholder="Enter permanent address">{{ @$applicationForm->permanent_address }}</textarea>
                                 <strong id="permanent_address-error" class="error"></strong>
                             </div>
                         </div>
@@ -99,9 +99,9 @@ Application Form
                             <div class="col-md-6">
                                 <select class="form-control" name="university_name" id="university_name">
                                     <option selected="" disabled="">Select University</option>
-                                    <option value="">University - 1</option>
-                                    <option value="">University - 2</option>
-                                    <option value="">University - 3</option>
+                                    <option value="1">University - 1</option>
+                                    <option value="2">University - 2</option>
+                                    <option value="3">University - 3</option>
                                 </select>
                                 <strong id="university_name-error" class="error"></strong>
                             </div>
@@ -113,7 +113,7 @@ Application Form
                             </div>
                             <div class="col-md-6">									
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input which_univeristy" type="radio" name="which_univeristy" id="which_univeristy0" value="which_univeristy0" checked>
+                                    <input class="form-check-input which_univeristy" type="radio" name="which_univeristy" id="which_univeristy0" value="0" checked>
                                     <label class="form-check-label text-dark" for="which_univeristy0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -140,7 +140,7 @@ Application Form
                                 <label class="text-dark" for="plus_two_mark">8. Whether the applicant passed 10+2 Examination before admission to 5 year Law Course, give full particulars. (An attested copy to be enclosed), with percentage & Marks</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control numeric-only" name="plus_two_mark" id="plus_two_mark" placeholder="Enter 10+2 marks">
+                                <input type="text" class="form-control " name="plus_two_mark" id="plus_two_mark" placeholder="Enter 10+2 marks">
                                 <strong id="plus_two_mark-error" class="error"></strong>
                             </div>
                         </div>
@@ -186,7 +186,7 @@ Application Form
                                 <label class="text-dark" for="college_pass_date">(iii) The date on which he/she passes the examination and obtained his/her degree.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="college_pass_date" id="college_pass_date" placeholder="Enter college pass date">
+                                <input type="date" class="form-control" name="college_pass_date" id="college_pass_date" placeholder="Enter college pass date">
                                 <strong id="college_pass_date-error" class="error"></strong>
                             </div>
                         </div>
@@ -504,11 +504,11 @@ Application Form
                         </div>
 
                         <div class="row">
-                           <div class="col ">
+                           {{-- <div class="col ">
                               <div class=" margin_top_33">
                                   <a href="table.html" name="" class="custom_btn previous_btn_padding">Previous</a>
                               </div>
-                          </div>
+                          </div> --}}
                           <div class="col ">
                               <div class="submit_btn">
                                   <input type="submit" name="" value="Next" class="float-end">
@@ -591,49 +591,71 @@ Application Form
                 contentType: false,
                 dataType : "json",
                 data: formData,
-                success: function (data) {
-                    var order_id = '';
-                if (data.order_id) {
-                    order_id = data.order_id;
-                }
-
-                var totalAmount = 1123;
-
-                var options = {
-                    "key": "{{ env('RAZORPAY_KEY') }}",
-                    "amount": $('#total_pay').val(),
-                    "currency": "INR",
-                    "name": "Varinder",
-                    "description": "remarks",
-                    "image": "{{ asset('front/images/logo.png') }}",
-                    "order_id": order_id,
-                    "handler": function (response) {
-                        // console.log(response.razorpay_signature);
-                        $('#razorpay_payment_id').val(response.razorpay_payment_id);
-                        $('#razorpay_order_id').val(response.razorpay_order_id);
-                        $('#razorpay_signature').val(response.razorpay_signature);
-                        window.location.href = 'http://localhost/bcph_laravel/public/paysuccess?razorpay_payment_id='+response.razorpay_payment_id+'&amount='+totalAmount+"&razorpay_signature="+response.razorpay_signature + "&razorpay_order_id=" + response.razorpay_order_id;
-                        // $('#application-form').submit();
-                    },
-                    "prefill": {
-                        "name": "{{ auth()->user()->applicant_name }}",
-                        "email": "{{ auth()->user()->email }}",
-                        "contact": "{{ auth()->user()->mobile_number }}"
-                    },
-                    "notes": {
-                        "address": "Razorpay Corporate Office"
-                    },
-                    "theme": {
-                        "color": "#3399cc"
-                    }
-                };
-                var rzp1 = new Razorpay(options);
-                rzp1.on('payment.failed', function (response) {
-                    console.log(response)
-                });
-
-                rzp1.open();
+                beforeSend: function(){
+                    $(".error").text("");
+                    $('.loader').show();
                 },
+                success: function (data) {
+                    console.log(data)
+
+                    if(data.data != 2)
+                    {
+                        var order_id = '';
+                        if (data.order_id) {
+                            order_id = data.order_id;
+                        }
+
+                        var totalAmount = 1123;
+
+                        var options = {
+                            "key": "{{ env('RAZORPAY_KEY') }}",
+                            "amount": $('#total_pay').val(),
+                            "currency": "INR",
+                            "name": "Varinder",
+                            "description": "remarks",
+                            "image": "{{ asset('front/images/logo.png') }}",
+                            "order_id": order_id,
+                            "handler": function (response) {
+                                // console.log(response.razorpay_signature);
+                                $('#razorpay_payment_id').val(response.razorpay_payment_id);
+                                $('#razorpay_order_id').val(response.razorpay_order_id);
+                                $('#razorpay_signature').val(response.razorpay_signature);
+                                window.location.href = baseUrl+'/paysuccess?razorpay_payment_id='+response.razorpay_payment_id+'&amount='+totalAmount+"&razorpay_signature="+response.razorpay_signature + "&razorpay_order_id=" + response.razorpay_order_id;
+                                // $('#application-form').submit();
+                            },
+                            "prefill": {
+                                "name": "{{ auth()->user()->applicant_name }}",
+                                "email": "{{ auth()->user()->email }}",
+                                "contact": "{{ auth()->user()->mobile_number }}"
+                            },
+                            "notes": {
+                                "address": "Razorpay Corporate Office"
+                            },
+                            "theme": {
+                                "color": "#3399cc"
+                            }
+                        };
+                        var rzp1 = new Razorpay(options);
+                        rzp1.on('payment.failed', function (response) {
+                            console.log(response)
+                        });
+
+                        rzp1.open();
+                    }
+                    else{
+                        window.location.href = data.link;
+                    }
+                    
+                },
+                error: function(data) {
+                    var errors = $.parseJSON(data.responseText);
+                    printErrorMsg(errors);
+                },
+                complete: function(){
+                    setTimeout(function() {
+                        $( ".loader" ).fadeOut();
+                    }, 1000);
+                }
 
             });
   

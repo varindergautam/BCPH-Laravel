@@ -22,7 +22,7 @@ Auth::routes([
 
   Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
   Route::controller(App\Http\Controllers\Front\UserController::class)
     // ->prefix('placements')
@@ -41,6 +41,15 @@ Auth::routes([
         Route::get('application-form', 'applicationForm')->name('applicationForm');
         Route::post('orderid-generate', 'orderIdGenerate')->name('orderIdGenerate');
         Route::get('paysuccess', 'paysuccess')->name('paysuccess');
+        Route::get('payment-detail/{id}', 'paymentDetail')->name('paymentDetail');
+        
+        Route::get('declaration-form', 'declarationForm')->name('declarationForm');
+        Route::post('saveDeclarationForm', 'saveDeclarationForm')->name('saveDeclarationForm');
+
+        Route::get('/undertaking', 'undertaking')->name('undertaking');
+
+        Route::get('/affidavit-form', 'affidavitForm')->name('affidavitForm');
+        Route::post('saveAffidavitForm', 'saveAffidavitForm')->name('saveAffidavitForm');
     });
   });
 

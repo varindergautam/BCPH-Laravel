@@ -11,9 +11,9 @@
     <link href="{{ asset('front/css/responsive.css') }}" rel="stylesheet">
 
     <script src="{{ asset('common/plugins/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('common/plugins/js/popper.min.js') }}"></script>
     <script src="{{ asset('common/plugins/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('common/plugins/js/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('common/plugins/js/popper.min.js') }}"></script>
     <script src="{{ asset('common/js/common_function.js') }}"></script>
     <script src="{{ asset('front/js/script.js') }}"></script>
     <script src="{{ asset('front/js/upload_file.js') }}"></script>
@@ -23,8 +23,6 @@
     @yield('style')
 </head>
 <body>
-    <div class="preloader" id="preloader" style="background: url('https://www.riwayatboutique.com/assets/images/16283153631619256248loader-100X100.gif') center center no-repeat scroll rgba(45, 45, 45, 0.5); display: none;">
-    </div>
     <div class="loader" style="
     position: fixed;
     top: 0;
@@ -48,11 +46,11 @@
                     <div class="col-md-12">
                         <div class="btn-group float-end">
                           <a type="button" class="text-decoration-none text-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Welcome, <span class="fw-bold">Dishant Thakur</span>
+                            Welcome, <span class="fw-bold">{{ auth::user()->applicant_name }}</span>
                           </a>
                           <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="change-password.html">Change Password</a></li>
-                            <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                           </ul>
                         </div>
                     </div>
@@ -64,7 +62,7 @@
     @yield('content')
 					
     <script>
-        var baseUrl = "{{env('APP_URL') }}";
+        var baseUrl = "{{url('/') }}";
     </script>
     @yield('script')
 </body>

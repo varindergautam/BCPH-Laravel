@@ -37,7 +37,7 @@ Login Form
                         </div>
                         <div class="col ">
                             <div class="submit_btn margin_top_0">
-                                <a href="index.html" name="" class="custom_btn previous_btn_padding float-end margin_top_0">Register</a>
+                                <a href="{{ url('/') }}" name="" class="custom_btn previous_btn_padding float-end margin_top_0">Register</a>
                             </div>
                         </div>
                         <div class="col-md-12 mt-3">

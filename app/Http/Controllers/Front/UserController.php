@@ -28,7 +28,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) { 
-            return response()->json(['errors'=>$validator->getMessageBag()->toArray(), 'status' => false]);
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(), 'status' => config('CommonStatus.INACTIVE')]);
         }
     }
     public function register() {
@@ -119,6 +119,10 @@ class UserController extends Controller
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => false]);
             throw $th;
         }
+    }
+
+    public function changePassword() {
+        return view('front.user.changePassword');
     }
 
     public function testEmail()

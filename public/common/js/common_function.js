@@ -30,7 +30,7 @@ function postAjax(url, method, formData){
         },
         complete: function(){
             setTimeout(function() {
-                $( ".loader" ).hide('slow');
+                $( ".loader" ).fadeOut();
               }, 1000);
         }
     });
