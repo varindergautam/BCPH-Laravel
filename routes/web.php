@@ -50,6 +50,17 @@ Auth::routes([
 
         Route::get('/affidavit-form', 'affidavitForm')->name('affidavitForm');
         Route::post('saveAffidavitForm', 'saveAffidavitForm')->name('saveAffidavitForm');
+
+        Route::get('/certify', 'certifyForm')->name('certifyForm');
+        Route::post('/saveCertifyForm', 'saveCertifyForm')->name('saveCertifyForm');
+
+        Route::get('/enrolment-committte-form', 'enrolmentCommittteForm')->name('enrolmentCommittteForm');
+
+        Route::get('/enrolment-advocate', 'enrolmentAsAdvocate')->name('enrolmentAsAdvocate');
+
+        Route::get('/identity-card', 'identityCard')->name('identityCard');
+
+        Route::get('/document-upload', 'documentUpload')->name('documentUpload');
     });
   });
 

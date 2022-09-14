@@ -174,11 +174,26 @@ a {
 	margin-top: 100px;
 }
 
-#declaration-form input, #oath-commissioner input, #document-upload-form input{
+#declaration-form input, 
+#oath-commissioner input, 
+#document-upload-form input, 
+.verification_form input,
+.application_form input{
 	border-top: 0 !important;
 	border-left: 0;
 	border-right: 0;
 }
+
+#declaration-form input:focus-visible, 
+#oath-commissioner input:focus-visible,
+ #document-upload-form input:focus-visible, 
+ .verification_form input:focus-visible,
+ .application_form input:focus-visible{
+	border-top: 0 !important;
+	border-left: 0;
+	border-right: 0;
+}
+
 .horizontal_line{
 	border-bottom: 1px solid #000;;
 }

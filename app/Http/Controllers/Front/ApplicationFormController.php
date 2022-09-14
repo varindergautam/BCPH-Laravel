@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AffidavitFormRequest;
 use App\Http\Requests\ApplicationFormRequest;
+use App\Http\Requests\CertifyFormRequest;
 use App\Http\Requests\DeclarationFormRequest;
 use App\Models\AffidavitForm;
 use App\Models\ApplicationForm;
+use App\Models\CertifyForm;
 use App\Models\DeclarationForm;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
@@ -82,9 +84,8 @@ class ApplicationFormController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
             throw $th;
-        }
-		
-		}
+        }		
+	}
 
     public function paysuccess(Request $request) {
         try{
@@ -187,7 +188,8 @@ class ApplicationFormController extends Controller
     }
 
     public function affidavitForm() {
-        return view('front.applicationForm.affidavitForm');
+        $data['affidavit_data'] = AffidavitForm::where('user_id', Auth::user()->id)->first();
+        return view('front.applicationForm.affidavitForm', $data);
     }
 
     public function saveAffidavitForm(AffidavitFormRequest $request) {
@@ -205,11 +207,59 @@ class ApplicationFormController extends Controller
             $affidavitForm->college_name_oath = $request->college_name_oath;
             $affidavitForm->place_name_oath = $request->place_name_oath;
             if($affidavitForm->save()) {
-                return response()->json(['message'=>'Success', 'redirect' => route('undertaking'), 'status' => true]);
+                return response()->json(['message'=>'Success', 'redirect' => route('certifyForm'), 'status' => true]);
             }
         } catch (\Throwable $th) {
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
             throw $th;
         }
+    }
+
+    public function certifyForm() {
+        $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+        $data['certify_form'] = CertifyForm::where('user_id', Auth::user()->id)->first();
+        return view('front.applicationForm.certify', $data);
+    }
+
+    public function saveCertifyForm(CertifyFormRequest $request) {
+        try {
+            $certifyForm = CertifyForm::where('user_id', Auth::user()->id)->first();
+            if(!$certifyForm){
+                $certifyForm = new CertifyForm;
+            }
+            $certifyForm->user_id = Auth::user()->id;
+            $certifyForm->years = $request->years;
+            $certifyForm->advocate_name = $request->advocate_name;
+            $certifyForm->date = $request->date;
+            $certifyForm->day = $request->day;
+            $certifyForm->years_2 = $request->years_2;
+            $certifyForm->advocate_name_2 = $request->advocate_name_2;
+            $certifyForm->date_2 = $request->date_2;
+            $certifyForm->day_2 = $request->day_2;
+            if($certifyForm->save()) {
+                return response()->json(['message'=>'Success', 'redirect' => route('enrolmentCommittteForm'), 'status' => true]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
+            throw $th;
+        }
+    }
+
+    public function enrolmentCommittteForm() {
+        $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+        return view('front.applicationForm.enrolmentCommittteForm', $data);
+    }
+
+    public function enrolmentAsAdvocate() {
+        return view('front.applicationForm.enrolmentAsAdvocate');
+    }
+
+    public function identityCard() {
+        $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+        return view('front.applicationForm.identityCard', $data);
+    }
+
+    public function documentUpload() {
+        return view('front.applicationForm.documentUpload');
     }
 }
