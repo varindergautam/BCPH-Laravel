@@ -29,14 +29,14 @@ Affidavit Form
 
                                 <ol type="i" class="">
                                     <li>
-                                        <p>	That I was born in India and I am a permanent resident of the Country, I was born at <input type="text" name="born" id="born" placeholder="Enter" value="{{ $affidavit_data->born }}"><strong id="born-error" class="error"></strong> District <input type="text" name="district_name" id="district_name" placeholder="Enter district name" value="{{ $affidavit_data->district_name }}"> <strong id="district_name-error" class="error"></strong> State <strong>{{ auth::user()->state }}</strong></p>
+                                        <p>	That I was born in India and I am a permanent resident of the Country, I was born at <input type="text" name="born" id="born" placeholder="Enter" value="{{ @$affidavit_data->born }}"><strong id="born-error" class="error"></strong> District <input type="text" name="district_name" id="district_name" placeholder="Enter district name" value="{{ @$affidavit_data->district_name }}"> <strong id="district_name-error" class="error"></strong> State <strong>{{ auth::user()->state }}</strong></p>
                                     </li>
 
                                     <li>
                                         <p>That my nationality is Indian and I am a citizen of India.</p>
                                     </li>
                                     <li>
-                                        <p>	That I have obtained my Bachelor of Laws Degree from the <input type="text" name="bachelor_law_degree_college_name" placeholder="Enter college name" value="{{ $affidavit_data->bachelor_law_degree_college_name }}"><strong id="bachelor_law_degree_college_name-error" class="error"></strong> </p>
+                                        <p>	That I have obtained my Bachelor of Laws Degree from the <input type="text" name="bachelor_law_degree_college_name" placeholder="Enter college name" value="{{ @$affidavit_data->bachelor_law_degree_college_name }}"><strong id="bachelor_law_degree_college_name-error" class="error"></strong> </p>
                                     </li>
                                 </ol>
 
@@ -60,7 +60,7 @@ Affidavit Form
                                     <div class="row">
                                         <div class="col-md-6">
                                             <p class="mb-3 mt-2 ">
-                                                <label class="">Place : <input type="text" name="place_name" id="place_name" placeholder="Enter place name" value="{{ $affidavit_data->place_name }}"></label>
+                                                <label class="">Place : <input type="text" name="place_name" id="place_name" placeholder="Enter place name" value="{{ @$affidavit_data->place_name }}"></label>
                                                 <strong id="place_name-error" class="error"></strong>
                                             </p>
                                             <p>
@@ -97,7 +97,7 @@ Affidavit Form
 
                                 <ol type="i" start="4">
                                     <li>
-                                        <p>	That I was born at <input type="text" name="type_born_in_oath" placeholder="Enter" value={{ $affidavit_data->type_born_in_oath }}> <strong id="type_born_in_oath-error" class="error"></strong>which is now in West Pakistan and migrated to India in <strong>{{ auth::user()->city }}</strong>. </p>
+                                        <p>	That I was born at <input type="text" name="type_born_in_oath" placeholder="Enter" value={{ @$affidavit_data->type_born_in_oath }}> <strong id="type_born_in_oath-error" class="error"></strong>which is now in West Pakistan and migrated to India in <strong>{{ auth::user()->city }}</strong>. </p>
                                     </li>
 
                                     <li>
@@ -107,7 +107,7 @@ Affidavit Form
                                         <p>That my nationality is Indian and I am a citizen of India.</p>
                                     </li>
                                     <li>
-                                        <p>	That I have obtained my Bachelor of Laws Degree from <input type="text" name="college_name_oath" placeholder="Enter college name" id="college_name_oath" value="{{ $affidavit_data->college_name_oath }}"> <strong id="college_name_oath-error" class="error"></strong>the University after undertaking a course of study in Law for a minimum period of three years, after graduation. </p>
+                                        <p>	That I have obtained my Bachelor of Laws Degree from <input type="text" name="college_name_oath" placeholder="Enter college name" id="college_name_oath" value="{{ @$affidavit_data->college_name_oath }}"> <strong id="college_name_oath-error" class="error"></strong>the University after undertaking a course of study in Law for a minimum period of three years, after graduation. </p>
                                     </li>
                                 </ol>
 
@@ -130,7 +130,7 @@ Affidavit Form
                                     <div class="row">
                                         <div class="col-md-6">
                                             <p class="mb-3 mt-2 ">
-                                                <label class="">Place : <input type="text" name="place_name_oath" id="place_name_oath" placeholder="Enter place name" value="{{ $affidavit_data->place_name_oath }}"></label>
+                                                <label class="">Place : <input type="text" name="place_name_oath" id="place_name_oath" placeholder="Enter place name" value="{{ @$affidavit_data->place_name_oath }}"></label>
                                                 <strong id="place_name_oath-error" class="error"></strong>
                                             </p>
                                             <p>

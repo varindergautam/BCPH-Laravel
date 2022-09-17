@@ -178,7 +178,7 @@ a {
 #oath-commissioner input, 
 #document-upload-form input, 
 .verification_form input,
-.application_form input{
+.application_form1 input{
 	border-top: 0 !important;
 	border-left: 0;
 	border-right: 0;
@@ -188,7 +188,7 @@ a {
 #oath-commissioner input:focus-visible,
  #document-upload-form input:focus-visible, 
  .verification_form input:focus-visible,
- .application_form input:focus-visible{
+ .application_form1 input:focus-visible{
 	border-top: 0 !important;
 	border-left: 0;
 	border-right: 0;

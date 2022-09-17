@@ -31,7 +31,7 @@ function postAjax(url, method, formData){
         complete: function(){
             setTimeout(function() {
                 $( ".loader" ).fadeOut();
-              }, 1000);
+              }, 700);
         }
     });
 }

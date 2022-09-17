@@ -76,7 +76,7 @@ Enrolment Committee Form
                                     <span class="text-dark"><strong></strong></span>
                                 </div>
                                 <p class="text-dark"><strong>Name & Address of Advocate:</strong></p>
-                                <p class="text-dark"><strong>{{ auth::user()->father_name }}</strong></p>
+                                <p class="text-dark"><strong>{{ auth::user()->applicant_name }}</strong></p>
                                 <p class="text-dark"><strong>{{ $application_form->permanent_address }}</strong></p>
                             </div>
 

@@ -113,14 +113,23 @@ Application Form
                             </div>
                             <div class="col-md-6">									
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input which_univeristy" type="radio" name="which_univeristy" id="which_univeristy0" value="0" checked>
+                                    <input class="form-check-input which_univeristy" type="radio" name="which_univeristy" id="which_univeristy0" value="0"  {{ @$applicationForm->which_univeristy == 0 ? 'checked' : '' }} >
                                     <label class="form-check-label text-dark" for="which_univeristy0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input which_univeristy" type="radio" name="which_univeristy" id="which_univeristy1" value="1">
+                                    <input class="form-check-input which_univeristy" type="radio" name="which_univeristy" id="which_univeristy1" value="1" {{ @$applicationForm->which_univeristy == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="which_univeristy1">Yes</label>
                                 </div>
-                                <textarea class="form-control" name="which_univeristy_remarks" id="which_univeristy_remarks" placeholder="Enter remarks" style="display: none;"></textarea>
+                                
+                                @php
+                                    if(@$applicationForm->which_univeristy == 1){
+                                        $which_university = 'display : block';
+                                    }else {
+                                        $which_university = 'display : none';
+                                    }
+                                @endphp
+
+                                <textarea class="form-control" name="which_univeristy_remarks" id="which_univeristy_remarks" placeholder="Enter remarks" style={{ $which_university }}>{{ @$applicationForm->which_univeristy_remarks }}</textarea>
                                 <strong id="which_univeristy_remarks-error" class="error"></strong>
                             </div>
                         </div>
@@ -130,7 +139,7 @@ Application Form
                                 <label class="text-dark" for="date_of_law_degree">7. Date on which the applicant obtained the law degree or provisional certificate in law or became a Barrister:</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="date_of_law_degree" id="date_of_law_degree">
+                                <input type="date" class="form-control" name="date_of_law_degree" id="date_of_law_degree" value="{{ @$applicationForm->date_of_law_degree }}">
                                 <strong id="date_of_law_degree-error" class="error"></strong>
                             </div>
                         </div>
@@ -140,7 +149,7 @@ Application Form
                                 <label class="text-dark" for="plus_two_mark">8. Whether the applicant passed 10+2 Examination before admission to 5 year Law Course, give full particulars. (An attested copy to be enclosed), with percentage & Marks</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control " name="plus_two_mark" id="plus_two_mark" placeholder="Enter 10+2 marks">
+                                <input type="text" class="form-control " name="plus_two_mark" id="plus_two_mark" placeholder="Enter 10+2 marks" value="{{ @$applicationForm->plus_two_mark }}">
                                 <strong id="plus_two_mark-error" class="error"></strong>
                             </div>
                         </div>
@@ -151,11 +160,11 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission0" value="0" checked>
+                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission0" value="0" {{ @$applicationForm->graduate_before_admission == 0 ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="graduate_before_admission0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission1" value="1">
+                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission1" value="1" {{ @$applicationForm->graduate_before_admission == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="graduate_before_admission1">Yes</label>
                                 </div>
                             </div>
@@ -166,7 +175,7 @@ Application Form
                                 <label class="text-dark" for="college_university_name">(i)	The name of the College and University at which he/she studied and from which he/she was sent up to the University for graduation.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="college_university_name" id="college_university_name" placeholder="Enter College and University name">
+                                <input type="text" class="form-control" name="college_university_name" id="college_university_name" placeholder="Enter College and University name" value="{{ @$applicationForm->college_university_name }}">
                                 <strong id="college_university_name-error" class="error"></strong>
                             </div>
                         </div>
@@ -176,7 +185,7 @@ Application Form
                                 <label class="text-dark" for="no_of_years">(ii)	The number of years for which he/she was required to study.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control numeric-only" name="no_of_years" id="no_of_years" placeholder="Enter number of years">
+                                <input type="text" class="form-control numeric-only" name="no_of_years" id="no_of_years" placeholder="Enter number of years" value="{{ @$applicationForm->no_of_years }}">
                                 <strong id="no_of_years-error" class="error"></strong>
                             </div>
                         </div>
@@ -186,7 +195,7 @@ Application Form
                                 <label class="text-dark" for="college_pass_date">(iii) The date on which he/she passes the examination and obtained his/her degree.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="college_pass_date" id="college_pass_date" placeholder="Enter college pass date">
+                                <input type="date" class="form-control" name="college_pass_date" id="college_pass_date" placeholder="Enter college pass date" value="{{ @$applicationForm->college_pass_date }}">
                                 <strong id="college_pass_date-error" class="error"></strong>
                             </div>
                         </div>
@@ -196,7 +205,7 @@ Application Form
                                 <label class="text-dark" for="stream">(iv)	The nature of the degree whether in Arts, Science, Commerce or other.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="stream" id="stream" placeholder="Enter stream">
+                                <input type="text" class="form-control" name="stream" id="stream" placeholder="Enter stream" value="{{ @$applicationForm->stream }}">
                                 <strong id="stream-error" class="error"></strong>
                             </div>
                         </div>
@@ -207,11 +216,11 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="english_compulsory" id="english_compulsory1" value="1" checked>
+                                    <input class="form-check-input" type="radio" name="english_compulsory" id="english_compulsory1" value="1" {{ @$applicationForm->english_compulsory == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="english_compulsory1">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="english_compulsory" id="english_compulsory0" value="0">
+                                    <input class="form-check-input" type="radio" name="english_compulsory" id="english_compulsory0" value="0" {{ @$applicationForm->english_compulsory == 0 ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="english_compulsory0">No</label>
                                 </div>
                             </div>
@@ -222,7 +231,7 @@ Application Form
                                 <label class="text-dark" for="correspondence_address">Correspondence Address</label>
                             </div>
                             <div class="col-md-6">
-                                <textarea class="form-control" id="correspondence_address" name="correspondence_address" placeholder="Enter correspondence address"></textarea>
+                                <textarea class="form-control" id="correspondence_address" name="correspondence_address" placeholder="Enter correspondence address">{{ @$applicationForm->correspondence_address }}</textarea>
                                 <strong id="correspondence_address-error" class="error"></strong>
                             </div>
                         </div>
@@ -232,17 +241,17 @@ Application Form
                                 <label class="text-dark" for="law_college_name">9. The name of the College at which the course of instructions in law was taken in LLB. Ist year and the name of the University from which the degree in law was obtained</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="law_college_name" name="law_college_name" placeholder="Enter law college name">
+                                <input type="text" class="form-control" id="law_college_name" name="law_college_name" placeholder="Enter law college name" value="{{ @$applicationForm->law_college_name }}">
                                 <strong id="law_college_name-error" class="error"></strong>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="text-dark" for="law_college_join_date">(i)	The month and the year in which he/she started/commenced the course of instruction in LLB. Ist year, i.e. date of joining of LL.B. course.</label>
+                                <label class="text-dark" for="law_college_join_date">(i) The month and the year in which he/she started/commenced the course of instruction in LLB. Ist year, i.e. date of joining of LL.B. course.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="date" class="form-control" id="law_college_join_date" name="law_college_join_date" placeholder="Enter law college join date">
+                                <input type="date" class="form-control" id="law_college_join_date" name="law_college_join_date" placeholder="Enter law college join date" value="{{ @$applicationForm->law_college_join_date }}">
                                 <strong id="law_college_join_date-error" class="error"></strong>
                             </div>
                         </div>
@@ -254,8 +263,8 @@ Application Form
                             <div class="col-md-6">
                                 <select class="form-control form-select"  name="law_college_duration_year" id="law_college_duration_year">
                                     <option selected="" disabled="">Select Duration</option>
-                                    <option value="3 years">3 Years</option>
-                                    <option value="5 years">5 Years</option>
+                                    <option value="3 years" {{ @$applicationForm->law_college_duration_year == '3 years' ? 'selected' : '' }}>3 Years</option>
+                                    <option value="5 years" {{ @$applicationForm->law_college_duration_year == '5 years' ? 'selected' : '' }}>5 Years</option>
                                 </select>
                                 <strong id="law_college_duration_year-error" class="error"></strong>
                             </div>
@@ -266,7 +275,7 @@ Application Form
                                 <label class="text-dark" for="law_college_passed">(iii)	The date on which the examination passed/declared and the degree in law was taken/issued.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="date" class="form-control" id="law_college_passed" name="law_college_passed" placeholder="Enter law college passed date">
+                                <input type="date" class="form-control" id="law_college_passed" name="law_college_passed" placeholder="Enter law college passed date" value="{{ @$applicationForm->law_college_passed }}">
                                 <strong id="law_college_passed-error" class="error"></strong>
                             </div>
                         </div>
@@ -277,11 +286,11 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="name_of_degree_obtained" id="name_of_degree_obtained1" value="Professional" checked="">
+                                    <input class="form-check-input" type="radio" name="name_of_degree_obtained" id="name_of_degree_obtained1" value="Professional" {{ @$applicationForm->name_of_degree_obtained == 'Professional' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="name_of_degree_obtained1">Professional</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="name_of_degree_obtained" id="name_of_degree_obtained0" value="Academic">
+                                    <input class="form-check-input" type="radio" name="name_of_degree_obtained" id="name_of_degree_obtained0" value="Academic" {{ @$applicationForm->name_of_degree_obtained == 'Academic' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="name_of_degree_obtained0">Academic</label>
                                 </div>
                             </div>
@@ -293,17 +302,17 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="medium_instruction" id="medium_instruction0" value="English" checked="">
+                                    <input class="form-check-input" type="radio" name="medium_instruction" id="medium_instruction0" value="English" {{ @$applicationForm->medium_instruction == 'English' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="medium_instruction0">English</label>
                                 </div>
 
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="medium_instruction" id="medium_instruction1" value="Hindi">
+                                    <input class="form-check-input" type="radio" name="medium_instruction" id="medium_instruction1" value="Hindi" {{ @$applicationForm->medium_instruction == 'Hindi' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="medium_instruction1">Hindi</label>
                                 </div>
                                 
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="medium_instruction" id="medium_instruction2" value="Punjabi">
+                                    <input class="form-check-input" type="radio" name="medium_instruction" id="medium_instruction2" value="Punjabi" {{ @$applicationForm->medium_instruction == 'Punjabi' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="medium_instruction2">Punjabi</label>
                                 </div>
                             </div>
@@ -316,8 +325,8 @@ Application Form
                             <div class="col-md-6">
                                 <select class="form-control form-select"  name="private_study_duration_year" id="private_study_duration_year">
                                     <option selected="" disabled="">Select Duration</option>
-                                    <option value="3 years">3 Years</option>
-                                    <option value="5 years">5 Years</option>
+                                    <option value="3 years" {{ @$applicationForm->private_study_duration_year == '3 years' ? 'selected' : '' }}>3 Years</option>
+                                    <option value="5 years" {{ @$applicationForm->private_study_duration_year == '5 years' ? 'selected' : '' }}>5 Years</option>
                                 </select>
                                 <strong id="private_study_duration_year-error" class="error"></strong>
                             </div>
@@ -344,14 +353,22 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input appointment_holds" type="radio" name="appointment_holds" id="appointment_holds0" value="0" checked="">
+                                    <input class="form-check-input appointment_holds" type="radio" name="appointment_holds" id="appointment_holds0" value="0" {{ @$applicationForm->appointment_holds == 0 ? 'checked': '' }}>
                                     <label class="form-check-label text-dark" for="appointment_holds0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input appointment_holds" type="radio" name="appointment_holds" id="appointment_holds1" value="1">
+                                    <input class="form-check-input appointment_holds" type="radio" name="appointment_holds" id="appointment_holds1" value="1" {{ @$applicationForm->appointment_holds == 1 ? 'checked': '' }}>
                                     <label class="form-check-label text-dark" for="appointment_holds1">Yes</label>
                                 </div>
-                                <textarea class="form-control" name="appointment_holds_remarks" placeholder="Enter remarks" id="appointment_holds_remarks" style="display: none;"></textarea>
+                                @php
+                                    if($applicationForm->appointment_holds == 1){
+                                        $appointment_holds = 'display : block';
+                                    }
+                                    else{
+                                        $appointment_holds = 'display : none';
+                                    }
+                                @endphp
+                                <textarea class="form-control" name="appointment_holds_remarks" placeholder="Enter remarks" id="appointment_holds_remarks" style="{{ $appointment_holds }}">{{ @$applicationForm->appointment_holds_remarks }}</textarea>
                                 <strong id="appointment_holds_remarks-error" class="error"></strong>
                             </div>
                         </div>
