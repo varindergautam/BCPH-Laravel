@@ -34,7 +34,7 @@ Declaration Form
               <div class="row margin_top">
                   <div class="col-md-6">
                       <label class="text-dark">Date :</label>
-                      <span class="text-dark">03-09-2022</span>
+                      <span id="date_of_completion" class="text-dark">{{ date('d-m-Y') }}</span>
                   </div>
                   <div class="col-md-6">
                       <span class="text-dark fw-bold">Dishant Thakur</span>

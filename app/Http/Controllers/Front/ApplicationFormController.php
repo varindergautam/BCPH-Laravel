@@ -107,7 +107,7 @@ class ApplicationFormController extends Controller
             }
             
             $applicationFormData->user_id = Auth::user()->id;
-            $applicationFormData->permanent_address = $sessionApplicatonFormData->permanent_address;
+            // $applicationFormData->permanent_address = $sessionApplicatonFormData->permanent_address;
             $applicationFormData->university_name = $sessionApplicatonFormData->university_name;
             $applicationFormData->which_univeristy = $sessionApplicatonFormData->which_univeristy;
             $applicationFormData->which_univeristy_remarks = $sessionApplicatonFormData->which_univeristy_remarks;
@@ -118,7 +118,7 @@ class ApplicationFormController extends Controller
             $applicationFormData->no_of_years = $sessionApplicatonFormData->no_of_years;
             $applicationFormData->college_pass_date = $sessionApplicatonFormData->college_pass_date;
             $applicationFormData->english_compulsory = $sessionApplicatonFormData->english_compulsory;
-            $applicationFormData->correspondence_address = $sessionApplicatonFormData->correspondence_address;
+            // $applicationFormData->correspondence_address = $sessionApplicatonFormData->correspondence_address;
             $applicationFormData->law_college_name = $sessionApplicatonFormData->law_college_name;
             $applicationFormData->law_college_join_date = $sessionApplicatonFormData->law_college_join_date;
             $applicationFormData->law_college_duration_year = $sessionApplicatonFormData->law_college_duration_year;
@@ -128,11 +128,19 @@ class ApplicationFormController extends Controller
             $applicationFormData->private_study_duration_year = $sessionApplicatonFormData->private_study_duration_year;
             $applicationFormData->city_for_pratice_after_enrollment = $sessionApplicatonFormData->city_for_pratice_after_enrollment;
             $applicationFormData->appointment_holds = $sessionApplicatonFormData->appointment_holds;
+            $applicationFormData->appointment_holds_remarks = $sessionApplicatonFormData->appointment_holds_remarks;
             $applicationFormData->business_or_profession = $sessionApplicatonFormData->business_or_profession;
+            $applicationFormData->business_or_profession_remark = $sessionApplicatonFormData->business_or_profession_remark;
+            $applicationFormData->criminal_court = $sessionApplicatonFormData->criminal_court;
+            $applicationFormData->criminal_court_remark = $sessionApplicatonFormData->criminal_court_remark;
             $applicationFormData->criminal_proceeding_againest_applicant = $sessionApplicatonFormData->criminal_proceeding_againest_applicant;
+            $applicationFormData->criminal_proceeding_againest_applicant_remark = $sessionApplicatonFormData->criminal_proceeding_againest_applicant_remark;
             $applicationFormData->suspension_type = $sessionApplicatonFormData->suspension_type;
+            $applicationFormData->suspension_type_remark = $sessionApplicatonFormData->suspension_type_remark;
             $applicationFormData->declared_insolvent_type = $sessionApplicatonFormData->declared_insolvent_type;
+            $applicationFormData->declared_insolvent_type_remark = $sessionApplicatonFormData->declared_insolvent_type_remark;
             $applicationFormData->already_apply_for_enrollment = $sessionApplicatonFormData->already_apply_for_enrollment;
+            $applicationFormData->already_apply_for_enrollment_remark = $sessionApplicatonFormData->already_apply_for_enrollment_remark;
             $applicationFormData->total_pay = $sessionApplicatonFormData->total_pay;
             $applicationFormData->razorpay_order_id = $request->razorpay_order_id ? $request->razorpay_order_id : $sessionApplicatonFormData->razorpay_order_id;
             $applicationFormData->razorpay_payment_id = $request->razorpay_payment_id ? $request->razorpay_payment_id : $sessionApplicatonFormData->razorpay_payment_id;

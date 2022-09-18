@@ -87,7 +87,7 @@ Application Form
                                 <label class="text-dark" for="permanent_address">5. Permanent address of the applicant, any change of address in future is to be intimated to the Bar Council at once (in Block Letter)</label>
                             </div>
                             <div class="col-md-6">
-                                <textarea class="form-control" name="permanent_address" id="permanent_address" placeholder="Enter permanent address">{{ @$applicationForm->permanent_address }}</textarea>
+                                <textarea class="form-control" name="permanent_address" id="permanent_address" placeholder="Enter permanent address">{{ auth()->user()->permanent_address }}</textarea>
                                 <strong id="permanent_address-error" class="error"></strong>
                             </div>
                         </div>
@@ -99,9 +99,9 @@ Application Form
                             <div class="col-md-6">
                                 <select class="form-control" name="university_name" id="university_name">
                                     <option selected="" disabled="">Select University</option>
-                                    <option value="1">University - 1</option>
-                                    <option value="2">University - 2</option>
-                                    <option value="3">University - 3</option>
+                                    <option value="1" {{ @$applicationForm->university_name == '1' ? 'selected' : '' }}>University - 1</option>
+                                    <option value="2" {{ @$applicationForm->university_name == '2' ? 'selected' : '' }}>University - 2</option>
+                                    <option value="3" {{ @$applicationForm->university_name == '3' ? 'selected' : '' }}>University - 3</option>
                                 </select>
                                 <strong id="university_name-error" class="error"></strong>
                             </div>
@@ -122,14 +122,14 @@ Application Form
                                 </div>
                                 
                                 @php
-                                    if(@$applicationForm->which_univeristy == 1){
+                                    if(@$applicationForm->which_univeristy == '1'){
                                         $which_university = 'display : block';
                                     }else {
                                         $which_university = 'display : none';
                                     }
                                 @endphp
 
-                                <textarea class="form-control" name="which_univeristy_remarks" id="which_univeristy_remarks" placeholder="Enter remarks" style={{ $which_university }}>{{ @$applicationForm->which_univeristy_remarks }}</textarea>
+                                <textarea class="form-control" name="which_univeristy_remarks" id="which_univeristy_remarks" placeholder="Enter remarks" style="{{ $which_university }}">{{ @$applicationForm->which_univeristy_remarks }}</textarea>
                                 <strong id="which_univeristy_remarks-error" class="error"></strong>
                             </div>
                         </div>
@@ -160,11 +160,11 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission0" value="0" {{ @$applicationForm->graduate_before_admission == 0 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission0" value="0" {{ @$applicationForm->graduate_before_admission == '0' ? 'checked' : ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="graduate_before_admission0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission1" value="1" {{ @$applicationForm->graduate_before_admission == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission1" value="1" {{ @$applicationForm->graduate_before_admission == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="graduate_before_admission1">Yes</label>
                                 </div>
                             </div>
@@ -216,11 +216,11 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="english_compulsory" id="english_compulsory1" value="1" {{ @$applicationForm->english_compulsory == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="english_compulsory" id="english_compulsory1" value="1" {{ @$applicationForm->english_compulsory == '1' ? 'checked' : ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="english_compulsory1">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="english_compulsory" id="english_compulsory0" value="0" {{ @$applicationForm->english_compulsory == 0 ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="english_compulsory" id="english_compulsory0" value="0" {{ @$applicationForm->english_compulsory == '0' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="english_compulsory0">No</label>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@ Application Form
                                 <label class="text-dark" for="correspondence_address">Correspondence Address</label>
                             </div>
                             <div class="col-md-6">
-                                <textarea class="form-control" id="correspondence_address" name="correspondence_address" placeholder="Enter correspondence address">{{ @$applicationForm->correspondence_address }}</textarea>
+                                <textarea class="form-control" id="correspondence_address" name="correspondence_address" placeholder="Enter correspondence address">{{ auth()->user()->correspondence_address }}</textarea>
                                 <strong id="correspondence_address-error" class="error"></strong>
                             </div>
                         </div>
@@ -286,7 +286,7 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="name_of_degree_obtained" id="name_of_degree_obtained1" value="Professional" {{ @$applicationForm->name_of_degree_obtained == 'Professional' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="name_of_degree_obtained" id="name_of_degree_obtained1" value="Professional" {{ @$applicationForm->name_of_degree_obtained == 'Professional' ? 'checked' : ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="name_of_degree_obtained1">Professional</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -302,7 +302,7 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="medium_instruction" id="medium_instruction0" value="English" {{ @$applicationForm->medium_instruction == 'English' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="medium_instruction" id="medium_instruction0" value="English" {{ @$applicationForm->medium_instruction == 'English' ? 'checked' : ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="medium_instruction0">English</label>
                                 </div>
 
@@ -339,9 +339,9 @@ Application Form
                             <div class="col-md-6">
                                 <select class="form-control form-select"  name="city_for_pratice_after_enrollment" id="city_for_pratice_after_enrollment">
                                     <option selected="" disabled="">Select City</option>
-                                    <option>City - 1 </option>
-                                    <option>City - 2 </option>
-                                    <option>City - 3 </option>
+                                    <option value="1" {{ @$applicationForm->city_for_pratice_after_enrollment == '1' ? 'selected' : '' }}>City - 1 </option>
+                                    <option value="2" {{ @$applicationForm->city_for_pratice_after_enrollment == '1' ? 'selected' : '' }}>City - 2 </option>
+                                    <option value="3" {{ @$applicationForm->city_for_pratice_after_enrollment == '1' ? 'selected' : '' }}>City - 3 </option>
                                 </select>
                                 <strong id="city_for_pratice_after_enrollment-error" class="error"></strong>
                             </div>
@@ -353,15 +353,15 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input appointment_holds" type="radio" name="appointment_holds" id="appointment_holds0" value="0" {{ @$applicationForm->appointment_holds == 0 ? 'checked': '' }}>
+                                    <input class="form-check-input appointment_holds" type="radio" name="appointment_holds" id="appointment_holds0" value="0" {{ @$applicationForm->appointment_holds == '0' ? 'checked': ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="appointment_holds0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input appointment_holds" type="radio" name="appointment_holds" id="appointment_holds1" value="1" {{ @$applicationForm->appointment_holds == 1 ? 'checked': '' }}>
+                                    <input class="form-check-input appointment_holds" type="radio" name="appointment_holds" id="appointment_holds1" value="1" {{ @$applicationForm->appointment_holds == '1' ? 'checked': '' }}>
                                     <label class="form-check-label text-dark" for="appointment_holds1">Yes</label>
                                 </div>
                                 @php
-                                    if($applicationForm->appointment_holds == 1){
+                                    if(@$applicationForm->appointment_holds == '1'){
                                         $appointment_holds = 'display : block';
                                     }
                                     else{
@@ -380,14 +380,22 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input business_or_profession" type="radio" name="business_or_profession" id="business_or_profession0" value="0" checked="">
+                                    <input class="form-check-input business_or_profession" type="radio" name="business_or_profession" id="business_or_profession0" value="0" {{ @$applicationForm->business_or_profession == '0' ? 'checked': ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="business_or_profession0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input business_or_profession" type="radio" name="business_or_profession" id="business_or_profession1" value="1">
+                                    <input class="form-check-input business_or_profession" type="radio" name="business_or_profession" id="business_or_profession1" value="1" {{ @$applicationForm->business_or_profession == '1' ? 'checked': '' }}>
                                     <label class="form-check-label text-dark" for="business_or_profession1">Yes</label>
                                 </div>
-                                <textarea class="form-control" name="business_or_profession_remark" placeholder="Enter remarks" id="business_or_profession_remark" style="display: none;"></textarea>
+                                @php
+                                    if(@$applicationForm->business_or_profession == '1'){
+                                        $business_or_profession = 'display : block';
+                                    }
+                                    else{
+                                        $business_or_profession = 'display : none';
+                                    }
+                                @endphp
+                                <textarea class="form-control" name="business_or_profession_remark" placeholder="Enter remarks" id="business_or_profession_remark" style="{{ $business_or_profession }}">{{ @$applicationForm->business_or_profession_remark }}</textarea>
                                 <strong id="business_or_profession_remark-error" class="error"></strong>
                             </div>
                         </div>
@@ -398,14 +406,22 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input criminal_court" type="radio" name="criminal_court" id="criminal_court0" value="0" checked="">
+                                    <input class="form-check-input criminal_court" type="radio" name="criminal_court" id="criminal_court0" value="0" {{ @$applicationForm->criminal_court == '0' ? 'checked': ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="criminal_court0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input criminal_court" type="radio" name="criminal_court" id="criminal_court1" value="1">
+                                    <input class="form-check-input criminal_court" type="radio" name="criminal_court" id="criminal_court1" value="1" {{ @$applicationForm->criminal_court == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="criminal_court1">Yes</label>
                                 </div>
-                                <textarea class="form-control" name="criminal_court_remark" placeholder="Enter remarks" id="criminal_court_remark" style="display: none;"></textarea>
+                                @php
+                                if(@$applicationForm->criminal_court == '1'){
+                                    $criminal_court = 'display : block';
+                                }
+                                else{
+                                    $criminal_court = 'display : none';
+                                }
+                            @endphp
+                                <textarea class="form-control" name="criminal_court_remark" placeholder="Enter remarks" id="criminal_court_remark" style="{{ $criminal_court }}">{{ @$applicationForm->criminal_court_remark }}</textarea>
                                 <strong id="criminal_court_remark-error" class="error"></strong>
                             </div>
                         </div>
@@ -417,14 +433,22 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input criminal_proceeding_againest_applicant" type="radio" name="criminal_proceeding_againest_applicant" id="criminal_proceeding_againest_applicant0" value="0" checked="">
+                                    <input class="form-check-input criminal_proceeding_againest_applicant" type="radio" name="criminal_proceeding_againest_applicant" id="criminal_proceeding_againest_applicant0" value="0" {{ @$applicationForm->criminal_proceeding_againest_applicant == '0' ? 'checked': ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="criminal_proceeding_againest_applicant0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input criminal_proceeding_againest_applicant" type="radio" name="criminal_proceeding_againest_applicant" id="criminal_proceeding_againest_applicant1" value="1">
+                                    <input class="form-check-input criminal_proceeding_againest_applicant" type="radio" name="criminal_proceeding_againest_applicant" id="criminal_proceeding_againest_applicant1" value="1" {{ @$applicationForm->criminal_proceeding_againest_applicant == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="criminal_proceeding_againest_applicant1">Yes</label>
                                 </div>
-                                <textarea class="form-control" name="criminal_proceeding_againest_applicant_remark" placeholder="Enter remarks" id="criminal_proceeding_againest_applicant_remark" style="display: none;"></textarea>
+                                @php
+                                if(@$applicationForm->criminal_proceeding_againest_applicant == '1'){
+                                    $criminal_proceeding_againest_applicant = 'display : block';
+                                }
+                                else{
+                                    $criminal_proceeding_againest_applicant = 'display : none';
+                                }
+                                @endphp
+                                <textarea class="form-control" name="criminal_proceeding_againest_applicant_remark" placeholder="Enter remarks" id="criminal_proceeding_againest_applicant_remark" style="{{ $criminal_proceeding_againest_applicant }}">{{ @$applicationForm->criminal_proceeding_againest_applicant_remark }}</textarea>
                                 <strong id="criminal_proceeding_againest_applicant_remark-error" class="error"></strong>
                             </div>
                         </div>
@@ -435,14 +459,22 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input suspension_type" type="radio" name="suspension_type" id="suspension_type0" value="0" checked="">
+                                    <input class="form-check-input suspension_type" type="radio" name="suspension_type" id="suspension_type0" value="0" {{ @$applicationForm->suspension_type == '0' ? 'checked': ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="suspension_type0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input suspension_type" type="radio" name="suspension_type" id="suspension_type1" value="1">
+                                    <input class="form-check-input suspension_type" type="radio" name="suspension_type" id="suspension_type1" value="1" {{ @$applicationForm->suspension_type == '1' ? 'checked': '' }}>
                                     <label class="form-check-label text-dark" for="suspension_type1">Yes</label>
                                 </div>
-                                <textarea class="form-control" name="suspension_type_remark" placeholder="Enter remarks" id="suspension_type_remark" style="display: none;"></textarea>
+                                @php
+                                if(@$applicationForm->suspension_type == '1'){
+                                    $suspension_type = 'display : block';
+                                }
+                                else{
+                                    $suspension_type = 'display : none';
+                                }
+                                @endphp
+                                <textarea class="form-control" name="suspension_type_remark" placeholder="Enter remarks" id="suspension_type_remark" style="{{ $suspension_type }}">{{ @$applicationForm->suspension_type_remark }}</textarea>
                                 <strong id="suspension_type_remark-error" class="error"></strong>
                             </div>
                         </div>
@@ -453,14 +485,22 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input declared_insolvent_type" type="radio" name="declared_insolvent_type" id="declared_insolvent_type0" value="0" checked="">
+                                    <input class="form-check-input declared_insolvent_type" type="radio" name="declared_insolvent_type" id="declared_insolvent_type0" value="0" {{ @$applicationForm->declared_insolvent_type == '0' ? 'checked': ( @$applicationForm ? '' : 'checked' ) }}>
                                     <label class="form-check-label text-dark" for="declared_insolvent_type0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input declared_insolvent_type" type="radio" name="declared_insolvent_type" id="declared_insolvent_type1" value="1">
+                                    <input class="form-check-input declared_insolvent_type" type="radio" name="declared_insolvent_type" id="declared_insolvent_type1" value="1" {{ @$applicationForm->declared_insolvent_type == '1' ? 'checked': '' }}>
                                     <label class="form-check-label text-dark" for="declared_insolvent_type1">Yes</label>
                                 </div>
-                                <textarea class="form-control" name="declared_insolvent_type_remark" placeholder="Enter remarks" id="declared_insolvent_type_remark" style="display: none;"></textarea>
+                                @php
+                                if(@$applicationForm->declared_insolvent_type == '1'){
+                                    $declared_insolvent_type = 'display : block';
+                                }
+                                else{
+                                    $declared_insolvent_type = 'display : none';
+                                }
+                                @endphp
+                                <textarea class="form-control" name="declared_insolvent_type_remark" placeholder="Enter remarks" id="declared_insolvent_type_remark" style="{{ $declared_insolvent_type }}">{{ @$applicationForm->declared_insolvent_type_remark }}</textarea>
                                 <strong id="declared_insolvent_type_remark-error" class="error"></strong>
                             </div>
                         </div>
@@ -471,14 +511,22 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input already_apply_for_enrollment" type="radio" name="already_apply_for_enrollment" id="already_apply_for_enrollment0" value="0" checked="">
+                                    <input class="form-check-input already_apply_for_enrollment" type="radio" name="already_apply_for_enrollment" id="already_apply_for_enrollment0" value="0" {{ @$applicationForm->already_apply_for_enrollment == '0' ? 'checked': ( @$applicationForm ? '' : 'checked' ) }}>
                                     <label class="form-check-label text-dark" for="already_apply_for_enrollment0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input already_apply_for_enrollment" type="radio" name="already_apply_for_enrollment" id="already_apply_for_enrollment1" value="1">
+                                    <input class="form-check-input already_apply_for_enrollment" type="radio" name="already_apply_for_enrollment" id="already_apply_for_enrollment1" value="1" {{ @$applicationForm->already_apply_for_enrollment == '1' ? 'checked': '' }}>
                                     <label class="form-check-label text-dark" for="already_apply_for_enrollment1">Yes</label>
                                 </div>
-                                <textarea class="form-control" name="already_apply_for_enrollment_remark" placeholder="Enter remarks" id="already_apply_for_enrollment_remark" style="display: none;"></textarea>
+                                @php
+                                if(@$applicationForm->already_apply_for_enrollment == '1'){
+                                    $already_apply_for_enrollment = 'display : block';
+                                }
+                                else{
+                                    $already_apply_for_enrollment = 'display : none';
+                                }
+                                @endphp
+                                <textarea class="form-control" name="already_apply_for_enrollment_remark" placeholder="Enter remarks" id="already_apply_for_enrollment_remark" style="{{ $already_apply_for_enrollment }}">{{ @$applicationForm->already_apply_for_enrollment_remark }}</textarea>
                                 <strong id="already_apply_for_enrollment_remark-error" class="error"></strong>
                             </div>
                         </div>
@@ -502,21 +550,22 @@ Application Form
                                 <p><label>Rs. 9200/-</label></p>
                                 <p><label>Rs. 1200/-</label></p>
                                 <p><label>Rs. 1000/-</label></p>
-                                <input type="" name="total_pay" id="total_pay" value="11400">
+                                <input type="hidden" name="total_pay" id="total_pay" value="11400">
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <p class="text-dark">I...............declare that the facts stated above are true to my knowledge and belief.</p>
+                            <p class="text-dark">I {{ auth()->user()->applicant_name }} declare that the facts stated above are true to my knowledge and belief.</p>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="text-dark">Date of Completion:</label>
-                                <span id="date_of_completion"></span>
+                                <span id="date_of_completion" class="text-dark">{{ date('d-m-Y') }}</span>
                             </div>
                             <div class="col-md-6">
                                 <label class="text-dark">Signature of the applicant:</label>
+                                <span class="text-dark">{{ auth()->user()->applicant_name }}</span>
                             </div>
                         </div>
 

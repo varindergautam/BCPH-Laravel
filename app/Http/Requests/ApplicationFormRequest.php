@@ -24,7 +24,8 @@ class ApplicationFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'permanent_address' => 'required'
+            'university_name' => 'required',
+            'which_univeristy' => 'required'
         ];
     }
 }

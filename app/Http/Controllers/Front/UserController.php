@@ -81,6 +81,8 @@ class UserController extends Controller
             $user->district = $request->district;
             $user->date_of_birth = $request->date_of_birth;
             $user->adhaarno = $request->adhaarno;
+            $user->permanent_address = $request->permanent_address;
+            $user->correspondence_address = $request->correspondence_address;
 
             $mailData['name'] = $request->applicant_name;
             $mailData['password'] = $this->generate_random_number();

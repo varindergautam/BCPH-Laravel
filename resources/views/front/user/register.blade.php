@@ -92,7 +92,7 @@ Registeration Form
             placeholder="Enter District Name">
             <strong id="district-error" class="error"></strong>
         </div>
-    </div>
+    </div>    
 
     <div class="row">
         <div class="col-md-6  mb-3">
@@ -108,6 +108,20 @@ Registeration Form
             <strong id="adhaarno-error" class="error"></strong>			
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="permanent_address">Permanent Address</label>
+            <textarea class="form-control" name="permanent_address" id="permanent_address" placeholder="Enter Permanent Address"></textarea>
+            <strong id="permanent_address-error" class="error"></strong>			
+        </div>
+        <div class="col-md-6  mb-3">
+            <label class="text-dark" for="correspondence_address">Correspondence Address</label>
+            <textarea class="form-control" name="correspondence_address" id="correspondence_address" placeholder="EnterCorrespondence Address"></textarea>
+            <strong id="correspondence_address-error" class="error"></strong>			
+        </div>
+    </div>
+
     <div class="row">
         <div class="col ">
             <div class=" margin_top_33">

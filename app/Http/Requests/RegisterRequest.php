@@ -38,6 +38,8 @@ class RegisterRequest extends FormRequest
             'date_of_birth' => 'required',
             'adhaarno' => 'required|digits:12',
             'adhaarno' => 'required|',
+            'permanent_address' => 'required|',
+            'correspondence_address' => 'required|',
         ];
     }
 
