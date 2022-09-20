@@ -30,12 +30,24 @@ Auth::routes([
     ->group(function () {
         Route::get('/', 'register')->name('register');
         Route::post('/storeRegister', 'storeRegister')->name('storeRegister');
+        
         Route::get('/login', 'login')->name('login');
         Route::post('/loginUser', 'loginUser')->name('loginUser');
+
+        Route::get('/forgot-password', 'forgotPassword')->name('forgotPassword');
+        Route::post('/mailForgotPassword', 'mailForgotPassword')->name('mailForgotPassword');
+
         Route::get('/testEmail', 'testEmail')->name('testEmail');
     });
 
   Route::group(['middleware' => ['auth']], function () {
+
+    Route::controller(App\Http\Controllers\Front\UserController::class)
+    ->group(function () {
+        Route::get('/change-password', 'changePassword')->name('changePassword');
+        Route::post('/updatePassword', 'updatePassword')->name('updatePassword');
+    });
+
     Route::controller(App\Http\Controllers\Front\ApplicationFormController::class)
     ->group(function () {
         Route::get('application-form', 'applicationForm')->name('applicationForm');

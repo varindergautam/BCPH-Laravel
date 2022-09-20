@@ -1,7 +1,7 @@
 @extends('layouts.front_layout')
 
 @section('title')
-Login Form
+Forgot Password
 @endsection
 
 @section('content')
@@ -14,34 +14,28 @@ Login Form
                         @csrf
                         <div class="form_heading">
                             <img src="{{ asset('front/images/logo.png') }}" class="mx-auto d-block mb-2">
-                            <h3>Login Now</h3>
+                            <h3>Forgot Password</h3>
                         </div>
                         <div class="mb-3 mt-3">
                             <h4 for="email" class="form-label w-100">Email</h4>
                             <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email">
                             <strong id="email-error" class="error"></strong>
                         </div>
-                        
-                        <div class="mb-3">
-                            <h4 for="password" class="form-label w-100">Password</h4>
-                            <input type="password" name="password" class="form-control" placeholder="Enter Password" id="password">
-                            <strong id="password-error" class="error"></strong>
-                        </div>
 
                         <div class="row">
                         <div class="col ">
                             <div class=" margin_top_33 mt-0">
-                                <input type="submit" value="Login" class=" custom_btn previous_btn_padding">
+                                <input type="submit" value="Forgot" class=" custom_btn previous_btn_padding">
                                 <!-- <span class=" fw-bold text-dark">&nbsp;&nbsp;&nbsp; OR</span> -->
                             </div>
                         </div>
                         <div class="col ">
                             <div class="submit_btn margin_top_0">
-                                <a href="{{ url('/') }}" name="" class="custom_btn previous_btn_padding float-end margin_top_0">Register</a>
+                                <a href="{{ url('/login') }}" name="" class="custom_btn previous_btn_padding float-end margin_top_0">Login</a>
                             </div>
                         </div>
                         <div class="col-md-12 mt-3">
-                                <a href="{{ route('forgotPassword') }}" class="text-dark fw-bold">Forgot Password</a>
+                                
                             </div>
                     </div>
                     </form>
@@ -58,7 +52,7 @@ Login Form
         $('form').on('submit', function (e) {
             e.preventDefault();
             
-            var url = baseUrl+'/loginUser';
+            var url = baseUrl+'/mailForgotPassword';
             var method = $(this).attr('method');
             var formData = new FormData(this);
 

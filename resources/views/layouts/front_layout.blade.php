@@ -49,7 +49,7 @@
                             Welcome, <span class="fw-bold">{{ auth::user()->applicant_name }}</span>
                           </a>
                           <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="change-password.html">Change Password</a></li>
+                            <li><a class="dropdown-item" href="{{ route('changePassword') }}">Change Password</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                           </ul>
                         </div>
