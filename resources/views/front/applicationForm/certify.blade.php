@@ -5,7 +5,7 @@ Certify Form
 @endsection
 
 @section('content')
-<div class="main_padding application_form" id="printableArea">
+<div class="main_padding application_form certify" id="printableArea">
     <div class="container  ">
         <div class="row ">
             <div class="col-md-12">
@@ -28,7 +28,7 @@ Certify Form
 
                                 <p class="text-dark"><strong>Name & Address of Advocate:</strong></p>
                                 <p class="text-dark">{{ auth::user()->applicant_name }}</p>
-                                <p class="text-dark">{{ $application_form->permanent_address }}</p>
+                                <p class="text-dark">{{ auth()->user()->permanent_address }}</p>
                             </div>
 
                             <div class="col-md-12">
@@ -55,7 +55,7 @@ Certify Form
 
                                     <p class="text-dark"><strong>Name & Address of Advocate:</strong></p>
                                     <p class="text-dark">{{ auth::user()->applicant_name }}</p>
-                                    <p class="text-dark">{{ $application_form->permanent_address }}</p>
+                                    <p class="text-dark">{{ auth()->user()->permanent_address }}</p>
                                 </div>
 
                                 <div class="col-md-12">

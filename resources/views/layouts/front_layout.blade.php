@@ -11,6 +11,8 @@
     <link href="{{ asset('front/css/responsive.css') }}" rel="stylesheet">
 
     <script src="{{ asset('common/plugins/js/jquery.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.js"></script>
     <script src="{{ asset('common/plugins/js/popper.min.js') }}"></script>
     <script src="{{ asset('common/plugins/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('common/plugins/js/sweetalert.min.js') }}"></script>

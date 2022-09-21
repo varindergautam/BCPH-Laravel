@@ -24,7 +24,14 @@ class CertifyFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'years' => 'required'
+            'years' => 'required',
+            'advocate_name' => 'required',
+            'date' => 'required',
+            'day' => 'required',
+            'years_2' => 'required',
+            'advocate_name_2' => 'required',
+            'date_2' => 'required',
+            'day_2' => 'required',
         ];
     }
 }

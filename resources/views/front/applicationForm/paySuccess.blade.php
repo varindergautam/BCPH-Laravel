@@ -16,8 +16,13 @@ Payment Success
                             <h3>Payment Confirmation</h3>
                         </div>
 
-                        <div class="row text-center">
-                            <div class="col">Your payment Rs. {{ $payment_data->total_pay }} successfully done.</div>
+                        <div class="row text-center text-dark">
+                            <ul style="width: auto; margin: 0 auto;">
+                                <li><p>Rs. 9200/-</p></li>
+                                <li><p>Rs. 1200/-</p></li>
+                                <li><p>Rs. 1000/-</p></li>
+                            </ul>
+                            <div class="col-md-12 mb-2">Your payment <strong>Rs. {{ $payment_data->total_pay }}</strong> successfully done.</div>
                         </div>
 
 

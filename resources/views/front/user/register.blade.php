@@ -117,7 +117,7 @@ Registeration Form
         </div>
         <div class="col-md-6  mb-3">
             <label class="text-dark" for="correspondence_address">Correspondence Address</label>
-            <textarea class="form-control" name="correspondence_address" id="correspondence_address" placeholder="EnterCorrespondence Address"></textarea>
+            <textarea class="form-control" name="correspondence_address" id="correspondence_address" placeholder="Enter Correspondence Address"></textarea>
             <strong id="correspondence_address-error" class="error"></strong>			
         </div>
     </div>

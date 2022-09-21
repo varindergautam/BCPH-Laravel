@@ -34,7 +34,8 @@ Declaration Form
               <div class="row margin_top">
                   <div class="col-md-6">
                       <label class="text-dark">Date :</label>
-                      <span id="date_of_completion" class="text-dark">{{ date('d-m-Y') }}</span>
+                      <input type="hidden" name="date_of_completion" value="{{ @$declaration_data->date_of_completion ? @$declaration_data->date_of_completion : date('d-m-Y') }}">
+                      <span id="date_of_completion" class="text-dark">{{ @$declaration_data->date_of_completion ? @$declaration_data->date_of_completion : date('d-m-Y') }}</span>
                   </div>
                   <div class="col-md-6">
                       <span class="text-dark fw-bold">Dishant Thakur</span>

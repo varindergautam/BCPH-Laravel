@@ -23,7 +23,7 @@ class UserController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
-        // $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 
     public function registerValidation($request) {
@@ -129,34 +129,34 @@ class UserController extends Controller
         }
     }
 
-    public function changePassword() {
-        return view('front.user.changePassword');
-    }
+    // public function changePassword() {
+    //     return view('front.user.changePassword');
+    // }
 
-    public function updatePassword(UpdatePasswordRequest $request) {
-        try {
-            if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
-                // throw new \Exception("Token is required.");
-                // The passwords matches
-                return response()->json(['message'=> 'Your current password does not matches with the password', 'status' => config('CommonStatus.INACTIVE')]);
-            }
+    // public function updatePassword(UpdatePasswordRequest $request) {
+    //     try {
+    //         if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
+    //             // throw new \Exception("Token is required.");
+    //             // The passwords matches
+    //             return response()->json(['message'=> 'Your current password does not matches with the password', 'status' => config('CommonStatus.INACTIVE')]);
+    //         }
     
-            // if(strcmp($request->get('new_password'), $request->get('confirm_password')) == 0){
-            //     // Current password and new password same
-            //     return response()->json(['message'=> 'New Password cannot be same as your current password', 'status' => config('CommonStatus.INACTIVE')]);
-            // }
+    //         // if(strcmp($request->get('new_password'), $request->get('confirm_password')) == 0){
+    //         //     // Current password and new password same
+    //         //     return response()->json(['message'=> 'New Password cannot be same as your current password', 'status' => config('CommonStatus.INACTIVE')]);
+    //         // }
 
-            //Change Password
-            $user = Auth::user();
-            $user->password = Hash::make($request->get('new_password'));
-            $user->save();
+    //         //Change Password
+    //         $user = Auth::user();
+    //         $user->password = Hash::make($request->get('newpassword'));
+    //         $user->save();
 
-            return response()->json(['message'=> 'Password successfully changed!', 'status' => config('CommonStatus.ACTIVE')]);
-        } catch (\Throwable $th) {
-            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => false]);
-            throw $th;
-        }
-    }
+    //         return response()->json(['message'=> 'Password successfully changed!', 'status' => config('CommonStatus.ACTIVE')]);
+    //     } catch (\Throwable $th) {
+    //         return response()->json(['message'=> json_encode($th->getMessage()), 'status' => false]);
+    //         throw $th;
+    //     }
+    // }
 
     public function forgotPassword() {
         return view('front.user.forgotPassword');

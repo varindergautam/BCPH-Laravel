@@ -561,7 +561,8 @@ Application Form
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="text-dark">Date of Completion:</label>
-                                <span id="date_of_completion" class="text-dark">{{ date('d-m-Y') }}</span>
+                                <input type="hidden" name="date_of_completion" value="{{ @$applicationForm->date_of_completion ? @$applicationForm->date_of_completion : date('d-m-Y') }}">
+                                <span id="date_of_completion" class="text-dark">{{ @$applicationForm->date_of_completion ? @$applicationForm->date_of_completion : date('d-m-Y') }}</span>
                             </div>
                             <div class="col-md-6">
                                 <label class="text-dark">Signature of the applicant:</label>

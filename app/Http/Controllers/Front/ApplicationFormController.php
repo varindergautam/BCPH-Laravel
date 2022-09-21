@@ -7,10 +7,13 @@ use App\Http\Requests\AffidavitFormRequest;
 use App\Http\Requests\ApplicationFormRequest;
 use App\Http\Requests\CertifyFormRequest;
 use App\Http\Requests\DeclarationFormRequest;
+use App\Http\Requests\DocumentUploadRequest;
 use App\Models\AffidavitForm;
 use App\Models\ApplicationForm;
 use App\Models\CertifyForm;
 use App\Models\DeclarationForm;
+use App\Models\DocumentUpload;
+use App\Models\Undertaking;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use Auth;
@@ -30,6 +33,35 @@ class ApplicationFormController extends Controller
     public function applicationForm() {
         $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         return view('Front.applicationForm.applicationForm', $data);
+    }
+
+    public function changePassword() {
+        return view('front.user.changePassword');
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request) {
+        try {
+            if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
+                // throw new \Exception("Token is required.");
+                // The passwords matches
+                return response()->json(['message'=> 'Your current password does not matches with the password', 'status' => config('CommonStatus.INACTIVE')]);
+            }
+    
+            // if(strcmp($request->get('new_password'), $request->get('confirm_password')) == 0){
+            //     // Current password and new password same
+            //     return response()->json(['message'=> 'New Password cannot be same as your current password', 'status' => config('CommonStatus.INACTIVE')]);
+            // }
+
+            //Change Password
+            $user = Auth::user();
+            $user->password = Hash::make($request->get('newpassword'));
+            $user->save();
+
+            return response()->json(['message'=> 'Password successfully changed!', 'status' => config('CommonStatus.ACTIVE')]);
+        } catch (\Throwable $th) {
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => false]);
+            throw $th;
+        }
     }
 
     public function orderIdGenerate(ApplicationFormRequest $request) {
@@ -146,6 +178,8 @@ class ApplicationFormController extends Controller
             $applicationFormData->razorpay_payment_id = $request->razorpay_payment_id ? $request->razorpay_payment_id : $sessionApplicatonFormData->razorpay_payment_id;
             $applicationFormData->razorpay_signature = $request->razorpay_signature ? $request->razorpay_signature : $sessionApplicatonFormData->razorpay_signature;
             $applicationFormData->payment_status = 1;
+            $applicationFormData->date_of_completion = $sessionApplicatonFormData->date_of_completion;
+            $applicationFormData->stream = $sessionApplicatonFormData->stream;
             $applicationFormData->save();
             if($applicationFormData) {
                 Session::forget('cart');
@@ -182,8 +216,9 @@ class ApplicationFormController extends Controller
             $declarationForm->law_college_name = $request->law_college_name;
             $declarationForm->law_university_name = $request->law_university_name;
             $declarationForm->law_affiliated_university = $request->law_affiliated_university;
+            $declarationForm->date_of_completion = $request->date_of_completion;
             if($declarationForm->save()) {
-                return response()->json(['message'=>'Success', 'redirect' => route('undertaking'), 'status' => true]);
+                return response()->json(['message'=>'Declaration form submitted successfully', 'redirect' => route('undertaking'), 'status' => true]);
             }
         } catch (\Throwable $th) {
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
@@ -193,6 +228,23 @@ class ApplicationFormController extends Controller
 
     public function undertaking() {
         return view('front.applicationForm.undertaking');
+    }
+
+    public function saveUndertakingForm(Request $request) {
+        try {
+            $undertaking = Undertaking::where('user_id', Auth::user()->id)->first();
+            if(!$undertaking){
+                $undertaking = new Undertaking;
+            }
+            $undertaking->user_id = Auth::user()->id;
+            $undertaking->date_of_completion = $request->date_of_completion;
+            if($undertaking->save()) {
+                return response()->json(['message'=>'Undertaking form submit successfully', 'redirect' => route('affidavitForm'), 'status' => true]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
+            throw $th;
+        }
     }
 
     public function affidavitForm() {
@@ -215,7 +267,7 @@ class ApplicationFormController extends Controller
             $affidavitForm->college_name_oath = $request->college_name_oath;
             $affidavitForm->place_name_oath = $request->place_name_oath;
             if($affidavitForm->save()) {
-                return response()->json(['message'=>'Success', 'redirect' => route('certifyForm'), 'status' => true]);
+                return response()->json(['message'=>'Affidavit form submit successfully', 'redirect' => route('certifyForm'), 'status' => true]);
             }
         } catch (\Throwable $th) {
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
@@ -245,7 +297,7 @@ class ApplicationFormController extends Controller
             $certifyForm->date_2 = $request->date_2;
             $certifyForm->day_2 = $request->day_2;
             if($certifyForm->save()) {
-                return response()->json(['message'=>'Success', 'redirect' => route('enrolmentCommittteForm'), 'status' => true]);
+                return response()->json(['message'=>'Cerify form submit successfully', 'redirect' => route('enrolmentCommittteForm'), 'status' => true]);
             }
         } catch (\Throwable $th) {
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
@@ -269,5 +321,29 @@ class ApplicationFormController extends Controller
 
     public function documentUpload() {
         return view('front.applicationForm.documentUpload');
+    }
+
+    public function saveDocumentUpload(DocumentUploadRequest $request) {
+        try {
+            $documentUpload = DocumentUpload::where('user_id', Auth::user()->id)->first();
+            if(!$documentUpload){
+                $documentUpload = new DocumentUpload;
+            }
+            if($request->file('provisional_certificate_of_llb')){
+                $file = $request->file('provisional_certificate_of_llb');
+                $provisional_certificate_of_llb = time(). '.' . $file->getClientOriginalExtension();
+                \Storage::disk('public')->put('documentUploads', $provisional_certificate_of_llb);
+                // $documentUpload->provisional_certificate_of_llb = $provisional_certificate_of_llb;
+            }
+
+            $documentUpload->user_id = Auth::user()->id;
+            $documentUpload->date_of_completion = $request->date_of_completion;
+            if($documentUpload->save()) {
+                return response()->json(['message'=>'Cerify form submit successfully', 'redirect' => route('documentUpload'), 'status' => true]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
+            throw $th;
+        }
     }
 }

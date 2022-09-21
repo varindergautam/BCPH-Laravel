@@ -43,7 +43,7 @@ Identity Card
                                 <p class="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Law Degree : (In Block Letters) <span class="fw-bold"></span></p>
                                 <p class="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Father's/Husband's Name:- <span class="fw-bold">{{ Auth::user()->father_name }}</span></p>
                                 <p class="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth and Age:- <span class="fw-bold">{{ auth::user()->date_of_birth }} and {{ auth::user()->age() }}</span></p>
-                                <p class="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permanent Address:- <span class="fw-bold">{{ $application_form->permanent_address }}</span></p>
+                                <p class="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permanent Address:- <span class="fw-bold">{{ auth()->user()->permanent_address }}</span></p>
                                 <p class="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile No:- <span class="fw-bold">{{ Auth::user()->mobile_number }}</span> </p>
                             </div>
                         </div>

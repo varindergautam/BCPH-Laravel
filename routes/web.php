@@ -42,23 +42,27 @@ Auth::routes([
 
   Route::group(['middleware' => ['auth']], function () {
 
-    Route::controller(App\Http\Controllers\Front\UserController::class)
-    ->group(function () {
-        Route::get('/change-password', 'changePassword')->name('changePassword');
-        Route::post('/updatePassword', 'updatePassword')->name('updatePassword');
-    });
+    // Route::controller(App\Http\Controllers\Front\UserController::class)
+    // ->group(function () {
+    //     Route::get('/change-password', 'changePassword')->name('changePassword');
+    //     Route::post('/updatePassword', 'updatePassword')->name('updatePassword');
+    // });
 
     Route::controller(App\Http\Controllers\Front\ApplicationFormController::class)
     ->group(function () {
-        Route::get('application-form', 'applicationForm')->name('applicationForm');
-        Route::post('orderid-generate', 'orderIdGenerate')->name('orderIdGenerate');
-        Route::get('paysuccess', 'paysuccess')->name('paysuccess');
-        Route::get('payment-detail/{id}', 'paymentDetail')->name('paymentDetail');
+      Route::get('/change-password', 'changePassword')->name('changePassword');
+        Route::post('/updatePassword', 'updatePassword')->name('updatePassword');
+
+        Route::get('/application-form', 'applicationForm')->name('applicationForm');
+        Route::post('/orderid-generate', 'orderIdGenerate')->name('orderIdGenerate');
+        Route::get('/paysuccess', 'paysuccess')->name('paysuccess');
+        Route::get('/payment-detail/{id}', 'paymentDetail')->name('paymentDetail');
         
         Route::get('declaration-form', 'declarationForm')->name('declarationForm');
         Route::post('saveDeclarationForm', 'saveDeclarationForm')->name('saveDeclarationForm');
 
         Route::get('/undertaking', 'undertaking')->name('undertaking');
+        Route::post('/saveUndertakingForm', 'saveUndertakingForm')->name('saveUndertakingForm');
 
         Route::get('/affidavit-form', 'affidavitForm')->name('affidavitForm');
         Route::post('saveAffidavitForm', 'saveAffidavitForm')->name('saveAffidavitForm');
@@ -73,6 +77,7 @@ Auth::routes([
         Route::get('/identity-card', 'identityCard')->name('identityCard');
 
         Route::get('/document-upload', 'documentUpload')->name('documentUpload');
+        Route::post('/saveDocumentUpload', 'saveDocumentUpload')->name('saveDocumentUpload');
     });
   });
 
