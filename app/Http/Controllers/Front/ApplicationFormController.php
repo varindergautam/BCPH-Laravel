@@ -227,7 +227,8 @@ class ApplicationFormController extends Controller
     }
 
     public function undertaking() {
-        return view('front.applicationForm.undertaking');
+        $data['undertaking'] = Undertaking::where('user_id', Auth::user()->id)->first();
+        return view('front.applicationForm.undertaking', $data);
     }
 
     public function saveUndertakingForm(Request $request) {
@@ -331,8 +332,11 @@ class ApplicationFormController extends Controller
             }
             if($request->file('provisional_certificate_of_llb')){
                 $file = $request->file('provisional_certificate_of_llb');
-                $provisional_certificate_of_llb = time(). '.' . $file->getClientOriginalExtension();
-                \Storage::disk('public')->put('documentUploads', $provisional_certificate_of_llb);
+                $provisional_certificate_of_llb = md5(time()). '.' . $file->getClientOriginalExtension();
+                $path = \Storage::disk('public')->path('documentUploads');
+                $file->move($path, $provisional_certificate_of_llb);
+                $documentUpload->provisional_certificate_of_llb =  $provisional_certificate_of_llb;
+                // \Storage::disk('public')->put('documentUploads', $provisional_certificate_of_llb);
                 // $documentUpload->provisional_certificate_of_llb = $provisional_certificate_of_llb;
             }
 

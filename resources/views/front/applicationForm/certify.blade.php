@@ -18,11 +18,11 @@ Certify Form
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="text-dark">I hereby certify that Shri/Miss <strong>{{ auth::user()->applicant_name }}</strong> Son/daughter/wife 
-                                    of  Shri <strong>{{ auth::user()->father_name }}</strong> has been known to me personally for about <input type="text" name="years" id="years" placeholder="Enter year"> <strong id="years-error" class="error"></strong> years OR has been introduced to me by shri <input type="text" name="advocate_name" id="advocate_name" placeholder="Enter advocate name"> <strong id="advocate_name-error" class="error"></strong> Advocate, who is personally known to me.
+                                    of  Shri <strong>{{ auth::user()->father_name }}</strong> has been known to me personally for about <input type="text" name="years" id="years" placeholder="Enter year" value="{{ @$certify_form->years }}"> <strong id="years-error" class="error"></strong> years OR has been introduced to me by shri <input type="text" name="advocate_name" id="advocate_name" placeholder="Enter advocate name" value="{{ @$certify_form->advocate_name }}"> <strong id="advocate_name-error" class="error"></strong> Advocate, who is personally known to me.
                                     
                                 </p>
                                 <p class="text-dark">I believe him/here to be a person of good character and conduct and fit to be admitted as on Advocate on the roll of the Bar Council of Punjab & Haryana.</p>
-                                <p class="text-dark">I hereby also certify that I have ten year's standing at the Bar, as an Advocate, on this date. Dated the <input type="text" name="date" id="date" placeholder="Enter"> <strong id="date-error" class="error"></strong>  day of <input type="text" name="day" id="day" placeholder="Enter"> <strong id="day-error" class="error"></strong> 201
+                                <p class="text-dark">I hereby also certify that I have ten year's standing at the Bar, as an Advocate, on this date. Dated the <input type="text" name="date" id="date" placeholder="Enter" value="{{ @$certify_form->date }}"> <strong id="date-error" class="error"></strong>  day of <input type="text" name="day" id="day" placeholder="Enter" value="{{ @$certify_form->day }}"> <strong id="day-error" class="error"></strong> 201
 
                                 </p>
 
@@ -45,11 +45,11 @@ Certify Form
                             <div class="row">
                                 <div class="col-md-12">
                                     <p class="text-dark">I hereby certify that Shri/Miss <strong>{{ auth::user()->applicant_name }}</strong> Son/daughter/wife 
-                                        of Shri <strong>{{ auth::user()->father_name }}</strong> has been known to me personally for about<input type="text" name="years_2" id="years_2" placeholder="Enter year"> <strong id="years_2-error" class="error"></strong> years OR has been introduced to me by shri <input type="text" name="advocate_name_2" id="advocate_name_2" placeholder="Enter advocate name"> <strong id="advocate_name_2-error" class="error"></strong> Advocate, who is personally known to me.
+                                        of Shri <strong>{{ auth::user()->father_name }}</strong> has been known to me personally for about<input type="text" name="years_2" id="years_2" placeholder="Enter year" value="{{ @$certify_form->years_2 }}"> <strong id="years_2-error" class="error"></strong> years OR has been introduced to me by shri <input type="text" name="advocate_name_2" id="advocate_name_2" placeholder="Enter advocate name" value="{{ @$certify_form->advocate_name_2 }}"> <strong id="advocate_name_2-error" class="error"></strong> Advocate, who is personally known to me.
                                         
                                     </p>
                                     <p class="text-dark">I believe him/here to be a person of good character and conduct and fit to be admitted as on Advocate on the roll of the Bar Council of Punjab & Haryana.</p>
-                                    <p class="text-dark">I hereby also certify that I have ten year's standing at the Bar, as an Advocate, on this date. Dated the <input type="text" name="date_2" id="date_2" placeholder="Enter"> <strong id="date_2-error" class="error"></strong>  day of  <input type="text" name="day_2" id="day_2" placeholder="Enter"> <strong id="day_2-error" class="error"></strong>  202
+                                    <p class="text-dark">I hereby also certify that I have ten year's standing at the Bar, as an Advocate, on this date. Dated the <input type="text" name="date_2" id="date_2" placeholder="Enter" value="{{ @$certify_form->date_2 }}"> <strong id="date_2-error" class="error"></strong>  day of  <input type="text" name="day_2" id="day_2" placeholder="Enter" value="{{ @$certify_form->day_2 }}"> <strong id="day_2-error" class="error"></strong>  202
 
                                     </p>
 
