@@ -43,22 +43,30 @@ function printErrorMsg (msg) {
 }
 
 function swalSuccessMessage(data) {
-    swal({
+    var message = '<strong>' + data.message + '</strong>';
+    Swal.fire({
       title: false,
-      text: data.message,
+      html: message,
       icon: "success",
-      button: false,
+    //   button: false,
+    // timer: 2000,
+    showCancelButton: false,
+    showConfirmButton: false
     });
 
     windowReload(data.redirect);
 }
 
 function swalErrorMessage(data) {
+    var message = '<strong>' + data.message + '</strong>';
     swal({
       title: false,
-      text: data.message,
+    //   text: data.message,
+        html: message,
       icon: "error",
-      button: false,
+    //   button: false,
+    showCancelButton: false,
+    showConfirmButton: false
     });
 
     windowReload(data.redirect);

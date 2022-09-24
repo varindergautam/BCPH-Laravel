@@ -66,6 +66,7 @@ class ApplicationFormController extends Controller
 
     public function orderIdGenerate(ApplicationFormRequest $request) {
         try {
+            Session::put('application_form_data', $request->all());
 
             $checkPayment = ApplicationForm::where('user_id', Auth::user()->id)->first();
             if($checkPayment) {
@@ -110,7 +111,7 @@ class ApplicationFormController extends Controller
                 //             ),
                 'payment_capture' => 1 // auto capture
             ];
-            Session::put('application_form_data', $request->all());
+        
             $razorpayOrder = $this->api->order->create($orderData);
             return response()->json(['order_id' => $razorpayOrder['id']]);
         } catch (\Throwable $th) {

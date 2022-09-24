@@ -172,12 +172,14 @@ class UserController extends Controller
                 $mailData['email'] = $user->email;
     
                 $user->password = Hash::make($mailData['password']);
-                $user->save();
     
-                if($user) {
+                if($user->save) {
                     Mail::to($user->email)->send(new UserRegisterMail($mailData));
                     return response()->json(['message'=>'New password will send to mail, please check.', 'status' => true]);
-                }  
+                }
+            }
+            else{
+                return response()->json(['message'=>'No user found', 'status' => false]);
             }
         } catch (\Throwable $th) {
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => false]);

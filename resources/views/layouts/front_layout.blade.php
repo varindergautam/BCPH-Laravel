@@ -15,13 +15,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.js"></script>
     <script src="{{ asset('common/plugins/js/popper.min.js') }}"></script>
     <script src="{{ asset('common/plugins/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('common/plugins/js/sweetalert.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="{{ asset('common/plugins/js/sweetalert.min.js') }}"></script> --}}
     <script src="{{ asset('common/js/common_function.js') }}"></script>
     <script src="{{ asset('front/js/script.js') }}"></script>
     <script src="{{ asset('front/js/upload_file.js') }}"></script>
     <script src="{{ asset('front/js/validation.js') }}"></script>
 
-    <title>@yield('title')</title>
+    <title>BCPH - @yield('title')</title>
     @yield('style')
 </head>
 <body>

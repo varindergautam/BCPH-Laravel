@@ -36,8 +36,7 @@ class RegisterRequest extends FormRequest
             'city' => 'required',
             'district' => 'required',
             'date_of_birth' => 'required',
-            'adhaarno' => 'required|digits:12',
-            'adhaarno' => 'required|',
+            'adhaarno' => 'required|digits:12|unique:users',
             'permanent_address' => 'required|',
             'correspondence_address' => 'required|',
         ];

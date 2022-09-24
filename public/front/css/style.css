@@ -228,3 +228,7 @@ header{
 .error{
 	color: #f00;
 }
+
+.swal2-popup{
+	padding: 0 0 1.7em;
+}
