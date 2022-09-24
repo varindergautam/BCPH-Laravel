@@ -160,52 +160,52 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission0" value="0" {{ @$applicationForm->graduate_before_admission == '0' ? 'checked' : ( @$applicationForm ? '' : 'checked') }}>
+                                    <input class="form-check-input graduate_before_admission" type="radio" name="graduate_before_admission" id="graduate_before_admission0" value="0" {{ @$applicationForm->graduate_before_admission == '0' ? 'checked' : ( @$applicationForm ? '' : 'checked') }}>
                                     <label class="form-check-label text-dark" for="graduate_before_admission0">No</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="graduate_before_admission" id="graduate_before_admission1" value="1" {{ @$applicationForm->graduate_before_admission == '1' ? 'checked' : '' }}>
+                                    <input class="form-check-input graduate_before_admission" type="radio" name="graduate_before_admission" id="graduate_before_admission1" value="1" {{ @$applicationForm->graduate_before_admission == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label text-dark" for="graduate_before_admission1">Yes</label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 was_graduate" style="display: none">
                             <div class="col-md-6">
                                 <label class="text-dark" for="college_university_name">(i)	The name of the College and University at which he/she studied and from which he/she was sent up to the University for graduation.</label>
-                            </div>
+                            </div>  
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="college_university_name" id="college_university_name" placeholder="Enter College and University name" value="{{ @$applicationForm->college_university_name }}">
+                                <input type="text" class="form-control 5_year" name="college_university_name" id="college_university_name" placeholder="Enter College and University name" value="{{ @$applicationForm->college_university_name }}" readonly>
                                 <strong id="college_university_name-error" class="error"></strong>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 was_graduate" style="display: none">
                             <div class="col-md-6">
                                 <label class="text-dark" for="no_of_years">(ii)	The number of years for which he/she was required to study.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control numeric-only" name="no_of_years" id="no_of_years" placeholder="Enter number of years" value="{{ @$applicationForm->no_of_years }}">
+                                <input type="text" class="form-control numeric-only 5_year" name="no_of_years" id="no_of_years" placeholder="Enter number of years" value="{{ @$applicationForm->no_of_years }}" readonly>
                                 <strong id="no_of_years-error" class="error"></strong>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 was_graduate" style="display: none">
                             <div class="col-md-6">
                                 <label class="text-dark" for="college_pass_date">(iii) The date on which he/she passes the examination and obtained his/her degree.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="college_pass_date" id="college_pass_date" placeholder="Enter college pass date" value="{{ @$applicationForm->college_pass_date }}">
+                                <input type="text" class="form-control 5_year" name="college_pass_date" id="college_pass_date" placeholder="Enter college pass date" value="{{ @$applicationForm->college_pass_date }}" readonly>
                                 <strong id="college_pass_date-error" class="error"></strong>
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 was_graduate" style="display: none">
                             <div class="col-md-6">
                                 <label class="text-dark" for="stream">(iv)	The nature of the degree whether in Arts, Science, Commerce or other.</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="stream" id="stream" placeholder="Enter stream" value="{{ @$applicationForm->stream }}">
+                                <input type="text" class="form-control 5_year" name="stream" id="stream" placeholder="Enter stream" value="{{ @$applicationForm->stream }}" readonly>
                                 <strong id="stream-error" class="error"></strong>
                             </div>
                         </div>

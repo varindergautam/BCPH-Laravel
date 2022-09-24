@@ -26,7 +26,6 @@ $(document).on('click', '.business_or_profession', function(){
 	show_remark(value, remark_name);
 });
 
-
 $(document).on('click', '.criminal_court', function(){
 	var value = $(this).val();
 	var remark_name = "#criminal_court_remark";
@@ -65,4 +64,17 @@ function show_remark(value, remark_name){
 		$(remark_name).hide();
 	}
 }
+
+$(document).on('click', '.graduate_before_admission', function () {
+	var value = $(this).val();
+	if(value == '1'){
+		$('.was_graduate').show();
+
+		var year5  = "5 Years";
+		$('.5_year').val(year5);
+	}
+	else{
+		$('.was_graduate').hide();
+	}
+});
 
