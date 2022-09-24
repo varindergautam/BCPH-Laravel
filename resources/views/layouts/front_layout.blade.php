@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('common/plugins/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('common/plugins/css/sweetalert2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('front/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/style.css?v='.rand(1,99)) }}" rel="stylesheet">
+    <link href="{{ asset('front/css/responsive.css?v='.rand(1,99)) }}" rel="stylesheet">
 
     <script src="{{ asset('common/plugins/js/jquery.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
@@ -17,10 +17,10 @@
     <script src="{{ asset('common/plugins/js/bootstrap.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- <script src="{{ asset('common/plugins/js/sweetalert.min.js') }}"></script> --}}
-    <script src="{{ asset('common/js/common_function.js') }}"></script>
-    <script src="{{ asset('front/js/script.js') }}"></script>
-    <script src="{{ asset('front/js/upload_file.js') }}"></script>
-    <script src="{{ asset('front/js/validation.js') }}"></script>
+    <script src="{{ asset('common/js/common_function.js?v='.rand(1,99)) }}"></script>
+    <script src="{{ asset('front/js/script.js?v='.rand(1,99)) }}"></script>
+    <script src="{{ asset('front/js/upload_file.js?v='.rand(1,99)) }}"></script>
+    <script src="{{ asset('front/js/validation.js?v='.rand(1,99)) }}"></script>
 
     <title>BCPH - @yield('title')</title>
     @yield('style')

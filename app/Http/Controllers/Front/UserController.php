@@ -84,7 +84,7 @@ class UserController extends Controller
             }
 
         } catch (\Throwable $th) {
-            print_r($th->getMessage());die('hhhhh');
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
             throw $th;
         }
     }
@@ -111,7 +111,7 @@ class UserController extends Controller
                 return response()->json(['message'=>'No user found', 'status' => false]);
             }
         } catch (\Throwable $th) {
-            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => false]);
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
             throw $th;
         }
     }
@@ -146,7 +146,7 @@ class UserController extends Controller
                 return response()->json(['message'=>'No user found', 'status' => false]);
             }
         } catch (\Throwable $th) {
-            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => false]);
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
             throw $th;
         }
     }

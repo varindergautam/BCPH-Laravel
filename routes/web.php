@@ -72,6 +72,9 @@ Auth::routes([
 
         Route::get('/document-upload', 'documentUpload')->name('documentUpload');
         Route::post('/saveDocumentUpload', 'saveDocumentUpload')->name('saveDocumentUpload');
+
+        Route::get('/official-report', 'officialReportForm')->name('officialReportForm');
+        Route::post('/saveOfficialReportForm', 'saveOfficialReportForm')->name('saveOfficialReportForm');
     });
   });
 

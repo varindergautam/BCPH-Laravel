@@ -13,6 +13,7 @@ use App\Models\ApplicationForm;
 use App\Models\CertifyForm;
 use App\Models\DeclarationForm;
 use App\Models\DocumentUpload;
+use App\Models\OfficialReport;
 use App\Models\Undertaking;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
@@ -29,16 +30,17 @@ class ApplicationFormController extends Controller
         $this->displayCurrency = 'INR';
         $this->api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
     }
-    
-    public function applicationForm() {
-        $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
-        return view('Front.applicationForm.applicationForm', $data);
-    }
 
+    /**
+     * This function open a change password view file
+     */
     public function changePassword() {
         return view('front.user.changePassword');
     }
 
+    /**
+     * This function use to update the password with UpdatePasswordRequest validation
+     */
     public function updatePassword(UpdatePasswordRequest $request) {
         try {
             if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
@@ -63,7 +65,18 @@ class ApplicationFormController extends Controller
             throw $th;
         }
     }
+    
+    /**
+     * This function open a application form view file
+     */
+    public function applicationForm() {
+        $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+        return view('Front.applicationForm.applicationForm', $data);
+    }
 
+    /**
+     * This function used to generate a order id for payment with ApplicationFormRequest validation
+     */
     public function orderIdGenerate(ApplicationFormRequest $request) {
         try {
             $checkPayment = ApplicationForm::where('user_id', Auth::user()->id)->first();
@@ -119,6 +132,10 @@ class ApplicationFormController extends Controller
         }		
 	}
 
+    /**
+     * This function used verify the payment and also save the application form data
+     * * @param $request 
+     */
     public function paysuccess(Request $request) {
         try{
             if($request->razorpay_signature)
@@ -195,17 +212,26 @@ class ApplicationFormController extends Controller
         }
     }
 
+    /**
+     * This function used to open the payment success with payment detail
+     */
     public function paymentDetail (Request $request, $razorPayId) {
         $data['payment_data'] = ApplicationForm::where('razorpay_payment_id', $razorPayId)->first();
         return view('front.applicationForm.paySuccess', $data);
     }
 
+    /**
+     * This function used to open the delcaration form
+     */
     public function declarationForm() {
         $data['payment_data'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         $data['declaration_data'] = DeclarationForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.declarationForm', $data);
     }
 
+    /**
+     * This function used to save the delcaration form with DeclarationFormRequest validation
+     */
     public function saveDeclarationForm(DeclarationFormRequest $request) {
         try {
             $declarationForm = DeclarationForm::where('user_id', Auth::user()->id)->first();
@@ -226,11 +252,17 @@ class ApplicationFormController extends Controller
         }
     }
 
+    /**
+     * This function used to open the undertaking form
+     */
     public function undertaking() {
         $data['undertaking'] = Undertaking::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.undertaking', $data);
     }
 
+    /**
+     * This function used to save the undertaking form
+     */
     public function saveUndertakingForm(Request $request) {
         try {
             $undertaking = Undertaking::where('user_id', Auth::user()->id)->first();
@@ -248,11 +280,17 @@ class ApplicationFormController extends Controller
         }
     }
 
+    /**
+     * This function used to open the affidavit form
+     */
     public function affidavitForm() {
         $data['affidavit_data'] = AffidavitForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.affidavitForm', $data);
     }
 
+    /**
+     * This function used to save the affidavit form with AffidavitFormRequest validation
+     */
     public function saveAffidavitForm(AffidavitFormRequest $request) {
         try {
             $affidavitForm = AffidavitForm::where('user_id', Auth::user()->id)->first();
@@ -276,12 +314,18 @@ class ApplicationFormController extends Controller
         }
     }
 
+    /**
+     * This function used to open the certify form
+     */
     public function certifyForm() {
         $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         $data['certify_form'] = CertifyForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.certify', $data);
     }
 
+    /**
+     * This function used to save the certify form with CertifyFormRequest validation
+     */
     public function saveCertifyForm(CertifyFormRequest $request) {
         try {
             $certifyForm = CertifyForm::where('user_id', Auth::user()->id)->first();
@@ -306,24 +350,39 @@ class ApplicationFormController extends Controller
         }
     }
 
+    /**
+     * This function used to open the enrolment committte form
+     */
     public function enrolmentCommittteForm() {
         $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.enrolmentCommittteForm', $data);
     }
 
+    /**
+     * This function used to open the enrolment as advocate
+     */
     public function enrolmentAsAdvocate() {
         return view('front.applicationForm.enrolmentAsAdvocate');
     }
 
+    /**
+     * This function used to open the identity card form
+     */
     public function identityCard() {
         $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.identityCard', $data);
     }
 
+    /**
+     * This function used to open the document upload form
+     */
     public function documentUpload() {
         return view('front.applicationForm.documentUpload');
     }
 
+    /**
+     * This function used to save the document upload form with DocumentUploadRequest validation
+     */
     public function saveDocumentUpload(DocumentUploadRequest $request) {
         try {
             $documentUpload = DocumentUpload::where('user_id', Auth::user()->id)->first();
@@ -346,6 +405,39 @@ class ApplicationFormController extends Controller
             $documentUpload->date_of_completion = $request->date_of_completion;
             if($documentUpload->save()) {
                 return response()->json(['message'=>'Document upload successfully', 'redirect' => route('documentUpload'), 'status' => true]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
+            throw $th;
+        }
+    }
+
+    /**
+     * This function used to open the official report form
+     */
+    public function officialReportForm() {
+        $data['officialReport'] = OfficialReport::where('user_id', Auth::user()->id)->first();
+        return view('front.applicationForm.officialReport', $data);
+    }
+
+    /**
+     * This function used to save the official report form
+     */
+    public function saveOfficialReportForm(Request $request) {
+        try {
+            $officialReport = OfficialReport::where('user_id', Auth::user()->id)->first();
+            if(!$officialReport){
+                $officialReport = new OfficialReport;
+            }
+            $officialReport->user_id = Auth::user()->id;
+            $officialReport->study_gap = $request->study_gap ? $request->study_gap : config('CommonStatus.INACTIVE');
+            $officialReport->criminal_procedding = $request->criminal_procedding ? $request->criminal_procedding : config('CommonStatus.INACTIVE');
+            $officialReport->above_21_years = $request->above_21_years ? $request->above_21_years : config('CommonStatus.INACTIVE');
+            $officialReport->ex_service_men = $request->ex_service_men ? $request->ex_service_men : config('CommonStatus.INACTIVE');
+            $officialReport->foreign_law = $request->foreign_law ? $request->foreign_law : config('CommonStatus.INACTIVE');
+            $officialReport->date_of_completion = $request->date_of_completion;
+            if($officialReport->save()) {
+                return response()->json(['message'=>'Official report submit successfully', 'redirect' => route('officialReportForm'), 'status' => true]);
             }
         } catch (\Throwable $th) {
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);

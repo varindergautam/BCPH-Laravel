@@ -59,7 +59,7 @@ function swalSuccessMessage(data) {
 
 function swalErrorMessage(data) {
     var message = '<strong>' + data.message + '</strong>';
-    swal({
+    Swal.fire({
       title: false,
     //   text: data.message,
         html: message,
