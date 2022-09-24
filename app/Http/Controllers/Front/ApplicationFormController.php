@@ -66,8 +66,6 @@ class ApplicationFormController extends Controller
 
     public function orderIdGenerate(ApplicationFormRequest $request) {
         try {
-            Session::put('application_form_data', $request->all());
-
             $checkPayment = ApplicationForm::where('user_id', Auth::user()->id)->first();
             if($checkPayment) {
                 Session::put('application_form_data', $checkPayment);
@@ -111,7 +109,8 @@ class ApplicationFormController extends Controller
                 //             ),
                 'payment_capture' => 1 // auto capture
             ];
-        
+
+            Session::put('application_form_data', $request->all());
             $razorpayOrder = $this->api->order->create($orderData);
             return response()->json(['order_id' => $razorpayOrder['id']]);
         } catch (\Throwable $th) {
@@ -178,12 +177,12 @@ class ApplicationFormController extends Controller
             $applicationFormData->razorpay_order_id = $request->razorpay_order_id ? $request->razorpay_order_id : $sessionApplicatonFormData->razorpay_order_id;
             $applicationFormData->razorpay_payment_id = $request->razorpay_payment_id ? $request->razorpay_payment_id : $sessionApplicatonFormData->razorpay_payment_id;
             $applicationFormData->razorpay_signature = $request->razorpay_signature ? $request->razorpay_signature : $sessionApplicatonFormData->razorpay_signature;
-            $applicationFormData->payment_status = 1;
+            $applicationFormData->payment_status = '1';
             $applicationFormData->date_of_completion = $sessionApplicatonFormData->date_of_completion;
             $applicationFormData->stream = $sessionApplicatonFormData->stream;
             $applicationFormData->save();
             if($applicationFormData) {
-                Session::forget('cart');
+                Session::forget('application_form_data');
                 return redirect()->route('paymentDetail', $request->razorpay_payment_id);
                 return response()->json(['message'=>'Application form submitted successfully',
                 'redirect' => route('paymentDetail', $request->razorpay_payment_id),
@@ -328,14 +327,16 @@ class ApplicationFormController extends Controller
     public function saveDocumentUpload(DocumentUploadRequest $request) {
         try {
             $documentUpload = DocumentUpload::where('user_id', Auth::user()->id)->first();
+
             if(!$documentUpload){
                 $documentUpload = new DocumentUpload;
             }
+
             if($request->file('provisional_certificate_of_llb')){
                 $file = $request->file('provisional_certificate_of_llb');
                 $provisional_certificate_of_llb = md5(time()). '.' . $file->getClientOriginalExtension();
-                $path = \Storage::disk('public')->path('documentUploads');
-                $file->move($path, $provisional_certificate_of_llb);
+                $provisional_certificate_of_llb_path = \Storage::disk('public')->path('documentUploads');
+                $file->move($provisional_certificate_of_llb_path, $provisional_certificate_of_llb);
                 $documentUpload->provisional_certificate_of_llb =  $provisional_certificate_of_llb;
                 // \Storage::disk('public')->put('documentUploads', $provisional_certificate_of_llb);
                 // $documentUpload->provisional_certificate_of_llb = $provisional_certificate_of_llb;
@@ -344,7 +345,7 @@ class ApplicationFormController extends Controller
             $documentUpload->user_id = Auth::user()->id;
             $documentUpload->date_of_completion = $request->date_of_completion;
             if($documentUpload->save()) {
-                return response()->json(['message'=>'Cerify form submit successfully', 'redirect' => route('documentUpload'), 'status' => true]);
+                return response()->json(['message'=>'Document upload successfully', 'redirect' => route('documentUpload'), 'status' => true]);
             }
         } catch (\Throwable $th) {
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);

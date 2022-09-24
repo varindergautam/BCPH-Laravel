@@ -22,41 +22,12 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth');
         $this->middleware('guest')->except('logout');
     }
 
-    public function registerValidation($request) {
-        $validator = Validator::make($request->all(), [
-            'applicant_name' => 'required|string|max:50',
-            'email' => 'required|email|unique:users',
-        ]);
-
-        if ($validator->fails()) { 
-            return response()->json(['errors'=>$validator->getMessageBag()->toArray(), 'status' => config('CommonStatus.INACTIVE')]);
-        }
-    }
-    
-    public function register() {
-        return view('front.user.register');
-    }
-
-    function getToken()
-    {
-        $length = 8;
-        $token = "";
-        $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $codeAlphabet.= "abcdefghijklmnopqrstuvwxyz";
-        $codeAlphabet.= "0123456789";
-        $max = strlen($codeAlphabet); // edited
-
-        for ($i=0; $i < $length; $i++) {
-            $token .= $codeAlphabet[crypto_rand_secure(0, $max-1)];
-        }
-
-        return $token;
-    }
-
+    /**
+     * This function generate a random number for 8 character
+     */
     public function generate_random_number($digits = 8) {
         srand((double) microtime() * 10000000);
         $input = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
@@ -71,7 +42,17 @@ class UserController extends Controller
         }
         return $random_generator;
     }
-
+    
+    /**
+     * This function open register form
+     */
+    public function register() {
+        return view('front.user.register');
+    }
+    
+    /**
+     * This function save register form data with RegisterRequest validation
+     */
     public function storeRegister(RegisterRequest $request) {
         try {
             $user = new User;
@@ -108,10 +89,16 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * This function open login form
+     */
     public function login() {
         return view('front.user.login');
     }
 
+    /**
+     * This function use to login the user with LoginRequest validation
+     */
     public function loginUser(LoginRequest $request) {
         try {
             $credentials = $request->except(['_token']);
@@ -129,39 +116,16 @@ class UserController extends Controller
         }
     }
 
-    // public function changePassword() {
-    //     return view('front.user.changePassword');
-    // }
-
-    // public function updatePassword(UpdatePasswordRequest $request) {
-    //     try {
-    //         if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
-    //             // throw new \Exception("Token is required.");
-    //             // The passwords matches
-    //             return response()->json(['message'=> 'Your current password does not matches with the password', 'status' => config('CommonStatus.INACTIVE')]);
-    //         }
-    
-    //         // if(strcmp($request->get('new_password'), $request->get('confirm_password')) == 0){
-    //         //     // Current password and new password same
-    //         //     return response()->json(['message'=> 'New Password cannot be same as your current password', 'status' => config('CommonStatus.INACTIVE')]);
-    //         // }
-
-    //         //Change Password
-    //         $user = Auth::user();
-    //         $user->password = Hash::make($request->get('newpassword'));
-    //         $user->save();
-
-    //         return response()->json(['message'=> 'Password successfully changed!', 'status' => config('CommonStatus.ACTIVE')]);
-    //     } catch (\Throwable $th) {
-    //         return response()->json(['message'=> json_encode($th->getMessage()), 'status' => false]);
-    //         throw $th;
-    //     }
-    // }
-
+    /**
+     * This function open forgot password form
+     */
     public function forgotPassword() {
         return view('front.user.forgotPassword');
     }
 
+    /**
+     * This function use to send new password to user on mail with LoginRequest validation
+     */
     public function mailForgotPassword (ForgotPasswordRequest $request) {
         try {
             $email = $request->email;
@@ -187,6 +151,9 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * This function used for testing purpose of mail
+     */
     public function testEmail()
     {
         Mail::send([], [],

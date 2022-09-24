@@ -42,12 +42,6 @@ Auth::routes([
 
   Route::group(['middleware' => ['auth']], function () {
 
-    // Route::controller(App\Http\Controllers\Front\UserController::class)
-    // ->group(function () {
-    //     Route::get('/change-password', 'changePassword')->name('changePassword');
-    //     Route::post('/updatePassword', 'updatePassword')->name('updatePassword');
-    // });
-
     Route::controller(App\Http\Controllers\Front\ApplicationFormController::class)
     ->group(function () {
       Route::get('/change-password', 'changePassword')->name('changePassword');

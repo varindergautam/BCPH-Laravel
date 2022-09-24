@@ -33,7 +33,7 @@ Undertaking
                                 <span id="date_of_completion" class="text-dark">{{ @$undertaking->date_of_completion ? @$undertaking->date_of_completion : date('d-m-Y') }}</span>
                             </div>
                             <div class="col-md-6">
-                                <span class="text-dark fw-bold">Dishant Thakur</span>
+                                <span class="text-dark fw-bold">{{ auth::user()->applicant_name }}</span>
                                 <p class="text-dark">Signature of Applicant</p>
                             </div>
                         </div>

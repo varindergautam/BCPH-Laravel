@@ -45,8 +45,9 @@
                 Dear {{ $name }}</h4>
             <h2 style="margin-top:30px;margin-bottom:0px;font-size:30px;font-style: oblique;color:#063979;font-weight: 500;">
                 Your account has been created.</h2>
-            <p style="font-size:22px;font-style:oblique;color:#847f7f;font-weight: 300;margin-bottom:40px;">Welcome to
-                the BCPH .From now on, please log in to your account using following Detail</p>
+            <p style="font-size:22px;font-style:oblique;color:#847f7f;font-weight: 300;margin-bottom:40px;text-align:center">Welcome to
+                the BCPH.</p>
+                <p style="font-size:22px;font-style:oblique;color:#847f7f;font-weight: 300;margin-bottom:40px;">From now on, please log in to your account using following Detail</p>
             <div style="width:100%;max-width:400px;margin:0 auto 40px;display:inline-block;padding:20px;border:5px solid #ccc;">
                 <p style="margin-bottom:0px;">
                     <label style="text-align:left;width:90px;font-weight:600;">Email:</label>
