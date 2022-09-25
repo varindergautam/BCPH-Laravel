@@ -29,7 +29,7 @@ Document Upload
                                     <td width="8%">1.</td>
                                     <td width="80%">Original Provisional Certificate of L.L.B & Its Attested Copy or Two Attested Copies in case of original degree (See enclosure page No. 2)</td>
                                     <td width="12%">
-                                        <input type="file" name="provisional_certificate_of_llb">
+                                        <input type="file" name="provisional_certificate_of_llb" >
                                         <strong id="provisional_certificate_of_llb-error" class="error"></strong>
                                     </td>
                                 </tr>

@@ -154,6 +154,15 @@ Application Form
                             </div>
                         </div>
 
+                        @php
+                        if(@$applicationForm->graduate_before_admission == '1') {
+                            $graduate_before_admission = 'display : flex';
+                        }
+                        else{
+                            $graduate_before_admission = 'display : none';
+                        }
+                        @endphp
+
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="text-dark" for="">8. (a) Whether the applicant was graduate before admission to the Law Course: Answer specifically "Yes or No," if yes give the following particulars of graduation with percentage & Marks</label>
@@ -170,7 +179,7 @@ Application Form
                             </div>
                         </div>
 
-                        <div class="row mb-3 was_graduate" style="display: none">
+                        <div class="row mb-3 was_graduate" style="{{ $graduate_before_admission }}">
                             <div class="col-md-6">
                                 <label class="text-dark" for="college_university_name">(i)	The name of the College and University at which he/she studied and from which he/she was sent up to the University for graduation.</label>
                             </div>  
@@ -180,7 +189,7 @@ Application Form
                             </div>
                         </div>
 
-                        <div class="row mb-3 was_graduate" style="display: none">
+                        <div class="row mb-3 was_graduate" style="{{ $graduate_before_admission }}">
                             <div class="col-md-6">
                                 <label class="text-dark" for="no_of_years">(ii)	The number of years for which he/she was required to study.</label>
                             </div>
@@ -190,7 +199,7 @@ Application Form
                             </div>
                         </div>
 
-                        <div class="row mb-3 was_graduate" style="display: none">
+                        <div class="row mb-3 was_graduate" style="{{ $graduate_before_admission }}">
                             <div class="col-md-6">
                                 <label class="text-dark" for="college_pass_date">(iii) The date on which he/she passes the examination and obtained his/her degree.</label>
                             </div>
@@ -200,7 +209,7 @@ Application Form
                             </div>
                         </div>
 
-                        <div class="row mb-3 was_graduate" style="display: none">
+                        <div class="row mb-3 was_graduate" style="{{ $graduate_before_admission }}">
                             <div class="col-md-6">
                                 <label class="text-dark" for="stream">(iv)	The nature of the degree whether in Arts, Science, Commerce or other.</label>
                             </div>
@@ -340,8 +349,8 @@ Application Form
                                 <select class="form-control form-select"  name="city_for_pratice_after_enrollment" id="city_for_pratice_after_enrollment">
                                     <option selected="" disabled="">Select City</option>
                                     <option value="1" {{ @$applicationForm->city_for_pratice_after_enrollment == '1' ? 'selected' : '' }}>City - 1 </option>
-                                    <option value="2" {{ @$applicationForm->city_for_pratice_after_enrollment == '1' ? 'selected' : '' }}>City - 2 </option>
-                                    <option value="3" {{ @$applicationForm->city_for_pratice_after_enrollment == '1' ? 'selected' : '' }}>City - 3 </option>
+                                    <option value="2" {{ @$applicationForm->city_for_pratice_after_enrollment == '2' ? 'selected' : '' }}>City - 2 </option>
+                                    <option value="3" {{ @$applicationForm->city_for_pratice_after_enrollment == '3' ? 'selected' : '' }}>City - 3 </option>
                                 </select>
                                 <strong id="city_for_pratice_after_enrollment-error" class="error"></strong>
                             </div>

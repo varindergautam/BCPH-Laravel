@@ -79,9 +79,53 @@ class ApplicationFormController extends Controller
      */
     public function orderIdGenerate(ApplicationFormRequest $request) {
         try {
+            Session::put('application_form_data', $request->all());
             $checkPayment = ApplicationForm::where('user_id', Auth::user()->id)->first();
             if($checkPayment) {
-                Session::put('application_form_data', $checkPayment);
+                // Session::put('application_form_data', $checkPayment);
+                $checkPayment->user_id = Auth::user()->id;
+            // $checkPayment->permanent_address = $request->permanent_address;
+            $checkPayment->university_name = $request->university_name;
+            $checkPayment->which_univeristy = $request->which_univeristy;
+            $checkPayment->which_univeristy_remarks = $request->which_univeristy_remarks;
+            $checkPayment->date_of_law_degree = $request->date_of_law_degree;
+            $checkPayment->plus_two_mark = $request->plus_two_mark;
+            $checkPayment->graduate_before_admission = $request->graduate_before_admission;
+            $checkPayment->college_university_name = $request->college_university_name;
+            $checkPayment->no_of_years = $request->no_of_years;
+            $checkPayment->college_pass_date = $request->college_pass_date;
+            $checkPayment->english_compulsory = $request->english_compulsory;
+            // $checkPayment->correspondence_address = $request->correspondence_address;
+            $checkPayment->law_college_name = $request->law_college_name;
+            $checkPayment->law_college_join_date = $request->law_college_join_date;
+            $checkPayment->law_college_duration_year = $request->law_college_duration_year;
+            $checkPayment->law_college_passed = $request->law_college_passed;
+            $checkPayment->name_of_degree_obtained = $request->name_of_degree_obtained;
+            $checkPayment->medium_instruction = $request->medium_instruction;
+            $checkPayment->private_study_duration_year = $request->private_study_duration_year;
+            $checkPayment->city_for_pratice_after_enrollment = $request->city_for_pratice_after_enrollment;
+            $checkPayment->appointment_holds = $request->appointment_holds;
+            $checkPayment->appointment_holds_remarks = $request->appointment_holds_remarks;
+            $checkPayment->business_or_profession = $request->business_or_profession;
+            $checkPayment->business_or_profession_remark = $request->business_or_profession_remark;
+            $checkPayment->criminal_court = $request->criminal_court;
+            $checkPayment->criminal_court_remark = $request->criminal_court_remark;
+            $checkPayment->criminal_proceeding_againest_applicant = $request->criminal_proceeding_againest_applicant;
+            $checkPayment->criminal_proceeding_againest_applicant_remark = $request->criminal_proceeding_againest_applicant_remark;
+            $checkPayment->suspension_type = $request->suspension_type;
+            $checkPayment->suspension_type_remark = $request->suspension_type_remark;
+            $checkPayment->declared_insolvent_type = $request->declared_insolvent_type;
+            $checkPayment->declared_insolvent_type_remark = $request->declared_insolvent_type_remark;
+            $checkPayment->already_apply_for_enrollment = $request->already_apply_for_enrollment;
+            $checkPayment->already_apply_for_enrollment_remark = $request->already_apply_for_enrollment_remark;
+            $checkPayment->total_pay = $request->total_pay;
+            $checkPayment->razorpay_order_id = $checkPayment->razorpay_order_id;
+            $checkPayment->razorpay_payment_id = $checkPayment->razorpay_payment_id;
+            $checkPayment->razorpay_signature = $checkPayment->razorpay_signature;
+            $checkPayment->payment_status = '1';
+            $checkPayment->date_of_completion = $checkPayment->date_of_completion;
+            $checkPayment->stream = $request->stream;
+            $checkPayment->save();
                 return response()->json(['message' => 'Already Pay',
                         'status' => true,
                         'data' => 2,
@@ -123,7 +167,7 @@ class ApplicationFormController extends Controller
                 'payment_capture' => 1 // auto capture
             ];
 
-            Session::put('application_form_data', $request->all());
+            
             $razorpayOrder = $this->api->order->create($orderData);
             return response()->json(['order_id' => $razorpayOrder['id']]);
         } catch (\Throwable $th) {
@@ -149,7 +193,7 @@ class ApplicationFormController extends Controller
             }
 
             $sessionApplicatonFormData = (object)Session::get('application_form_data');
-
+            // print_r($request->all());die;
             $applicationFormData = ApplicationForm::where('user_id', Auth::user()->id)->first();
             if(!$applicationFormData){
                 $applicationFormData = new ApplicationForm;
@@ -193,7 +237,7 @@ class ApplicationFormController extends Controller
             $applicationFormData->total_pay = $sessionApplicatonFormData->total_pay;
             $applicationFormData->razorpay_order_id = $request->razorpay_order_id ? $request->razorpay_order_id : $sessionApplicatonFormData->razorpay_order_id;
             $applicationFormData->razorpay_payment_id = $request->razorpay_payment_id ? $request->razorpay_payment_id : $sessionApplicatonFormData->razorpay_payment_id;
-            $applicationFormData->razorpay_signature = $request->razorpay_signature ? $request->razorpay_signature : $sessionApplicatonFormData->razorpay_signature;
+            $applicationFormData->razorpay_signature = $request->razorpay_signature ? $request->razorpay_signature : $applicationFormData->razorpay_signature;
             $applicationFormData->payment_status = '1';
             $applicationFormData->date_of_completion = $sessionApplicatonFormData->date_of_completion;
             $applicationFormData->stream = $sessionApplicatonFormData->stream;
@@ -377,18 +421,26 @@ class ApplicationFormController extends Controller
      * This function used to open the document upload form
      */
     public function documentUpload() {
-        return view('front.applicationForm.documentUpload');
+        $data['documentUpload'] = DocumentUpload::where('user_id', Auth::user()->id)->first();
+        return view('front.applicationForm.documentUpload', $data);
     }
 
     /**
      * This function used to save the document upload form with DocumentUploadRequest validation
      */
-    public function saveDocumentUpload(DocumentUploadRequest $request) {
+    public function saveDocumentUpload(Request $request) {
         try {
+            $document_upload = new DocumentUpload;
+            if($document_upload->checkField($request->attendance_certificate)){
+
+                return response()->json(['message'=> 'requierd', 'status' => config('CommonStatus.INACTIVE')], 422); 
+            }
+
             $documentUpload = DocumentUpload::where('user_id', Auth::user()->id)->first();
 
             if(!$documentUpload){
                 $documentUpload = new DocumentUpload;
+                
             }
 
             if($request->file('provisional_certificate_of_llb')){

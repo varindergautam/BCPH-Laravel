@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +25,9 @@ class DocumentUploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'provisional_certificate_of_llb' => 'required',
+            // 'provisional_certificate_of_llb' => ['required', Rule::unique('posts', 'title')->ignore($this->post)],
+            'provisional_certificate_of_llb' => 'exists',
+            'attendance_certificate' => 'exists:attendance_certificate',
             // 'attendance_certificate' => 'required',
             // 'dmc_of_llb' => 'required',
             // 'matriculation_certificate' => 'required',

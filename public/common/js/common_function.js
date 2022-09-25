@@ -16,8 +16,6 @@ function postAjax(url, method, formData){
             $('.loader').show();
         },
         success: function (response) {
-            console.log(response);
-            // var response = JSON.stringify(response);
             if(response.status == 0){
                 swalErrorMessage(response);
             }else{

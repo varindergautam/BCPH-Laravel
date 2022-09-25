@@ -74,13 +74,14 @@ class UserController extends Controller
             $mailData['name'] = $request->applicant_name;
             $mailData['password'] = $this->generate_random_number();
             $mailData['email'] = $request->email;
+            $mailData['mail_type'] = 'create';
 
             $user->password = Hash::make($mailData['password']);
             $user->save();
 
             if($user) {
                 Mail::to($request->email)->send(new UserRegisterMail($mailData));
-                return response()->json(['message'=>'You have successfull registered, now you can login..', 'status' => true]);
+                return response()->json(['message'=>'You have successfull registered, now you can login..', 'redirect' => route('login'), 'status' => true]);
             }
 
         } catch (\Throwable $th) {
@@ -134,10 +135,10 @@ class UserController extends Controller
                 $mailData['name'] = $user->applicant_name;
                 $mailData['password'] = $this->generate_random_number();
                 $mailData['email'] = $user->email;
-    
+                $mailData['mail_type'] = 'forgot';
                 $user->password = Hash::make($mailData['password']);
     
-                if($user->save) {
+                if($user->save()) {
                     Mail::to($user->email)->send(new UserRegisterMail($mailData));
                     return response()->json(['message'=>'New password will send to mail, please check.', 'status' => true]);
                 }
