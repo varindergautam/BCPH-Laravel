@@ -64,12 +64,12 @@ Certify Form
 
                             </div>
 
-                            <div class="row">
+                            {{-- <div class="row">
                                  <div class="col mt-5 mb-3">
                                     <div class="mt-3">
                                         <a href="javascript:void(0)" class="custom_btn print_btn print">Print</a>
                                     </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                  <div class="col ">
                                     <div class=" margin_top_33">

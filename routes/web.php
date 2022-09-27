@@ -75,6 +75,9 @@ Auth::routes([
 
         Route::get('/official-report', 'officialReportForm')->name('officialReportForm');
         Route::post('/saveOfficialReportForm', 'saveOfficialReportForm')->name('saveOfficialReportForm');
+
+        Route::get('/print-data', 'printPage')->name('printPage');
+
     });
   });
 

@@ -440,7 +440,6 @@ class ApplicationFormController extends Controller
 
             if(!$documentUpload){
                 $documentUpload = new DocumentUpload;
-                
             }
 
             if($request->file('provisional_certificate_of_llb')){
@@ -495,5 +494,10 @@ class ApplicationFormController extends Controller
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
             throw $th;
         }
+    }
+
+    public function printPage() {
+        $data['certify_form'] = CertifyForm::where('user_id', Auth::user()->id)->first();
+        return view('front.applicationForm.printPage', $data);
     }
 }
