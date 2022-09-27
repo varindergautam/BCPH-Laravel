@@ -9,6 +9,10 @@ body {
 	line-height: 26px;
 }
 
+:root {
+	--primary: #ded04c;
+  }
+
 h1,
 h2,
 h3,
@@ -109,7 +113,7 @@ a {
 	font-weight: 600;
 	line-height: 37px;
 	margin-bottom: 24px;
-	border-bottom: 1px solid #ded04c;
+	border-bottom: 1px solid var(--primary);
 	padding-bottom: 17px;
 }
 
@@ -131,7 +135,7 @@ a {
 
 .submit_btn input[type="submit"], button {
 	height: 45px;
-	background-color: #ded04c;
+	background-color: var(--primary);
 	border: 0px;
 	margin-bottom: 0px;
 	text-transform: uppercase;
@@ -146,7 +150,7 @@ a {
 	color: #000;
 	padding: 12px 60px;
 	height: 48px;
-	background-color: #ded04c;
+	background-color: var(--primary);
 	border: 0px;
 	margin-bottom: 0px;
 	text-transform: uppercase;
@@ -208,7 +212,7 @@ a {
 }
 
 .dropdown-item.active, .dropdown-item:active, .dropdown-item:focus, .dropdown-item:hover{
-	background: #ded04c;
+	background: var(--primary);
 }
 
 .dropdown-item{
@@ -216,7 +220,7 @@ a {
 }
 
 header{
-	background-color: #ded04c
+	background-color: var(--primary);
 }
 
 .remove_border{
