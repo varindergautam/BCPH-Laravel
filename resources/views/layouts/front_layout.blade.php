@@ -43,7 +43,7 @@
     </div>
 
     @auth
-        <header>
+        <header class="d-print-none">
             <div class="container py-2">
                 <div class="row">
                     <div class="col-md-12">

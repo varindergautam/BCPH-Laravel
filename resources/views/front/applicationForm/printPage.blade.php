@@ -125,25 +125,26 @@ Print Data
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row d-print-none">
             <div class="col mt-5 mb-3">
-            <div class="mt-3">
-                <a href="javascript:void(0)" class="custom_btn print_btn print">Print</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col ">
-                <div class=" margin_top_33">
-                    <a href="{{ route('affidavitForm') }}" name="" class="custom_btn previous_btn_padding">Previous</a>
+                <div class="mt-3">
+                    <a href="javascript:void(0)" class="custom_btn print_btn print">Print</a>
                 </div>
             </div>
-            <div class="col ">
-                <div class="submit_btn">
-                    <input type="submit" name="" value="Next" class="float-end">
+            <div class="row">
+                <div class="col ">
+                    <div class=" margin_top_33">
+                        <a href="{{ route('affidavitForm') }}" name="" class="custom_btn previous_btn_padding">Previous</a>
+                    </div>
+                </div>
+                <div class="col ">
+                    <div class="submit_btn">
+                        <input type="submit" name="" value="Next" class="float-end">
+                    </div>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </div>
 @endsection
 
