@@ -152,7 +152,6 @@ Print Data
 <script>
     jQuery(document).ready(function(){
         $('.print').click(function(){
-            $('header').hide()
             var originalContent = $('body').html();
             var printArea = $('#printableArea').html();
 
