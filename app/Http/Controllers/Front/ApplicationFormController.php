@@ -8,6 +8,7 @@ use App\Http\Requests\ApplicationFormRequest;
 use App\Http\Requests\CertifyFormRequest;
 use App\Http\Requests\DeclarationFormRequest;
 use App\Http\Requests\DocumentUploadRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Models\AffidavitForm;
 use App\Models\ApplicationForm;
 use App\Models\CertifyForm;
