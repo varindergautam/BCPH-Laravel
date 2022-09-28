@@ -23,6 +23,7 @@ function postAjax(url, method, formData){
             }
         },
         error: function(data) {
+            console.log(data);
             var errors = $.parseJSON(data.responseText);
             printErrorMsg(errors);
         },

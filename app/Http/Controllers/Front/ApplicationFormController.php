@@ -49,12 +49,7 @@ class ApplicationFormController extends Controller
                 // The passwords matches
                 return response()->json(['message'=> 'Your current password does not matches with the password', 'status' => config('CommonStatus.INACTIVE')]);
             }
-    
-            // if(strcmp($request->get('new_password'), $request->get('confirm_password')) == 0){
-            //     // Current password and new password same
-            //     return response()->json(['message'=> 'New Password cannot be same as your current password', 'status' => config('CommonStatus.INACTIVE')]);
-            // }
-
+            
             //Change Password
             $user = Auth::user();
             $user->password = Hash::make($request->get('newpassword'));
@@ -350,6 +345,7 @@ class ApplicationFormController extends Controller
             $affidavitForm->type_born_in_oath = $request->type_born_in_oath;
             $affidavitForm->college_name_oath = $request->college_name_oath;
             $affidavitForm->place_name_oath = $request->place_name_oath;
+            $affidavitForm->date_of_completion = $request->date_of_completion;
             if($affidavitForm->save()) {
                 return response()->json(['message'=>'Affidavit form submit successfully', 'redirect' => route('certifyForm'), 'status' => true]);
             }
@@ -432,9 +428,26 @@ class ApplicationFormController extends Controller
     public function saveDocumentUpload(Request $request) {
         try {
             $document_upload = new DocumentUpload;
-            if($document_upload->checkField($request->attendance_certificate)){
+            
+            if($document_upload->checkField('provisional_certificate_of_llb')){
+                $provisional_certificate_of_llb_validation = 'required';
+            } else {
+                $provisional_certificate_of_llb_validation = 'nullable';
+            }
 
-                return response()->json(['message'=> 'requierd', 'status' => config('CommonStatus.INACTIVE')], 422); 
+            if($document_upload->checkField('attendance_certificate')){
+                $attendance_certificate_validation = 'required';
+            } else {
+                $attendance_certificate_validation = 'nullable';
+            }
+
+            $validator = Validator::make($request->all(), [
+                'provisional_certificate_of_llb' => $provisional_certificate_of_llb_validation,
+                'attendance_certificate' => $attendance_certificate_validation,
+            ]);
+            
+            if ($validator->fails()) {
+                return response()->json(['errors'=>$validator->getMessageBag()->toArray(), 'status' => false], 422);
             }
 
             $documentUpload = DocumentUpload::where('user_id', Auth::user()->id)->first();
