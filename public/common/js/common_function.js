@@ -82,3 +82,7 @@ function windowReload(url) {
     }
     }, 2000);
 }
+
+function calculatePercentage(totalMarks, obtainMarks){
+    return obtainMarks / totalMarks * 100;
+}

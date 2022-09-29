@@ -418,16 +418,21 @@ class ApplicationFormController extends Controller
      * This function used to open the document upload form
      */
     public function documentUpload() {
-        $data['documentUpload'] = DocumentUpload::where('user_id', Auth::user()->id)->first();
+        $userId = Auth::user()->id;
+        $documentUpload = new DocumentUpload($userId);
+        // echo "<pre>";
+        // print_r($documentUpload->userId);die;
+        $data['documentUpload'] = $documentUpload->where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.documentUpload', $data);
     }
 
     /**
      * This function used to save the document upload form with DocumentUploadRequest validation
      */
-    public function saveDocumentUpload(Request $request) {
+    public function saveDocumentUpload(Request $request, DocumentUpload $document_upload) {
         try {
-            $document_upload = new DocumentUpload;
+            $userId = auth()->user()->id;
+            $document_upload->userId = $userId;
             
             if($document_upload->checkField('provisional_certificate_of_llb')){
                 $provisional_certificate_of_llb_validation = 'required';
@@ -441,9 +446,96 @@ class ApplicationFormController extends Controller
                 $attendance_certificate_validation = 'nullable';
             }
 
+            if($document_upload->checkField('dmc_of_llb')){
+                $dmc_of_llb_validation = 'required';
+            } else {
+                $dmc_of_llb_validation = 'nullable';
+            }
+
+            if($document_upload->checkField('matriculation_certificate')){
+                $matriculation_certificate_validation = 'required';
+            } else {
+                $matriculation_certificate_validation = 'nullable';
+            }
+
+            if($document_upload->checkField('plus_two_certificate')){
+                $plus_two_certificate_validation = 'required';
+            } else {
+                $plus_two_certificate_validation = 'nullable';
+            }
+            
+            if($document_upload->checkField('all_dmc_certificate_of_llb')){
+                $all_dmc_certificate_of_llb_validation = 'required';
+            } else {
+                $all_dmc_certificate_of_llb_validation = 'nullable';
+            }
+            
+            if($document_upload->checkField('affidavit_of_law_degree')){
+                $affidavit_of_law_degree_validation = 'required';
+            } else {
+                $affidavit_of_law_degree_validation = 'nullable';
+            }
+            
+            if($document_upload->checkField('affidavit_of_stamp_duty')){
+                $affidavit_of_stamp_duty_validation = 'required';
+            } else {
+                $affidavit_of_stamp_duty_validation = 'nullable';
+            }
+
+            if($document_upload->checkField('affidavit_of_aibe')){
+                $affidavit_of_aibe_validation = 'required';
+            } else {
+                $affidavit_of_aibe_validation = 'nullable';
+            }
+            
+            if($document_upload->checkField('service_certificate')){
+                $service_certificate_validation = 'required';
+            } else {
+                $service_certificate_validation = 'nullable';
+            }
+            
+            if($document_upload->checkField('document_of_column_12_13_14')){
+                $document_of_column_12_13_14_validation = 'required';
+            } else {
+                $document_of_column_12_13_14_validation = 'nullable';
+            }
+
+            if($document_upload->checkField('gap_affidavit')){
+                $gap_affidavit_validation = 'required';
+            } else {
+                $gap_affidavit_validation = 'nullable';
+            }
+            
+            if($document_upload->checkField('additional_affidavit')){
+                $additional_affidavit_validation = 'required';
+            } else {
+                $additional_affidavit_validation = 'nullable';
+            }
+            
+            if($document_upload->checkField('any_other_infomation')){
+                $any_other_infomation_validation = 'required';
+            } else {
+                $any_other_infomation_validation = 'nullable';
+            }
+
             $validator = Validator::make($request->all(), [
                 'provisional_certificate_of_llb' => $provisional_certificate_of_llb_validation,
                 'attendance_certificate' => $attendance_certificate_validation,
+                // 'dmc_of_llb' => $dmc_of_llb_validation,
+                'matriculation_certificate' => $document_upload->checkValidation('matriculation_certificate'),
+                // 'all_dmc_certificate_of_llb' => $all_dmc_certificate_of_llb_validation,
+                // 'affidavit_of_law_degree' => $affidavit_of_law_degree_validation,
+                // 'affidavit_of_stamp_duty' => $affidavit_of_stamp_duty_validation,
+                // 'affidavit_of_aibe' => $affidavit_of_aibe_validation,
+                // 'service_certificate' => $service_certificate_validation,
+                // 'document_of_column_12_13_14' => $document_of_column_12_13_14_validation,
+                // 'gap_affidavit' => $gap_affidavit_validation,
+                // 'additional_affidavit' => $additional_affidavit_validation,
+                // 'any_other_infomation' => $any_other_infomation_validation,
+                // 'total_mark_of_plus_two' => 'required',
+                // 'obtain_mark_of_tenth' => 'required',
+                // 'total_mark_of_gradutation' => 'required',
+                // 'obtain_mark_of_gradutation' => 'required',
             ]);
             
             if ($validator->fails()) {
@@ -453,17 +545,19 @@ class ApplicationFormController extends Controller
             $documentUpload = DocumentUpload::where('user_id', Auth::user()->id)->first();
 
             if(!$documentUpload){
-                $documentUpload = new DocumentUpload;
+                $documentUpload = new DocumentUpload(auth::user()->id);
             }
 
             if($request->file('provisional_certificate_of_llb')){
                 $file = $request->file('provisional_certificate_of_llb');
-                $provisional_certificate_of_llb = md5(time()). '.' . $file->getClientOriginalExtension();
-                $provisional_certificate_of_llb_path = \Storage::disk('public')->path('documentUploads');
-                $file->move($provisional_certificate_of_llb_path, $provisional_certificate_of_llb);
+                $provisional_certificate_of_llb = $this->uploadfile($file);
                 $documentUpload->provisional_certificate_of_llb =  $provisional_certificate_of_llb;
-                // \Storage::disk('public')->put('documentUploads', $provisional_certificate_of_llb);
-                // $documentUpload->provisional_certificate_of_llb = $provisional_certificate_of_llb;
+            }
+
+            if($request->file('attendance_certificate')){
+                $file = $request->file('attendance_certificate');
+                $attendance_certificate = $this->uploadfile($file);
+                $documentUpload->attendance_certificate =  $attendance_certificate;
             }
 
             $documentUpload->user_id = Auth::user()->id;
@@ -475,6 +569,16 @@ class ApplicationFormController extends Controller
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
             throw $th;
         }
+    }
+
+    /**
+     * This function used to move file into the storage path
+     */
+    public function uploadfile($file) {
+        $fileName = md5(time()). '.' . $file->getClientOriginalExtension();
+        $filePath = \Storage::disk('public')->path('documentUploads');
+        $file->move($filePath, $fileName);
+        return $fileName;
     }
 
     /**
