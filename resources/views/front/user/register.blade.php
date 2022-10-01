@@ -25,7 +25,7 @@ Registeration Form
             <strong id="applicant_name-error" class="error"></strong>
         </div>
         <div class="col-md-6  mb-3">
-            <label class="text-dark" for="father_name">Name Of Father's/Husband's </label>
+            <label class="text-dark" for="father_name">Name of Father's/Husband's </label>
             <input type="text" class="form-control" name="father_name" id="father_name"
             placeholder="Enter Father/Husband Name">
             <strong id="father_name-error" class="error"></strong>

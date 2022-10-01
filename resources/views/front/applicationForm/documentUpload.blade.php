@@ -72,14 +72,14 @@ Document Upload
                                 <tr>
                                     <td width="8%">5.</td>
                                     <td width="80%">Attested Copy of 10+2 Certificate, Calculated & write on copy DMC with Total Marks:-
-                                        <span><input type="text" name="total_mark_of_plus_two" placeholder="Enter total marks">
+                                        <span><input type="text" name="total_mark_of_plus_two" placeholder="Enter total marks" class="total_mark_of_plus_two" value="{{ @$documentUpload->total_mark_of_plus_two }}">
                                             <strong id="total_mark_of_plus_two-error" class="error"></strong>
                                         </span>, 
                                         Obtain Marks:-
-                                        <span><input type="text" name="obtain_mark_of_tenth" placeholder="Enter obtain marks">
-                                            <strong id="obtain_mark_of_tenth-error" class="error"></strong>
-                                            <input type="hidden" name="tenth_percentage" id="tenth_percentage">
-                                        </span> and % auto Calculate.  </td>
+                                        <span><input type="text" name="obtain_mark_of_plus_two" placeholder="Enter obtain marks" class="obtain_mark_of_plus_two" value="{{ @$documentUpload->obtain_mark_of_plus_two }}">
+                                            <strong id="obtain_mark_of_plus_two-error" class="error"></strong>
+                                            <input type="hidden" name="plus_two_percentage" id="plus_two_percentage">
+                                        </span> and <span class="plus_two_percentage"></span>{{ @$documentUpload->plus_two_percentage }}% auto Calculate.  </td>
                                     <td width="12%">
                                         <input type="file" name="plus_two_certificate" class="mb-1">
                                         @if(@$documentUpload->plus_two_certificate)
@@ -92,13 +92,13 @@ Document Upload
                                     <td width="8%">6.</td>
                                     <td width="80%">Attested Copy of  all DMC of Graduation Part I,II,III & degree Kindly Enter Total Marks:- 
                                         <span>
-                                            <input type="text" name="total_mark_of_gradutation" placeholder="Enter Graduation marks">
+                                            <input type="text" name="total_mark_of_gradutation" placeholder="Enter Graduation marks"  class="total_mark_of_gradutation" value="{{ @$documentUpload->total_mark_of_gradutation }}">
                                             <strong id="total_mark_of_gradutation-error" class="error"></strong>
                                         </span>, Obtain Marks:-
-                                        <span><input type="text" name="obtain_mark_of_gradutation" placeholder="Enter obtain marks">
+                                        <span><input type="text" name="obtain_mark_of_gradutation" placeholder="Enter obtain marks" class="obtain_mark_of_gradutation" value="{{ @$documentUpload->obtain_mark_of_gradutation }}">
                                             <strong id="obtain_mark_of_gradutation-error" class="error"></strong>
                                             <input type="hidden" name="graduation_percentage" id="graduation_percentage">
-                                        </span> and % auto Calculate.  </td>
+                                        </span> and <span class="graduation_percentage"></span>{{ @$documentUpload->graduation_percentage }}% auto Calculate.  </td>
                                     <td width="12%">
                                         <input type="file" name="all_dmc_certificate_of_llb" class="mb-1">
                                         @if(@$documentUpload->all_dmc_certificate_of_llb)
@@ -243,6 +243,36 @@ Document Upload
             var formData = new FormData(this);
 
             postAjax(url, method, formData)
+        });
+
+        $('.obtain_mark_of_plus_two').on('keyup', function () {
+            var obtain_mark_of_plus_two = parseInt($(this).val());
+            var total_mark_of_plus_two = parseInt($('.total_mark_of_plus_two').val());
+
+            compareMarks(total_mark_of_plus_two, obtain_mark_of_plus_two);
+         
+            if(obtain_mark_of_plus_two != 0 && total_mark_of_plus_two != 0 && obtain_mark_of_plus_two <= total_mark_of_plus_two){
+                var total_percentage = calculatePercentage(total_mark_of_plus_two, obtain_mark_of_plus_two);
+                $('.plus_two_percentage').text(Math.round(total_percentage));
+                $('#plus_two_percentage').val(Math.round(total_percentage));
+            }
+        });
+
+        $('.obtain_mark_of_gradutation').on('keyup', function () {
+            var obtain_mark_of_gradutation = parseInt($(this).val());
+            var total_mark_of_gradutation = parseInt($('.total_mark_of_gradutation').val());
+
+            compareMarks(total_mark_of_gradutation, obtain_mark_of_gradutation);
+
+            if(obtain_mark_of_gradutation > total_mark_of_gradutation){
+                alert(obtain_mark_of_gradutation + ' not be greater than ' + total_mark_of_gradutation);
+            }
+         
+            if(obtain_mark_of_gradutation != 0 && total_mark_of_gradutation != 0 && obtain_mark_of_gradutation <= total_mark_of_gradutation){
+                var total_percentage = calculatePercentage(total_mark_of_gradutation, obtain_mark_of_gradutation);
+                $('.graduation_percentage').text(Math.round(total_percentage));
+                $('#graduation_percentage').val(Math.round(total_percentage));
+            }
         });
     });
 </script>

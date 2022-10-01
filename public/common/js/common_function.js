@@ -73,7 +73,7 @@ function swalErrorMessage(data) {
 
 function windowReload(url) {
     setTimeout(function(){
-    //    window.location.reload();
+
     if(url != undefined){
         window.location.replace(url)
     }
@@ -85,4 +85,10 @@ function windowReload(url) {
 
 function calculatePercentage(totalMarks, obtainMarks){
     return obtainMarks / totalMarks * 100;
+}
+
+function compareMarks(totalMarks, obtainMarks) {
+    if(obtainMarks > totalMarks){
+        alert(obtainMarks + ' not be greater than ' + totalMarks);
+    }
 }

@@ -10,7 +10,7 @@ Identity Card
         <div class="row ">
             <div class="col-md-12">
                 <div class="form_section border p-3 rounded-1">
-                    <form method="get" action="{{ route('documentUpload') }}" enctype="mutlipart/form-data" id="step1-form">
+                    <form method="get" action="{{ route('printPage') }}" enctype="mutlipart/form-data" id="step1-form">
                         <div class="form_heading">
                             <h3>The Bar Council of Punjab & Haryana Chandigarh
                                 <p style="font-size: 15px;">Law Bhawan, Dakshin Marg, Sector 37-A, Chandigarh, Phone

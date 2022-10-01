@@ -521,21 +521,21 @@ class ApplicationFormController extends Controller
             $validator = Validator::make($request->all(), [
                 'provisional_certificate_of_llb' => $provisional_certificate_of_llb_validation,
                 'attendance_certificate' => $attendance_certificate_validation,
-                // 'dmc_of_llb' => $dmc_of_llb_validation,
-                'matriculation_certificate' => $document_upload->checkValidation('matriculation_certificate'),
-                // 'all_dmc_certificate_of_llb' => $all_dmc_certificate_of_llb_validation,
-                // 'affidavit_of_law_degree' => $affidavit_of_law_degree_validation,
-                // 'affidavit_of_stamp_duty' => $affidavit_of_stamp_duty_validation,
-                // 'affidavit_of_aibe' => $affidavit_of_aibe_validation,
-                // 'service_certificate' => $service_certificate_validation,
-                // 'document_of_column_12_13_14' => $document_of_column_12_13_14_validation,
-                // 'gap_affidavit' => $gap_affidavit_validation,
-                // 'additional_affidavit' => $additional_affidavit_validation,
-                // 'any_other_infomation' => $any_other_infomation_validation,
-                // 'total_mark_of_plus_two' => 'required',
-                // 'obtain_mark_of_tenth' => 'required',
-                // 'total_mark_of_gradutation' => 'required',
-                // 'obtain_mark_of_gradutation' => 'required',
+                'dmc_of_llb' => $dmc_of_llb_validation,
+                'matriculation_certificate' => $matriculation_certificate_validation,
+                'all_dmc_certificate_of_llb' => $all_dmc_certificate_of_llb_validation,
+                'affidavit_of_law_degree' => $affidavit_of_law_degree_validation,
+                'affidavit_of_stamp_duty' => $affidavit_of_stamp_duty_validation,
+                'affidavit_of_aibe' => $affidavit_of_aibe_validation,
+                'service_certificate' => $service_certificate_validation,
+                'document_of_column_12_13_14' => $document_of_column_12_13_14_validation,
+                'gap_affidavit' => $gap_affidavit_validation,
+                'additional_affidavit' => $additional_affidavit_validation,
+                'any_other_infomation' => $any_other_infomation_validation,
+                'total_mark_of_plus_two' => 'required',
+                'obtain_mark_of_plus_two' => 'required',
+                'total_mark_of_gradutation' => 'required',
+                'obtain_mark_of_gradutation' => 'required',
             ]);
             
             if ($validator->fails()) {
@@ -560,8 +560,86 @@ class ApplicationFormController extends Controller
                 $documentUpload->attendance_certificate =  $attendance_certificate;
             }
 
+            if($request->file('dmc_of_llb')){
+                $file = $request->file('dmc_of_llb');
+                $dmc_of_llb = $this->uploadfile($file);
+                $documentUpload->dmc_of_llb =  $dmc_of_llb;
+            }
+
+            if($request->file('matriculation_certificate')){
+                $file = $request->file('matriculation_certificate');
+                $matriculation_certificate = $this->uploadfile($file);
+                $documentUpload->matriculation_certificate =  $matriculation_certificate;
+            }
+
+            if($request->file('plus_two_certificate')){
+                $file = $request->file('plus_two_certificate');
+                $plus_two_certificate = $this->uploadfile($file);
+                $documentUpload->plus_two_certificate =  $plus_two_certificate;
+            }
+
+            if($request->file('all_dmc_certificate_of_llb')){
+                $file = $request->file('all_dmc_certificate_of_llb');
+                $all_dmc_certificate_of_llb = $this->uploadfile($file);
+                $documentUpload->all_dmc_certificate_of_llb =  $all_dmc_certificate_of_llb;
+            }
+
+            if($request->file('affidavit_of_law_degree')){
+                $file = $request->file('affidavit_of_law_degree');
+                $affidavit_of_law_degree = $this->uploadfile($file);
+                $documentUpload->affidavit_of_law_degree =  $affidavit_of_law_degree;
+            }
+
+            if($request->file('affidavit_of_stamp_duty')){
+                $file = $request->file('affidavit_of_stamp_duty');
+                $affidavit_of_stamp_duty = $this->uploadfile($file);
+                $documentUpload->affidavit_of_stamp_duty =  $affidavit_of_stamp_duty;
+            }
+
+            if($request->file('affidavit_of_aibe')){
+                $file = $request->file('affidavit_of_aibe');
+                $affidavit_of_aibe = $this->uploadfile($file);
+                $documentUpload->affidavit_of_aibe =  $affidavit_of_aibe;
+            }
+
+            if($request->file('service_certificate')){
+                $file = $request->file('service_certificate');
+                $service_certificate = $this->uploadfile($file);
+                $documentUpload->service_certificate =  $service_certificate;
+            }
+
+            if($request->file('document_of_column_12_13_14')){
+                $file = $request->file('document_of_column_12_13_14');
+                $document_of_column_12_13_14 = $this->uploadfile($file);
+                $documentUpload->document_of_column_12_13_14 =  $document_of_column_12_13_14;
+            }
+
+            if($request->file('gap_affidavit')){
+                $file = $request->file('gap_affidavit');
+                $gap_affidavit = $this->uploadfile($file);
+                $documentUpload->gap_affidavit =  $gap_affidavit;
+            }
+
+            if($request->file('additional_affidavit')){
+                $file = $request->file('additional_affidavit');
+                $additional_affidavit = $this->uploadfile($file);
+                $documentUpload->additional_affidavit =  $additional_affidavit;
+            }
+
+            if($request->file('any_other_infomation')){
+                $file = $request->file('any_other_infomation');
+                $any_other_infomation = $this->uploadfile($file);
+                $documentUpload->any_other_infomation =  $any_other_infomation;
+            }
+
             $documentUpload->user_id = Auth::user()->id;
             $documentUpload->date_of_completion = $request->date_of_completion;
+            $documentUpload->total_mark_of_plus_two = $request->total_mark_of_plus_two;
+            $documentUpload->obtain_mark_of_plus_two = $request->obtain_mark_of_plus_two;
+            $documentUpload->plus_two_percentage = $request->plus_two_percentage;
+            $documentUpload->total_mark_of_gradutation = $request->total_mark_of_gradutation;
+            $documentUpload->obtain_mark_of_gradutation = $request->obtain_mark_of_gradutation;
+            $documentUpload->graduation_percentage = $request->graduation_percentage;
             if($documentUpload->save()) {
                 return response()->json(['message'=>'Document upload successfully', 'redirect' => route('documentUpload'), 'status' => true]);
             }
@@ -614,8 +692,27 @@ class ApplicationFormController extends Controller
         }
     }
 
+    public function officialOrder1() {
+        try {
+            return view('front.applicationForm.officialOrder1');
+        } catch (\Throwable $th) {
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
+            throw $th;
+        }
+    }
+
+    public function officialOrder2() {
+        try {
+            return view('front.applicationForm.officialOrder2');
+        } catch (\Throwable $th) {
+            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
+            throw $th;
+        }
+    }
+
     public function printPage() {
         $data['certify_form'] = CertifyForm::where('user_id', Auth::user()->id)->first();
+        $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.printPage', $data);
     }
 }
