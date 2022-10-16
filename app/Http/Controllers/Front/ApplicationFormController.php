@@ -14,6 +14,7 @@ use App\Models\ApplicationForm;
 use App\Models\CertifyForm;
 use App\Models\DeclarationForm;
 use App\Models\DocumentUpload;
+use App\Models\Fee;
 use App\Models\OfficialReport;
 use App\Models\Undertaking;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class ApplicationFormController extends Controller
         $this->middleware('auth');
 
         $this->displayCurrency = 'INR';
-        $this->api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+        $this->api = new Api(config('razorpay.RAZORPAY_KEY'), config('razorpay.RAZORPAY_SECRET'));
     }
 
     /**
@@ -66,6 +67,7 @@ class ApplicationFormController extends Controller
      * This function open a application form view file
      */
     public function applicationForm() {
+        $data['fees'] = Fee::all();
         $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         return view('Front.applicationForm.applicationForm', $data);
     }
@@ -80,86 +82,88 @@ class ApplicationFormController extends Controller
             if($checkPayment) {
                 // Session::put('application_form_data', $checkPayment);
                 $checkPayment->user_id = Auth::user()->id;
-            // $checkPayment->permanent_address = $request->permanent_address;
-            $checkPayment->university_name = $request->university_name;
-            $checkPayment->which_univeristy = $request->which_univeristy;
-            $checkPayment->which_univeristy_remarks = $request->which_univeristy_remarks;
-            $checkPayment->date_of_law_degree = $request->date_of_law_degree;
-            $checkPayment->plus_two_mark = $request->plus_two_mark;
-            $checkPayment->graduate_before_admission = $request->graduate_before_admission;
-            $checkPayment->college_university_name = $request->college_university_name;
-            $checkPayment->no_of_years = $request->no_of_years;
-            $checkPayment->college_pass_date = $request->college_pass_date;
-            $checkPayment->english_compulsory = $request->english_compulsory;
-            // $checkPayment->correspondence_address = $request->correspondence_address;
-            $checkPayment->law_college_name = $request->law_college_name;
-            $checkPayment->law_college_join_date = $request->law_college_join_date;
-            $checkPayment->law_college_duration_year = $request->law_college_duration_year;
-            $checkPayment->law_college_passed = $request->law_college_passed;
-            $checkPayment->name_of_degree_obtained = $request->name_of_degree_obtained;
-            $checkPayment->medium_instruction = $request->medium_instruction;
-            $checkPayment->private_study_duration_year = $request->private_study_duration_year;
-            $checkPayment->city_for_pratice_after_enrollment = $request->city_for_pratice_after_enrollment;
-            $checkPayment->appointment_holds = $request->appointment_holds;
-            $checkPayment->appointment_holds_remarks = $request->appointment_holds_remarks;
-            $checkPayment->business_or_profession = $request->business_or_profession;
-            $checkPayment->business_or_profession_remark = $request->business_or_profession_remark;
-            $checkPayment->criminal_court = $request->criminal_court;
-            $checkPayment->criminal_court_remark = $request->criminal_court_remark;
-            $checkPayment->criminal_proceeding_againest_applicant = $request->criminal_proceeding_againest_applicant;
-            $checkPayment->criminal_proceeding_againest_applicant_remark = $request->criminal_proceeding_againest_applicant_remark;
-            $checkPayment->suspension_type = $request->suspension_type;
-            $checkPayment->suspension_type_remark = $request->suspension_type_remark;
-            $checkPayment->declared_insolvent_type = $request->declared_insolvent_type;
-            $checkPayment->declared_insolvent_type_remark = $request->declared_insolvent_type_remark;
-            $checkPayment->already_apply_for_enrollment = $request->already_apply_for_enrollment;
-            $checkPayment->already_apply_for_enrollment_remark = $request->already_apply_for_enrollment_remark;
-            $checkPayment->total_pay = $request->total_pay;
-            $checkPayment->razorpay_order_id = $checkPayment->razorpay_order_id;
-            $checkPayment->razorpay_payment_id = $checkPayment->razorpay_payment_id;
-            $checkPayment->razorpay_signature = $checkPayment->razorpay_signature;
-            $checkPayment->payment_status = '1';
-            $checkPayment->date_of_completion = $checkPayment->date_of_completion;
-            $checkPayment->stream = $request->stream;
-            $checkPayment->save();
+                // $checkPayment->permanent_address = $request->permanent_address;
+                $checkPayment->university_name = $request->university_name;
+                $checkPayment->which_univeristy = $request->which_univeristy;
+                $checkPayment->which_univeristy_remarks = $request->which_univeristy_remarks;
+                $checkPayment->date_of_law_degree = $request->date_of_law_degree;
+                $checkPayment->plus_two_mark = $request->plus_two_mark;
+                $checkPayment->graduate_before_admission = $request->graduate_before_admission;
+                $checkPayment->college_university_name = $request->college_university_name;
+                $checkPayment->no_of_years = $request->no_of_years;
+                $checkPayment->college_pass_date = $request->college_pass_date;
+                $checkPayment->english_compulsory = $request->english_compulsory;
+                // $checkPayment->correspondence_address = $request->correspondence_address;
+                $checkPayment->law_college_name = $request->law_college_name;
+                $checkPayment->law_college_join_date = $request->law_college_join_date;
+                $checkPayment->law_college_duration_year = $request->law_college_duration_year;
+                $checkPayment->law_college_passed = $request->law_college_passed;
+                $checkPayment->name_of_degree_obtained = $request->name_of_degree_obtained;
+                $checkPayment->medium_instruction = $request->medium_instruction;
+                $checkPayment->private_study_duration_year = $request->private_study_duration_year;
+                $checkPayment->city_for_pratice_after_enrollment = $request->city_for_pratice_after_enrollment;
+                $checkPayment->appointment_holds = $request->appointment_holds;
+                $checkPayment->appointment_holds_remarks = $request->appointment_holds_remarks;
+                $checkPayment->business_or_profession = $request->business_or_profession;
+                $checkPayment->business_or_profession_remark = $request->business_or_profession_remark;
+                $checkPayment->criminal_court = $request->criminal_court;
+                $checkPayment->criminal_court_remark = $request->criminal_court_remark;
+                $checkPayment->criminal_proceeding_againest_applicant = $request->criminal_proceeding_againest_applicant;
+                $checkPayment->criminal_proceeding_againest_applicant_remark = $request->criminal_proceeding_againest_applicant_remark;
+                $checkPayment->suspension_type = $request->suspension_type;
+                $checkPayment->suspension_type_remark = $request->suspension_type_remark;
+                $checkPayment->declared_insolvent_type = $request->declared_insolvent_type;
+                $checkPayment->declared_insolvent_type_remark = $request->declared_insolvent_type_remark;
+                $checkPayment->already_apply_for_enrollment = $request->already_apply_for_enrollment;
+                $checkPayment->already_apply_for_enrollment_remark = $request->already_apply_for_enrollment_remark;
+                $checkPayment->total_pay = $request->total_pay;
+                $checkPayment->razorpay_order_id = $checkPayment->razorpay_order_id;
+                $checkPayment->razorpay_payment_id = $checkPayment->razorpay_payment_id;
+                $checkPayment->razorpay_signature = $checkPayment->razorpay_signature;
+                $checkPayment->payment_status = '1';
+                $checkPayment->date_of_completion = $checkPayment->date_of_completion;
+                $checkPayment->stream = $request->stream;
+                $checkPayment->save();
                 return response()->json(['message' => 'Already Pay',
-                        'status' => true,
-                        'data' => 2,
-                        'link' => url('paysuccess?razorpay_payment_id=' .$checkPayment->razorpay_payment_id. "&razorpay_order_id=" . $checkPayment->razorpay_order_id)
-                    ]);
+                    'status' => true,
+                    'data' => 2,
+                    'link' => url('paysuccess?razorpay_payment_id=' .$checkPayment->razorpay_payment_id. "&razorpay_order_id=" . $checkPayment->razorpay_order_id)
+                ]);
             }
 
             $item_number = \Str::random(4).time();
+            $divideAmount = ($request->total_pay  / 2) * 100 ;
+
             $orderData = [
                 'receipt'         => $item_number,
                 'amount'          => ($request->total_pay) * 100, // 2000 rupees in paise
                 // 'amount'          => 2000 * 100, // 2000 rupees in paise
                 'currency'        => $this->displayCurrency,
-                // 'transfers' => array(
-                //                 array(
-                //                     'account' => '111222333444555666',
-                //                     'amount' => 1000,
-                //                     'currency' => 'INR',
-                //                     'notes' => array(
-                //                                 'branch' => 'Acme Corp Bangalore North',
-                //                                 'name' => 'Gaurav Kumar'
-                //                                 ),
-                //                     'linked_account_notes' => array('branch'),
-                //                     'on_hold' => 1,
-                //                     'on_hold_until' => 1671222870
-                //                 ),
-                //                 array(
-                //                     'account' => '11122233344455566',
-                //                     'amount' => 1000,
-                //                     'currency' => 'INR',
-                //                     'notes' => array(
-                //                                 'branch' => 'Acme Corp Bangalore South',
-                //                                 'name' => 'Saurav Kumar'
-                //                             ),
-                //                     'linked_account_notes' => array('branch'),
-                //                     'on_hold' => 0
-                //                 )
-                //             ),
+                'transfers' => array(
+                                array(
+                                    'account' => 'acc_KGdBZE5CI4cPUO',
+                                    'amount' => $divideAmount,
+                                    'currency' => 'INR',
+                                    'notes' => array(
+                                                'branch' => 'Acme Corp Bangalore North',
+                                                'name' => 'Gaurav Kumar'
+                                                ),
+                                    'linked_account_notes' => array('branch'),
+                                    'on_hold' => 1,
+                                    'on_hold_until' => 1671222870
+                                ),
+                                array(
+                                    'account' => 'acc_KQYkgqXXp2SnKk',
+                                    'amount' => $divideAmount,
+                                    'currency' => 'INR',
+                                    'notes' => array(
+                                                'branch' => 'Acme Corp Bangalore South',
+                                                'name' => 'Saurav Kumar'
+                                            ),
+                                    'linked_account_notes' => array('branch'),
+                                    'on_hold' => 0
+                                )
+                            ),
                 'payment_capture' => 1 // auto capture
             ];
 
@@ -434,85 +438,85 @@ class ApplicationFormController extends Controller
             $userId = auth()->user()->id;
             $document_upload->userId = $userId;
             
-            if($document_upload->checkField('provisional_certificate_of_llb')){
+            if(empty($document_upload->checkField('provisional_certificate_of_llb'))){
                 $provisional_certificate_of_llb_validation = 'required';
             } else {
                 $provisional_certificate_of_llb_validation = 'nullable';
             }
 
-            if($document_upload->checkField('attendance_certificate')){
+            if(empty($document_upload->checkField('attendance_certificate'))){
                 $attendance_certificate_validation = 'required';
             } else {
                 $attendance_certificate_validation = 'nullable';
             }
 
-            if($document_upload->checkField('dmc_of_llb')){
+            if(empty($document_upload->checkField('dmc_of_llb'))){
                 $dmc_of_llb_validation = 'required';
             } else {
                 $dmc_of_llb_validation = 'nullable';
             }
 
-            if($document_upload->checkField('matriculation_certificate')){
+            if(empty($document_upload->checkField('matriculation_certificate'))){
                 $matriculation_certificate_validation = 'required';
             } else {
                 $matriculation_certificate_validation = 'nullable';
             }
 
-            if($document_upload->checkField('plus_two_certificate')){
+            if(empty($document_upload->checkField('plus_two_certificate'))){
                 $plus_two_certificate_validation = 'required';
             } else {
                 $plus_two_certificate_validation = 'nullable';
             }
             
-            if($document_upload->checkField('all_dmc_certificate_of_llb')){
+            if(empty($document_upload->checkField('all_dmc_certificate_of_llb'))){
                 $all_dmc_certificate_of_llb_validation = 'required';
             } else {
                 $all_dmc_certificate_of_llb_validation = 'nullable';
             }
             
-            if($document_upload->checkField('affidavit_of_law_degree')){
+            if(empty($document_upload->checkField('affidavit_of_law_degree'))){
                 $affidavit_of_law_degree_validation = 'required';
             } else {
                 $affidavit_of_law_degree_validation = 'nullable';
             }
             
-            if($document_upload->checkField('affidavit_of_stamp_duty')){
+            if(empty($document_upload->checkField('affidavit_of_stamp_duty'))){
                 $affidavit_of_stamp_duty_validation = 'required';
             } else {
                 $affidavit_of_stamp_duty_validation = 'nullable';
             }
 
-            if($document_upload->checkField('affidavit_of_aibe')){
+            if(empty($document_upload->checkField('affidavit_of_aibe'))){
                 $affidavit_of_aibe_validation = 'required';
             } else {
                 $affidavit_of_aibe_validation = 'nullable';
             }
             
-            if($document_upload->checkField('service_certificate')){
+            if(empty($document_upload->checkField('service_certificate'))){
                 $service_certificate_validation = 'required';
             } else {
                 $service_certificate_validation = 'nullable';
             }
             
-            if($document_upload->checkField('document_of_column_12_13_14')){
+            if(empty($document_upload->checkField('document_of_column_12_13_14'))){
                 $document_of_column_12_13_14_validation = 'required';
             } else {
                 $document_of_column_12_13_14_validation = 'nullable';
             }
 
-            if($document_upload->checkField('gap_affidavit')){
+            if(empty($document_upload->checkField('gap_affidavit'))){
                 $gap_affidavit_validation = 'required';
             } else {
                 $gap_affidavit_validation = 'nullable';
             }
             
-            if($document_upload->checkField('additional_affidavit')){
+            if(empty($document_upload->checkField('additional_affidavit'))){
                 $additional_affidavit_validation = 'required';
             } else {
                 $additional_affidavit_validation = 'nullable';
             }
             
-            if($document_upload->checkField('any_other_infomation')){
+            if(empty($document_upload->checkField('any_other_infomation'))){
                 $any_other_infomation_validation = 'required';
             } else {
                 $any_other_infomation_validation = 'nullable';
@@ -654,8 +658,12 @@ class ApplicationFormController extends Controller
      */
     public function uploadfile($file) {
         $fileName = md5(time()). '.' . $file->getClientOriginalExtension();
+        $createFolder = public_path(). '/images/documentUploads/' . auth()->user()->id;
+        if (! \File::exists($createFolder)) {
+            \File::makeDirectory($createFolder, 0777, true);
+        }
         $filePath = \Storage::disk('public')->path('documentUploads');
-        $file->move($filePath, $fileName);
+        $file->move($createFolder, $fileName);
         return $fileName;
     }
 
@@ -692,6 +700,9 @@ class ApplicationFormController extends Controller
         }
     }
 
+    /**
+     * This function used to view offical order 1
+     */
     public function officialOrder1() {
         try {
             return view('front.applicationForm.officialOrder1');
@@ -701,6 +712,9 @@ class ApplicationFormController extends Controller
         }
     }
 
+    /**
+     * This function used to view offical order 2
+     */
     public function officialOrder2() {
         try {
             return view('front.applicationForm.officialOrder2');
@@ -714,5 +728,17 @@ class ApplicationFormController extends Controller
         $data['certify_form'] = CertifyForm::where('user_id', Auth::user()->id)->first();
         $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.printPage', $data);
+    }
+
+    public function virtualTour() {
+        return view('front.applicationForm.virtualTour');
+    }
+
+    function getFeeDetail(Request $request) {
+        try {
+            return Fee::where('id', $request->categoryId)->first();
+        } catch (\Throwable $th) {
+            throw $th->getMessage();
+        }
     }
 }

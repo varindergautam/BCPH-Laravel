@@ -41,14 +41,21 @@ Application Form
                                 <label class="text-dark" for="category">2. (a) Category of the Applicant</label>
                             </div>
                             <div class="col-md-6">
-                                <select class="form-control form-select" name="category" id="category">
+                                <select class="form-control form-select category" name="category" id="category">
                                     <option selected="" disabled="">Select Category</option>
-                                    <option value="General" {{ Auth::user()->category == 'General' ? 'selected' : '' }}>General</option>
+
+                                    @forelse ($fees as $key => $fee)
+                                        <option value="{{ $fee->id }}" {{ auth()->user()->category == $fee->id ? 'selected' : '' }}>{{ $fee->category }}</option>
+                                    @empty
+                                        <option>No Fee Found</option>
+                                    @endforelse
+
+                                    {{-- <option value="General" {{ Auth::user()->category == 'General' ? 'selected' : '' }}>General</option>
                                     <option value="OBC" {{ Auth::user()->category == 'OBC' ? 'selected' : '' }}>OBC</option>
                                     <option value="SC/ST/BPL" {{ Auth::user()->category == 'SC/ST/BPL' ? 'selected' : '' }}>SC/ST/BPL</option>
-                                    <option value="Handicaps/Blinds" {{ Auth::user()->category == 'Handicaps/Blinds' ? 'selected' : '' }}>Handicaps/Blinds</option>
+                                    <option value="Handicaps/Blinds" {{ Auth::user()->category == 'Handicaps/Blinds' ? 'selected' : '' }}>Handicaps/Blinds</option> --}}
                                 </select>
-                                <strong id="nationality-error" class="error"></strong>
+                                <strong id="category-error" class="error"></strong>
                             </div>
                         </div>
 
@@ -58,7 +65,7 @@ Application Form
                             </div>
                             <div class="col-md-6">
                                 <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="" value="{{ Auth::user()->date_of_birth }}">
-                                <strong id="nationality-error" class="error"></strong>
+                                <strong id="date_of_birth-error" class="error"></strong>
                             </div>
                         </div>
 
@@ -556,10 +563,12 @@ Application Form
                                     <option value="1200">Rs. 1200/-</option>
                                     <option value="1000">Rs. 1000/-</option>
                                 </select> --}}
-                                <p><label>Rs. 9200/-</label></p>
-                                <p><label>Rs. 1200/-</label></p>
-                                <p><label>Rs. 1000/-</label></p>
-                                <input type="hidden" name="total_pay" id="total_pay" value="11400">
+                                <p><label>Rs. <span id="basic_fees">{{ isset(auth()->user()->fee) ? auth()->user()->fee->basic_fees  : 0 }}</span>/-</label></p>
+                                <p><label>Rs. <span id="bar_council_fees">{{ isset(auth()->user()->fee) ? auth()->user()->fee->bar_council_fees : 0 }}</span>/-</label></p>
+                                <p><label>Rs. <span id="building_fees">{{ isset(auth()->user()->fee) ? auth()->user()->fee->building_fees : 0 }}</span>/-</label></p>
+                                <p><label>Rs. <span id="advocate_welfare_fees">{{ isset(auth()->user()->fee) ? auth()->user()->fee->advocate_welfare_fees : 0 }}</span>/-</label></p>
+                                <p><label>Rs. <span id="benevolent_fees">{{ isset(auth()->user()->fee) ? auth()->user()->fee->benevolent_fees : 0 }}</span>/-</label></p>
+                                <input type="hidden" name="total_pay" id="total_pay" value="{{ totalFees() }}">
                             </div>
                         </div>
 
@@ -617,47 +626,6 @@ Application Form
 
             var url = "{{ route('orderIdGenerate') }}";
             var formData = new FormData(this);
-
-            // $.ajax({
-            //     type: "post",
-            //     url: "http://localhost/bcph_laravel/public/application-form-payment",
-            //     data: formData,
-            //     dataType: 'json',
-            //     data: formData,
-            //     cache : false,
-            //     processData: false,
-            //     success: function (data) {
-            //         var totalAmount = 1;
-            //         var product_id =  1;
-            //         var options = {
-            //             "key": "rzp_test_sQI8iGZVndnKD3",
-            //             "amount": (1*100), // 2000 paise = INR 20
-            //             "name": "Tutsmake",
-            //             "description": "Payment",
-            //             "image": "//www.tutsmake.com/wp-content/uploads/2018/12/cropped-favicon-1024-1-180x180.png",
-            //             "handler": function (response){
-            //                 console.log(response);
-            //                 // window.location.href = 'http://localhost/bcph_laravel/public/paysuccess?razorpay_payment_id='+response.razorpay_payment_id+'&product_id='+product_id+'&amount='+totalAmount;
-            //             },
-            //             "prefill": {
-            //                 "name": "{{ auth()->user()->applicant_name }}",
-            //                 "email": "{{ auth()->user()->email }}",
-            //                 "contact": "{{ auth()->user()->mobile_number }}"
-            //             },
-            //             "notes":{
-            //                 "address" : "address",
-            //                 "merchant_order_id" : "{{ Session::get('razorpay_order_id') }}"
-            //             },
-            //             "theme": {
-            //             "color": "#528FF0"
-            //             }
-            //         }
-            //         var rzp1 = new Razorpay(options);
-            //         rzp1.open();
-            //         e.preventDefault();
-            //     }
-            // });
-
 
              $.ajax({
                 type: "post",
@@ -734,7 +702,30 @@ Application Form
                 }
 
             });
+
+             
   
+        });
+
+        $(document).on('change', '.category', function (e) {
+            var categoryId = $(this).val();
+            console.log(categoryId)
+            $.ajax({
+                type: "get",
+                url: baseUrl + '/getFeeDetail/', categoryId,
+                data: {'categoryId': categoryId},
+                success: function (data) {
+                    $('#basic_fees').html(data.basic_fees);
+                    $('#bar_council_fees').html(data.bar_council_fees);
+                    $('#building_fees').html(data.building_fees);
+                    $('#advocate_welfare_fees').html(data.advocate_welfare_fees);
+                    $('#benevolent_fees').html(data.benevolent_fees);
+
+                    var totalPay = parseInt(data.basic_fees) + parseInt(data.bar_council_fees) + parseInt(data.building_fees) + parseInt(data.advocate_welfare_fees)  + parseInt(data.benevolent_fees);
+
+                    $('#total_pay').val(totalPay);
+                }
+            });
         });
     });
 </script>

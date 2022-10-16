@@ -17,7 +17,9 @@ class DocumentUpload extends Model
     }
 
     public function checkField($key) {
-        return self::whereNull($key)->where('user_id', $this->userId)->first();
+        return DocumentUpload::whereNotNull($key)->where('user_id', $this->userId)->first();
+        $query = DocumentUpload::whereNull('provisional_certificate_of_llb')->where('user_id', $this->userId)->toSql();
+        print_r($query);
     }
 
 }

@@ -17,12 +17,14 @@ Auth::routes([
     'register' => false,
     'reset' => false,
     'verify' => false,
-    'login' => false,
+    // 'login' => false,
   ]);
 
   Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
+  Route::get('/virtual-tour', 'App\Http\Controllers\Front\ApplicationFormController@virtualTour')->name('virtualTour');
 
   Route::controller(App\Http\Controllers\Front\UserController::class)
     // ->prefix('placements')
@@ -38,6 +40,15 @@ Auth::routes([
         Route::post('/mailForgotPassword', 'mailForgotPassword')->name('mailForgotPassword');
 
         Route::get('/testEmail', 'testEmail')->name('testEmail');
+    });
+
+
+    Route::controller(App\Http\Controllers\Admin\AdminController::class)
+    // ->prefix('admin')
+    ->as('admin.')
+    ->group(function () {
+      Route::get('/admin_login', 'login')->name('login');
+      Route::post('/loginAdmin', 'loginAdmin')->name('loginAdmin');
     });
 
   Route::group(['middleware' => ['auth']], function () {
@@ -81,6 +92,43 @@ Auth::routes([
 
         Route::get('/print-data', 'printPage')->name('printPage');
 
+        Route::get('/getFeeDetail', 'getFeeDetail')->name('getFeeDetail');
+
+    });
+
+    Route::group(['middleware' => ['userAuthenticate'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+
+      Route::controller(App\Http\Controllers\Admin\DashboardController::class)
+      ->prefix('dashboard')
+      ->group(function () {
+        Route::get('/', 'dashboard')->name('dashboard');
+      });
+
+      Route::controller(App\Http\Controllers\Admin\FeeController::class)
+      ->prefix('fee')
+      ->as('fee.')
+      ->group(function () {
+        Route::get('/', 'index')->name('list');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update', 'update')->name('update');
+
+        Route::get('tatkaal', 'tatkaalFee')->name('tatkaalFee');
+        Route::post('tatkaalFeeStore', 'tatkaalFeeStore')->name('tatkaalFeeStore');
+      });
+
+      Route::controller(App\Http\Controllers\Admin\UserController::class)
+      ->prefix('user')
+      ->as('user.')
+      ->group(function () {
+        Route::get('/', 'list')->name('list');
+        Route::get('/userAjax', 'userAjax')->name('userAjax');
+        Route::get('/view/{id}', 'show')->name('show');
+        Route::get('/viewForm/{id}', 'viewForm')->name('viewForm');
+      });
     });
   });
+
+  
 

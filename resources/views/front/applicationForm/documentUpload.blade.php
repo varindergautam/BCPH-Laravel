@@ -5,6 +5,10 @@ Document Upload
 @endsection
 
 @section('content')
+@php
+$path = asset('images/documentUploads/'. auth()->user()->id);    
+@endphp
+
 <div class="main_padding application_form">
     <div class="container  ">
         <div class="row ">
@@ -31,7 +35,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="provisional_certificate_of_llb" class="mb-1">
                                         @if(@$documentUpload->provisional_certificate_of_llb)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->provisional_certificate_of_llb}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->provisional_certificate_of_llb}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="provisional_certificate_of_llb-error" class="error"></strong>
                                     </td>
@@ -42,7 +46,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="attendance_certificate" class="mb-1">
                                         @if(@$documentUpload->attendance_certificate)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->attendance_certificate}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->attendance_certificate}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="attendance_certificate-error" class="error"></strong>
                                     </td>
@@ -53,7 +57,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="dmc_of_llb" class="mb-1">
                                         @if(@$documentUpload->dmc_of_llb)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->dmc_of_llb}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->dmc_of_llb}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="dmc_of_llb-error" class="error"></strong>
                                     </td>
@@ -64,7 +68,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="matriculation_certificate" class="mb-1">
                                         @if(@$documentUpload->matriculation_certificate)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->matriculation_certificate}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->matriculation_certificate}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="matriculation_certificate-error" class="error"></strong>
                                     </td>
@@ -83,7 +87,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="plus_two_certificate" class="mb-1">
                                         @if(@$documentUpload->plus_two_certificate)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->plus_two_certificate}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->plus_two_certificate}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="plus_two_certificate-error" class="error"></strong>
                                     </td>                                    
@@ -102,7 +106,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="all_dmc_certificate_of_llb" class="mb-1">
                                         @if(@$documentUpload->all_dmc_certificate_of_llb)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->all_dmc_certificate_of_llb}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->all_dmc_certificate_of_llb}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="all_dmc_certificate_of_llb-error" class="error"></strong>
                                     </td>
@@ -113,7 +117,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="affidavit_of_law_degree" class="mb-1">
                                         @if(@$documentUpload->affidavit_of_law_degree)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->affidavit_of_law_degree}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->affidavit_of_law_degree}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="affidavit_of_law_degree-error" class="error"></strong>
                                     </td>
@@ -124,7 +128,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="affidavit_of_stamp_duty" class="mb-1">
                                         @if(@$documentUpload->affidavit_of_stamp_duty)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->affidavit_of_stamp_duty}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->affidavit_of_stamp_duty}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="affidavit_of_stamp_duty-error" class="error"></strong>
                                     </td>
@@ -135,7 +139,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="affidavit_of_aibe" class="mb-1">
                                         @if(@$documentUpload->affidavit_of_aibe)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->affidavit_of_aibe}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->affidavit_of_aibe}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="affidavit_of_aibe-error" class="error"></strong>
                                     </td>
@@ -146,7 +150,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="service_certificate" class="mb-1">
                                         @if(@$documentUpload->service_certificate)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->service_certificate}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->service_certificate}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="service_certificate-error" class="error"></strong>
                                     </td>
@@ -157,7 +161,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="document_of_column_12_13_14" class="mb-1">
                                         @if(@$documentUpload->document_of_column_12_13_14)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->document_of_column_12_13_14}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->document_of_column_12_13_14}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="document_of_column_12_13_14-error" class="error"></strong>
                                     </td>
@@ -168,7 +172,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="gap_affidavit" class="mb-1">
                                         @if(@$documentUpload->gap_affidavit)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->gap_affidavit}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->gap_affidavit}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="gap_affidavit-error" class="error"></strong>
                                     </td>
@@ -179,7 +183,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="additional_affidavit" class="mb-1">
                                         @if(@$documentUpload->additional_affidavit)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->additional_affidavit}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->additional_affidavit}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="additional_affidavit-error" class="error"></strong>
                                     </td>
@@ -190,7 +194,7 @@ Document Upload
                                     <td width="12%">
                                         <input type="file" name="any_other_infomation" class="mb-1">
                                         @if(@$documentUpload->any_other_infomation)
-                                        <span><a href="{{ asset('../storage/app/public/documentUploads') . '/' .$documentUpload->any_other_infomation}}" class="view_document" target="_blank">View File</a></span>
+                                        <span><a href="{{ $path . '/' .$documentUpload->any_other_infomation}}" class="view_document" target="_blank">View File</a></span>
                                         @endif
                                         <strong id="any_other_infomation-error" class="error"></strong>
                                     </td>

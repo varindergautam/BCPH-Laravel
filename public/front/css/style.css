@@ -196,6 +196,7 @@ a {
 	border-top: 0 !important;
 	border-left: 0;
 	border-right: 0;
+	outline: 0;
 }
 
 .horizontal_line{

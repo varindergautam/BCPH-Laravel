@@ -52,10 +52,11 @@ Registeration Form
             <label class="text-dark" for="category">Category (General/BC/SC)</label>
             <select class="form-control form-select" name="category" id="category" >
                 <option selected="" disabled="">Select Category</option>
-                <option value="General">General</option>
-                <option value="OBC">OBC</option>
-                <option value="SC/ST/BPL">SC/ST/BPL</option>
-                <option value="Handicaps/Blinds">Handicaps/Blinds</option>
+                @forelse ($fees as $key => $fee)
+                    <option value="{{ $fee->id }}">{{ $fee->category }}</option>
+                @empty
+                    <option>No Fee Found</option>
+                @endforelse
             </select>
             <strong id="category-error" class="error"></strong>
         </div>

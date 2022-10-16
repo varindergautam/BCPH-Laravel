@@ -8,6 +8,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Mail\UserRegisterMail;
+use App\Models\Fee;
 use Illuminate\Http\Request;
 use Response;
 use Validator;
@@ -47,7 +48,8 @@ class UserController extends Controller
      * This function open register form
      */
     public function register() {
-        return view('front.user.register');
+        $data['fees'] = Fee::all();
+        return view('front.user.register', $data);
     }
     
     /**

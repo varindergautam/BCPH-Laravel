@@ -1,0 +1,79 @@
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+  
+          <li class="nav-item">
+            <a href="{{route('admin.dashboard')}}" class="nav-link {{ (Request::segment(2) == "dashboard") ? "active" : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+  
+  
+          {{-- <li class="nav-item has-treeview menu-{{ (Request::segment(2) == "subcategory") ? "open" : "close" }}">
+  
+            <a href="#" class="nav-link {{ (Request::segment(2) == "subcategory") ? "active" : '' }}">
+  
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+  
+              <p>
+  
+                Medicine Sub Category
+  
+                <i class="right fas fa-angle-left"></i>
+  
+              </p>
+  
+            </a>
+  
+            <ul class="nav nav-treeview">
+  
+              <li class="nav-item">
+  
+                <a href="" class="nav-link {{ (Request::segment(3) == "create") ? "active" : '' }}">
+  
+                  <i class="far fa-circle nav-icon"></i>
+  
+                  <p>Add</p>
+  
+                </a>
+  
+              </li>
+  
+              <li class="nav-item">
+  
+                <a href="" class="nav-link {{ (Request::segment(3) == "list") ? "active" : '' }}">
+  
+                  <i class="far fa-circle nav-icon"></i>
+  
+                  <p>List</p>
+  
+                </a>
+  
+              </li>
+  
+            </ul>
+  
+          </li> --}}
+  
+          <li class="nav-item">
+            <a href="{{ route('admin.user.list') }}" class="nav-link {{ (Request::segment(2) == "user") ? "active" : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Users</p>
+            </a>
+          </li>
+  
+          <li class="nav-item">
+            <a href="{{ route('admin.fee.list') }}" class="nav-link {{ (Request::segment(2) == "fee") ? "active" : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Fees</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('admin.fee.tatkaalFee') }}" class="nav-link {{ (Request::segment(3) == "tatkaal") ? "active" : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Tatkaal Fees</p>
+            </a>
+          </li>
+    </ul>
+  </nav>
