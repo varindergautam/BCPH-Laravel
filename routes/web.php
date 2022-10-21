@@ -40,7 +40,11 @@ Auth::routes([
         Route::post('/mailForgotPassword', 'mailForgotPassword')->name('mailForgotPassword');
 
         Route::get('/testEmail', 'testEmail')->name('testEmail');
+       
     });
+
+    // Route::get('/testPaytm', 'App\Http\Controllers\Front\ApplicationFormController@testPaytm')->name('testPaytm');
+    // Route::post('/status', 'App\Http\Controllers\Front\ApplicationFormController@paymentCallback')->name('status');
 
 
     Route::controller(App\Http\Controllers\Admin\AdminController::class)
@@ -93,6 +97,9 @@ Auth::routes([
         Route::get('/print-data', 'printPage')->name('printPage');
 
         Route::get('/getFeeDetail', 'getFeeDetail')->name('getFeeDetail');
+
+        Route::post('/pay', 'pay')->name('pay');
+        Route::post('/status', 'paymentCallback')->name('status');
 
     });
 

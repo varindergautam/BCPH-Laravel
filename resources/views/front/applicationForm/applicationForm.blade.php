@@ -11,7 +11,8 @@ Application Form
         <div class="row ">
             <div class="col-md-12">
                 <div class="form_section border p-3 rounded-1">
-                    <form method="post" action="" enctype="mutlipart/form-data" id="application-form">
+                    <form method="post" action="{{ route('pay') }}" enctype="mutlipart/form-data" id="application-form">
+                        @csrf
                         <div class="form_heading">
                             <h3>Application Form</h3>
                         </div>
@@ -573,6 +574,17 @@ Application Form
                         </div>
 
                         <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="text-dark" for=""><span><input type="checkbox" name="tatkaal" id="tatkaal" class="tatkaal"></span>
+                                <span for="tatkaal">Tatkaal</span></label>
+                            </div>
+                            <div class="col-md-6 text-dark">
+                                <input type="hidden" name="tatkaal_fee" class="tatkaal_fee">
+                                <p id="tatkaal_fees" data-tatkaal_fee="{{ $tatkaal->tatkaal_fees }}" style="display: none"><label>Rs. {{ $tatkaal->tatkaal_fees }}</label></p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <p class="text-dark">I {{ auth()->user()->applicant_name }} declare that the facts stated above are true to my knowledge and belief.</p>
                         </div>
 
@@ -615,6 +627,15 @@ Application Form
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     jQuery(document).ready(function(){
+        $('form').on('submit1', function (e) {
+            e.preventDefault();
+            
+            var url = baseUrl+'/pay';
+            var method = $(this).attr('method');
+            var formData = new FormData(this);
+
+            postAjax(url, method, formData)
+        });
         $('form').on('submit', function (e) {
             e.preventDefault();
 
@@ -703,8 +724,6 @@ Application Form
 
             });
 
-             
-  
         });
 
         $(document).on('change', '.category', function (e) {
@@ -727,6 +746,25 @@ Application Form
                 }
             });
         });
+
+        $('.tatkaal').click(function() {
+            var tatkaal_fees = $('#tatkaal_fees').data('tatkaal_fee');
+            var total_pay = $('#total_pay').val();
+
+            if($("#tatkaal").is(':checked')){
+                $('#tatkaal_fees').show();
+                var grand_total_pay = parseInt(tatkaal_fees) + parseInt(total_pay);
+                $('#total_pay').val(grand_total_pay);
+                $('.tatkaal_fee').val(tatkaal_fees);
+            }
+            else
+            {
+                $('#tatkaal_fees').hide();
+                var grand_total_pay = parseInt(total_pay) - parseInt(tatkaal_fees);
+                $('#total_pay').val(grand_total_pay);
+                $('.tatkaal_fee').val(null);
+            }
+        })
     });
 </script>
 @endsection

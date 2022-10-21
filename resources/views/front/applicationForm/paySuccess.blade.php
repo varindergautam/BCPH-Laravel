@@ -16,13 +16,35 @@ Payment Success
                             <h3>Payment Confirmation</h3>
                         </div>
 
-                        <div class="row text-center text-dark">
-                            <ul style="width: auto; margin: 0 auto;">
-                                <li><p>Rs. 9200/-</p></li>
-                                <li><p>Rs. 1200/-</p></li>
-                                <li><p>Rs. 1000/-</p></li>
+                        <div class="row text-center1 text-dark">
+                            <ul style="width: auto1; margin: 0 auto; list-style-type: none" >
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="basic_fees">{{ auth()->user()->fee->basic_fees }}</span>/-</label> basic fees
+                                    </p>
+                                </li>
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="bar_council_fees">{{ auth()->user()->fee->bar_council_fees }}</span>/-</label> bar council fees
+                                    </p>
+                                </li>
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="building_fees">{{ auth()->user()->fee->building_fees }}</span>/-</label> building fees
+                                    </p>
+                                </li>
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="advocate_welfare_fees">{{ auth()->user()->fee->advocate_welfare_fees }}</span>/-</label> advocate welfare fees
+                                    </p>
+                                </li>
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="benevolent_fees">{{ auth()->user()->fee->benevolent_fees }}</span>/-</label> benevolent fees
+                                    </p>
+                                </li>
                             </ul>
-                            <div class="col-md-12 mb-2">Your payment <strong>Rs. {{ $payment_data->total_pay }}</strong> successfully done.</div>
+                            <div class="col-md-12 mb-2">Your total payment <strong>Rs. {{ $payment_data->total_pay }}</strong> successfully done.</div>
                         </div>
 
 

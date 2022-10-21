@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AffidavitForm;
+use App\Models\ApplicationForm;
+use App\Models\CertifyForm;
+use App\Models\DeclarationForm;
+use App\Models\DocumentUpload;
 use App\Models\Fee;
+use App\Models\Undertaking;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
@@ -46,7 +52,15 @@ class UserController extends Controller
         return view('admin.user.show', $data);
     }
 
-    public function viewForm(){
-        die('view form');
+    public function viewForm($id){
+        $data['fees'] = Fee::all();
+        $data['user'] = User::find($id);
+        $data['applicationForm'] = ApplicationForm::where('user_id', $id)->first();
+        $data['declaration_data'] = DeclarationForm::where('user_id', $id)->first();
+        $data['undertaking'] = Undertaking::where('user_id', $id)->first();
+        $data['affidavit_data'] = AffidavitForm::where('user_id', $id)->first();
+        $data['certify_form'] = CertifyForm::where('user_id', $id)->first();
+        $data['documentUpload'] = DocumentUpload::where('user_id', $id)->first();
+        return view('admin.user.user_form', $data);
     }
 }

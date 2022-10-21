@@ -16,12 +16,15 @@ use App\Models\DeclarationForm;
 use App\Models\DocumentUpload;
 use App\Models\Fee;
 use App\Models\OfficialReport;
+use App\Models\TatkaalFee;
 use App\Models\Undertaking;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use Auth;
 use Validator;
 use Session;
+
+use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
 
 class ApplicationFormController extends Controller
 {
@@ -69,6 +72,7 @@ class ApplicationFormController extends Controller
     public function applicationForm() {
         $data['fees'] = Fee::all();
         $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+        $data['tatkaal'] = TatkaalFee::first();
         return view('Front.applicationForm.applicationForm', $data);
     }
 
@@ -259,8 +263,10 @@ class ApplicationFormController extends Controller
     /**
      * This function used to open the payment success with payment detail
      */
-    public function paymentDetail (Request $request, $razorPayId) {
-        $data['payment_data'] = ApplicationForm::where('razorpay_payment_id', $razorPayId)->first();
+    public function paymentDetail (Request $request, $orderId) {
+        // $data['payment_data'] = ApplicationForm::where('paytm_order_id', $orderId)->first();
+        $data['payment_data'] = ApplicationForm::where('razorpay_payment_id', $orderId)->first();
+        $data['fees'] = Fee::all();
         return view('front.applicationForm.paySuccess', $data);
     }
 
@@ -724,21 +730,165 @@ class ApplicationFormController extends Controller
         }
     }
 
+    /**
+     * This function is used to open the printing page only
+     */
     public function printPage() {
         $data['certify_form'] = CertifyForm::where('user_id', Auth::user()->id)->first();
         $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.printPage', $data);
     }
 
+    /**
+     * This function is used to open virtual tour of bcph
+     */
     public function virtualTour() {
         return view('front.applicationForm.virtualTour');
     }
 
+    /**
+     * This function is used to get the fee detail of particular category
+     */
     function getFeeDetail(Request $request) {
         try {
             return Fee::where('id', $request->categoryId)->first();
         } catch (\Throwable $th) {
             throw $th->getMessage();
         }
+    }
+
+    /** 
+     * Payment with using paytm
+    */
+    public function pay(Request $request) {
+        try {
+            $applicationFormData = ApplicationForm::where('user_id', Auth::user()->id)->first();
+            if(!$applicationFormData){
+                $applicationFormData = new ApplicationForm;
+            }
+            
+            $applicationFormData->user_id = Auth::user()->id;
+            $applicationFormData->university_name = $request->university_name;
+            $applicationFormData->which_univeristy = $request->which_univeristy;
+            $applicationFormData->which_univeristy_remarks = $request->which_univeristy_remarks;
+            $applicationFormData->date_of_law_degree = $request->date_of_law_degree;
+            $applicationFormData->plus_two_mark = $request->plus_two_mark;
+            $applicationFormData->graduate_before_admission = $request->graduate_before_admission;
+            $applicationFormData->college_university_name = $request->college_university_name;
+            $applicationFormData->no_of_years = $request->no_of_years;
+            $applicationFormData->college_pass_date = $request->college_pass_date;
+            $applicationFormData->english_compulsory = $request->english_compulsory;
+            $applicationFormData->law_college_name = $request->law_college_name;
+            $applicationFormData->law_college_join_date = $request->law_college_join_date;
+            $applicationFormData->law_college_duration_year = $request->law_college_duration_year;
+            $applicationFormData->law_college_passed = $request->law_college_passed;
+            $applicationFormData->name_of_degree_obtained = $request->name_of_degree_obtained;
+            $applicationFormData->medium_instruction = $request->medium_instruction;
+            $applicationFormData->private_study_duration_year = $request->private_study_duration_year;
+            $applicationFormData->city_for_pratice_after_enrollment = $request->city_for_pratice_after_enrollment;
+            $applicationFormData->appointment_holds = $request->appointment_holds;
+            $applicationFormData->appointment_holds_remarks = $request->appointment_holds_remarks;
+            $applicationFormData->business_or_profession = $request->business_or_profession;
+            $applicationFormData->business_or_profession_remark = $request->business_or_profession_remark;
+            $applicationFormData->criminal_court = $request->criminal_court;
+            $applicationFormData->criminal_court_remark = $request->criminal_court_remark;
+            $applicationFormData->criminal_proceeding_againest_applicant = $request->criminal_proceeding_againest_applicant;
+            $applicationFormData->criminal_proceeding_againest_applicant_remark = $request->criminal_proceeding_againest_applicant_remark;
+            $applicationFormData->suspension_type = $request->suspension_type;
+            $applicationFormData->suspension_type_remark = $request->suspension_type_remark;
+            $applicationFormData->declared_insolvent_type = $request->declared_insolvent_type;
+            $applicationFormData->declared_insolvent_type_remark = $request->declared_insolvent_type_remark;
+            $applicationFormData->already_apply_for_enrollment = $request->already_apply_for_enrollment;
+            $applicationFormData->already_apply_for_enrollment_remark = $request->already_apply_for_enrollment_remark;
+            $applicationFormData->total_pay = $request->total_pay;
+            $applicationFormData->tatkaal_fees = $request->tatkaal_fee;
+            $applicationFormData->paytm_order_id = \Str::random(4).time();;
+            $applicationFormData->date_of_completion = $request->date_of_completion;
+            $applicationFormData->stream = $request->stream;
+            $applicationFormData->save();
+
+            $payment = PaytmWallet::with('receive');
+            $payment->prepare([
+                'order' => $applicationFormData->paytm_order_id, 
+                'user' => auth()->user()->id,
+                'mobile_number' => auth()->user()->mobile_number,
+                'email' => auth()->user()->email, // your user email address)
+                'amount' => $applicationFormData->total_pay, // amount will be paid in INR.
+                'callback_url' => route('status') // callback URL
+            ]);
+
+            return $payment->receive();
+
+            if($applicationFormData) {
+                return response()->json(['message'=>'Application form submitted successfully',
+                'redirect' => route('status'),
+                'status' => true]);
+            }
+
+            return $payment->receive();
+
+
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function testPaytm(Request $request)
+    {
+        $amount = 1500; //Amount to be paid
+
+        $userData = [
+            'name' => 'varinder', // Name of user
+            'mobile' => 7508068170, //Mobile number of user
+            'email' => 'varinder.slinfy@gmail.com', //Email of user
+            'fee' => $amount,
+            'order_id' => rand(1,1000) //Order id
+        ];
+
+
+        $payment = PaytmWallet::with('receive');
+        
+        $payment->prepare([
+            'order' => $userData['order_id'], 
+            'user' => 1,
+            'mobile_number' => $userData['mobile'],
+            'email' => $userData['email'], // your user email address
+            'amount' => $amount, // amount will be paid in INR.
+            'callback_url' => route('status') // callback URL
+        ]);
+        return $payment->receive();  // initiate a new payment
+    }
+
+    public function paymentCallback()
+    {
+        $transaction = PaytmWallet::with('receive');
+        
+        $response = $transaction->response();
+       
+        $order_id = $transaction->getOrderId(); // return a order id
+        $transaction->getTransactionId(); // return a transaction id
+    
+        // update the db data as per result from api call
+        if ($transaction->isSuccessful()) {
+            ApplicationForm::where('paytm_order_id', $order_id)->update(['paytm_status' => 1, 'paytm_transaction_id' => $transaction->getTransactionId()]);
+            return redirect(route('paymentDetail', $order_id));
+
+        } else if ($transaction->isFailed()) {
+            ApplicationForm::where('paytm_order_id', $order_id)->update(['paytm_status' => 0, 'paytm_transaction_id' => $transaction->getTransactionId()]);
+            return response()->json([
+                'message'=>'Your payment is failed.', 
+                'redirect' => route('applicationForm'), 
+                'status' => true
+            ]);
+            return redirect(route('applicationForm'))->with('message', "Your payment is failed.");
+            
+        } else if ($transaction->isOpen()) {
+            ApplicationForm::where('paytm_order_id', $order_id)->update(['paytm_status' => 2, 'paytm_transaction_id' => $transaction->getTransactionId()]);
+            return redirect(route('paymentDetail', $order_id));
+            // return redirect(route('applicationForm'))->with('message', "Your payment is processing.");
+        }
+        $transaction->getResponseMessage(); //Get Response Message If Available
+        
+        // $transaction->getOrderId(); // Get order id
     }
 }

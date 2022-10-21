@@ -35,11 +35,25 @@
 
 
         <ul class="navbar-nav ml-auto">
-            <div class="user-area dropdown float-right">
+            <div class="btn-group float-end">
+                <a type="button" class="text-decoration-none text-dark dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Welcome, <span class="fw-bold">{{ auth::user()->applicant_name }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    
+                    </li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+
+            {{-- <div class="user-area dropdown float-right">
                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false">
                     <span>{{Auth::user()->applicant_name}}</span>
                 </a>
+
+                
 
                 <div class="user-menu dropdown-menu">
                     <a class="nav-link" href="">My Account</a>
@@ -49,7 +63,7 @@
                         @csrf
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </ul>
 
     </nav>
