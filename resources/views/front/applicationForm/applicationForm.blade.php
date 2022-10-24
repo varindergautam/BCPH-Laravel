@@ -50,11 +50,6 @@ Application Form
                                     @empty
                                         <option>No Fee Found</option>
                                     @endforelse
-
-                                    {{-- <option value="General" {{ Auth::user()->category == 'General' ? 'selected' : '' }}>General</option>
-                                    <option value="OBC" {{ Auth::user()->category == 'OBC' ? 'selected' : '' }}>OBC</option>
-                                    <option value="SC/ST/BPL" {{ Auth::user()->category == 'SC/ST/BPL' ? 'selected' : '' }}>SC/ST/BPL</option>
-                                    <option value="Handicaps/Blinds" {{ Auth::user()->category == 'Handicaps/Blinds' ? 'selected' : '' }}>Handicaps/Blinds</option> --}}
                                 </select>
                                 <strong id="category-error" class="error"></strong>
                             </div>
@@ -575,12 +570,15 @@ Application Form
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="text-dark" for=""><span><input type="checkbox" name="tatkaal" id="tatkaal" class="tatkaal"></span>
+                                <label class="text-dark" for=""><span><input type="checkbox" name="tatkaal" id="tatkaal" class="tatkaal" {{@$applicationForm->tatkaal_fees ? 'checked' : ''}}></span>
                                 <span for="tatkaal">Tatkaal</span></label>
                             </div>
                             <div class="col-md-6 text-dark">
                                 <input type="hidden" name="tatkaal_fee" class="tatkaal_fee">
-                                <p id="tatkaal_fees" data-tatkaal_fee="{{ $tatkaal->tatkaal_fees }}" style="display: none"><label>Rs. {{ $tatkaal->tatkaal_fees }}</label></p>
+                                @php
+                                    $tatkaal_display = isset($applicationForm->tatkaal_fees) ? 'display: block' : 'display: none';
+                                @endphp
+                                <p id="tatkaal_fees" data-tatkaal_fee="{{ $tatkaal->tatkaal_fees }}" style="{{$tatkaal_display}}"><label>Rs. {{ $tatkaal->tatkaal_fees }}</label></p>
                             </div>
                         </div>
 
@@ -636,7 +634,7 @@ Application Form
 
             postAjax(url, method, formData)
         });
-        $('form').on('submit', function (e) {
+        $('form').on('submit1', function (e) {
             e.preventDefault();
 
             $.ajaxSetup({

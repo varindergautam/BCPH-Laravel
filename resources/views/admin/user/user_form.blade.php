@@ -81,11 +81,6 @@
                                         @empty
                                             <option>No Fee Found</option>
                                         @endforelse
-
-                                        {{-- <option value="General" {{ $user->category == 'General' ? 'selected' : '' }}>General</option>
-                                        <option value="OBC" {{ $user->category == 'OBC' ? 'selected' : '' }}>OBC</option>
-                                        <option value="SC/ST/BPL" {{ $user->category == 'SC/ST/BPL' ? 'selected' : '' }}>SC/ST/BPL</option>
-                                        <option value="Handicaps/Blinds" {{ $user->category == 'Handicaps/Blinds' ? 'selected' : '' }}>Handicaps/Blinds</option> --}}
                                     </select>
                                     <strong id="category-error" class="error"></strong>
                                 </div>
@@ -749,32 +744,26 @@
                                         particulars.</label>
                                 </div>
                                 <div class="col-md-6 text-dark">
-                                    {{-- <select class="form-control" id="mode_of_payment" name="mode_of_payment">
-                                        <option selected="" disabled="">Select Mode of Payment</option>
-                                        <option value="online" selected="">Online</option>
-                                        <option value="offline">Offline</option>
-                                    </select>
-    
-                                    <select class="form-control mt-2 form-select" id="payment" name="payment" aria-label="Filter select">
-                                        <option value="9200">Rs. 9200/-</option>
-                                        <option value="1200">Rs. 1200/-</option>
-                                        <option value="1000">Rs. 1000/-</option>
-                                    </select> --}}
                                     <p><label>Rs. <span
-                                                id="basic_fees">{{ isset($user->fee) ? $user->fee->basic_fees : 0 }}</span>/-</label>
-                                    </p>
-                                    <p><label>Rs. <span
-                                                id="bar_council_fees">{{ isset($user->fee) ? $user->fee->bar_council_fees : 0 }}</span>/-</label>
-                                    </p>
-                                    <p><label>Rs. <span
-                                                id="building_fees">{{ isset($user->fee) ? $user->fee->building_fees : 0 }}</span>/-</label>
-                                    </p>
-                                    <p><label>Rs. <span
-                                                id="advocate_welfare_fees">{{ isset($user->fee) ? $user->fee->advocate_welfare_fees : 0 }}</span>/-</label>
-                                    </p>
-                                    <p><label>Rs. <span
-                                                id="benevolent_fees">{{ isset($user->fee) ? $user->fee->benevolent_fees : 0 }}</span>/-</label>
-                                    </p>
+                                                    id="basic_fees">{{ isset($user->fee) ? $user->fee->basic_fees : 0 }}</span>/-</label> basic fees
+                                        </p>
+                                    
+                                        <p><label>Rs. <span
+                                                    id="bar_council_fees">{{ isset($user->fee) ? $user->fee->bar_council_fees : 0 }}</span>/-</label> bar council fees
+                                        </p>
+                                    
+                                        <p><label>Rs. <span
+                                                    id="building_fees">{{ isset($user->fee) ? $user->fee->building_fees : 0 }}</span>/-</label> building fees
+                                        </p>
+                                   
+                                        <p><label>Rs. <span
+                                                    id="advocate_welfare_fees">{{ isset($user->fee) ? $user->fee->advocate_welfare_fees : 0 }}</span>/-</label> advocate welfare fees
+                                        </p>
+                                    
+                                        <p><label>Rs. <span
+                                                    id="benevolent_fees">{{ isset($user->fee) ? $user->fee->benevolent_fees : 0 }}</span>/-</label> benevolent fees
+                                        </p>
+                                    
                                     <input type="hidden" name="total_pay" id="total_pay" value="{{ totalFees() }}">
                                 </div>
                             </div>
@@ -813,31 +802,39 @@
 
                             <div class="row text-center text-dark">
                                 <ul style="width: auto; margin: 0 auto;">
+                                    
                                     <li>
                                         <p><label>Rs. <span
-                                                    id="basic_fees">{{ isset($user->fee) ? $user->fee->basic_fees : 0 }}</span>/-</label>
+                                                    id="basic_fees">{{ isset($user->fee) ? $user->fee->basic_fees : 0 }}</span>/-</label> basic fees
                                         </p>
                                     </li>
                                     <li>
                                         <p><label>Rs. <span
-                                                    id="bar_council_fees">{{ isset($user->fee) ? $user->fee->bar_council_fees : 0 }}</span>/-</label>
+                                                    id="bar_council_fees">{{ isset($user->fee) ? $user->fee->bar_council_fees : 0 }}</span>/-</label> bar council fees
                                         </p>
                                     </li>
                                     <li>
                                         <p><label>Rs. <span
-                                                    id="building_fees">{{ isset($user->fee) ? $user->fee->building_fees : 0 }}</span>/-</label>
+                                                    id="building_fees">{{ isset($user->fee) ? $user->fee->building_fees : 0 }}</span>/-</label> building fees
                                         </p>
                                     </li>
                                     <li>
                                         <p><label>Rs. <span
-                                                    id="advocate_welfare_fees">{{ isset($user->fee) ? $user->fee->advocate_welfare_fees : 0 }}</span>/-</label>
+                                                    id="advocate_welfare_fees">{{ isset($user->fee) ? $user->fee->advocate_welfare_fees : 0 }}</span>/-</label> advocate welfare fees
                                         </p>
                                     </li>
                                     <li>
                                         <p><label>Rs. <span
-                                                    id="benevolent_fees">{{ isset($user->fee) ? $user->fee->benevolent_fees : 0 }}</span>/-</label>
+                                                    id="benevolent_fees">{{ isset($user->fee) ? $user->fee->benevolent_fees : 0 }}</span>/-</label> benevolent fees
                                         </p>
                                     </li>
+                                    @if($applicationForm->tatkaal_fees)
+                                    <li>
+                                        <p><label>Rs. <span
+                                                    id="benevolent_fees">{{ $applicationForm->tatkaal_fees }}</span>/-</label> tatkaal fees
+                                        </p>
+                                    </li>
+                                    @endif
                                 </ul>
                                 <div class="col-md-12 mb-2">Your payment <strong>Rs.
                                         {{ $applicationForm->total_pay }}</strong> successfully done.</div>

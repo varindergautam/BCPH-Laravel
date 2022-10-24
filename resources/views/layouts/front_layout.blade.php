@@ -11,6 +11,7 @@
     <link href="{{ asset('front/css/style.css?v=' . rand(1, 99)) }}" rel="stylesheet">
     <link href="{{ asset('front/css/responsive.css?v=' . rand(1, 99)) }}" rel="stylesheet">
     <link href="{{ asset('front/theme_css/style.css?v=' . rand(1, 99)) }}" rel="stylesheet">
+    {{-- <link href="{{ asset('front/theme_css/core/assets/css/sway-font.css?v=' . rand(1, 99)) }}" rel="stylesheet"> --}}
 
 
     <script src="{{ asset('common/plugins/js/jquery.min.js') }}"></script>
@@ -31,23 +32,13 @@
 
 <body>
     <div class="loader"
-        style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff !important;
-    z-index: 99999;
-    margin: 0px auto;
-    text-align: center;
-    background-image: url({{ asset('front/images/loader.gif') }});
-    background-position: center center;
-    background-repeat: no-repeat; 
+        style="position: fixed; top: 0;left: 0; width: 100%; height: 100%; background-color: #fff !important;
+    z-index: 99999; margin: 0px auto; text-align: center; background-image: url({{ asset('front/images/loader.gif') }});
+    background-position: center center;background-repeat: no-repeat; 
     display:none">
     </div>
 
-    <nav class="" style="    box-shadow: 0px 2px 40px 0px hsl(0deg 0% 6% / 5%);">
+    <nav class="no-print" style="    box-shadow: 0px 2px 40px 0px hsl(0deg 0% 6% / 5%);">
         <div class="topbar tb-border-design visible-on-mobile">
             <div class="container">
                 <div class="topbar-left-content ">
@@ -69,27 +60,24 @@
                 </div>
             </div>
         </div>
+
         <div class="navbar navbar-expand-lg menubar main-nav-right">
             <div class="container" style="max-width: 1240px;">
-                <div id="logo">
-                    <a class="logo" href="http://112.196.117.52/bcph_website" title="BCPH">BCPH</a>
-                </div>
-                <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#main-menu">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-
-                    <div class="mobile-cart">
-                    </div>
-                </div>
-                <div id="main-menu" class="collaps1e navbar-collapse background-dropdown-effect justify-content-end">
+                {{-- <div id="logo"> --}}
+                <a class="logo" href="http://112.196.117.52/bcph_website" title="BCPH">BCPH</a>
+                {{-- </div> --}}
+                {{-- <div class="navbar-header page-scroll"> --}}
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#main-menu"
+                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                {{-- </div> --}}
+                <div id="main-menu" class="collapse navbar-collapse background-dropdown-effect justify-content-end">
                     <ul id="menu-logged-in-main-menu" class="nav navbar-nav">
                         <li id="menu-item-9782"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-9782 active">
-                            <a href="http://112.196.117.52/bcph_website/">Home</a></li>
+                            <a href="http://112.196.117.52/bcph_website/">Home</a>
+                        </li>
                         <li id="menu-item-9784"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9784"><a
                                 href="http://112.196.117.52/bcph_website/about-us/">About Us</a></li>
@@ -140,22 +128,22 @@
                     </div>
                     <div class="header-bttn-wrapper">
                         @auth
-                        <div class="btn-group float-end">
-                            <a type="button" class="text-decoration-none text-dark dropdown-toggle"
-                                data-bs-toggle="dropdown" aria-expanded="false" style="padding: 10px 0;">
-                                Welcome, <span class="fw-bold">{{ auth::user()->applicant_name }}</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('changePassword') }}">Change Password</a>
-                                </li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
-                            </ul>
-                        </div>
+                            <div class="btn-group float-end">
+                                <a type="button" class="text-decoration-none text-dark dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="padding: 10px 0;">
+                                    Welcome, <span class="fw-bold">{{ auth::user()->applicant_name }}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('changePassword') }}">Change Password</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                                </ul>
+                            </div>
                         @endauth
                         @guest
-                        <a class="modal-menu-item tt_button tt_primary_button btn_primary_color default_header_btn default_header_btn"
-                        href="{{ env('FORM_URL') }}"
-                        style="color: #fff; background: #C8102E; font-weight: 500;">Apply Now</a>
+                            <a class="modal-menu-item tt_button tt_primary_button btn_primary_color default_header_btn default_header_btn"
+                                href="{{ env('FORM_URL') }}"
+                                style="color: #fff; background: #C8102E; font-weight: 500;">Apply Now</a>
                         @endguest
                     </div>
                 </div>
@@ -187,7 +175,7 @@
 
     @yield('content')
 
-    <footer id="footer" class="fixed underline-effect">
+    <footer id="footer" class="fixed underline-effect no-print">
         <div class="upper-footer" style="">
             <div class="container">
                 <!-- <div class="footer-bar ">
@@ -226,22 +214,28 @@
                                     </li>
                                     <li id="menu-item-9743"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9743">
-                                        <a href="http://112.196.117.52/bcph_website/about-us/">About Us</a></li>
+                                        <a href="http://112.196.117.52/bcph_website/about-us/">About Us</a>
+                                    </li>
                                     <li id="menu-item-9742"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9742">
-                                        <a href="http://112.196.117.52/bcph_website/members/">Members</a></li>
+                                        <a href="http://112.196.117.52/bcph_website/members/">Members</a>
+                                    </li>
                                     <li id="menu-item-9776"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9776">
-                                        <a href="http://112.196.117.52/bcph_website/events/">Events</a></li>
+                                        <a href="http://112.196.117.52/bcph_website/events/">Events</a>
+                                    </li>
                                     <li id="menu-item-9761"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9761">
-                                        <a href="http://112.196.117.52/bcph_website/downloads/">Downloads</a></li>
+                                        <a href="http://112.196.117.52/bcph_website/downloads/">Downloads</a>
+                                    </li>
                                     <li id="menu-item-9740"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9740">
-                                        <a href="http://112.196.117.52/bcph_website/blog/">Blog</a></li>
+                                        <a href="http://112.196.117.52/bcph_website/blog/">Blog</a>
+                                    </li>
                                     <li id="menu-item-9741"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9741">
-                                        <a href="http://112.196.117.52/bcph_website/contact-us/">Contact Us</a></li>
+                                        <a href="http://112.196.117.52/bcph_website/contact-us/">Contact Us</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -289,7 +283,7 @@
             } else {
                 $(".main-nav-right").removeClass("stickyMenu");
             }
-        }); 
+        });
     </script>
     @yield('script')
 </body>

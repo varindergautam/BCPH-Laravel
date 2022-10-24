@@ -264,8 +264,8 @@ class ApplicationFormController extends Controller
      * This function used to open the payment success with payment detail
      */
     public function paymentDetail (Request $request, $orderId) {
-        // $data['payment_data'] = ApplicationForm::where('paytm_order_id', $orderId)->first();
-        $data['payment_data'] = ApplicationForm::where('razorpay_payment_id', $orderId)->first();
+        $data['payment_data'] = ApplicationForm::where('paytm_order_id', $orderId)->first();
+        // $data['payment_data'] = ApplicationForm::where('razorpay_payment_id', $orderId)->first();
         $data['fees'] = Fee::all();
         return view('front.applicationForm.paySuccess', $data);
     }

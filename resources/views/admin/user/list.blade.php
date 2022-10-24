@@ -105,9 +105,9 @@
 
                                             `<a href="`+row.viewForm+`"`+
 
-                                            `class="info-btn1">`+
+                                            `class="info-btn">`+
 
-                                            `Form`+
+                                            `<i class="fab fa-wpforms"></i>`+
 
                                             `</a>`+
 

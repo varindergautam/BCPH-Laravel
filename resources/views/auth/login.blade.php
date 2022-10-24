@@ -36,7 +36,7 @@
                   </div>
                 </div>
                 <div class="col-12 col-sm-6 col-md-6">
-                  
+                      @include('validation_message.validation_message')
                       <div class="w-100 logo-wrap text-center pt-4 px-3">
                         <a href="{{ url('/admin') }}">
                           <img src="{{ url('/admin/login/img/logo.png') }}" alt="Logo Image" class="img-fluid">

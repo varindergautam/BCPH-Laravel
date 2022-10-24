@@ -5,6 +5,19 @@ Print Data
 @endsection
 
 @section('content')
+
+@section('style')
+<style>
+    @media print
+    {    
+        .no-print, .no-print *
+        {
+            display: none !important;
+        }
+    }
+</style>
+@endsection
+
 <div class="main_padding application_form">
     <div class="container  ">
         <div class="row ">
@@ -309,12 +322,12 @@ Print Data
 <script>
     jQuery(document).ready(function(){
         $('.print').click(function(){
-            var originalContent = $('body').html();
+            // var originalContent = $('body').html();
             var printArea = $('#printableArea').html();
 
             $('body').html(printArea);
-            window.print();
-            $('body').html(originalContent);
+            window.print(printArea);
+            // $('body').html(originalContent);
         });
 
         $('form').on('submit', function (e) {

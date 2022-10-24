@@ -16,6 +16,7 @@ h1,h2,h3,h4,h5,h6, #logo .logo {
     color: #fff !important;
 }
 
+
 .scrollLock {
     position: fixed;
     width: 100%;
@@ -999,7 +1000,7 @@ body.maintenance-mode .wpcf7-submit:hover {
     box-shadow: none;
     min-width: 260px;
     left: -16px;
-    top: auto;
+    top: 42px;
     overflow: visible;
     right: auto;
 }
@@ -2389,6 +2390,8 @@ footer.underline-effect .footer_widget ul li.cat-item a:hover:after,
     }
     .lower-footer {
         margin-top: 0;
+        background : #212240;
+        color : #BDBEC8
     }
     .footer-secondary-nav a {
         margin: auto;
@@ -2640,7 +2643,7 @@ footer.underline-effect .footer_widget ul li.cat-item a:hover:after,
     }
     .upper-footer {
         padding: 50px 0 20px 0;
-        background-color: #fafafa;
+        background-color: #212240;
     }
 
     .footer-bar {

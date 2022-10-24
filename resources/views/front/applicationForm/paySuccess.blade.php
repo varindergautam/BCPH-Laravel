@@ -43,6 +43,13 @@ Payment Success
                                                 id="benevolent_fees">{{ auth()->user()->fee->benevolent_fees }}</span>/-</label> benevolent fees
                                     </p>
                                 </li>
+                                @if(@$payment_data->tatkaal_fee)
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="benevolent_fees">{{ $payment_data->tatkaal_fee }}</span>/-</label> tatkaal fees
+                                    </p>
+                                </li>
+                                @endif
                             </ul>
                             <div class="col-md-12 mb-2">Your total payment <strong>Rs. {{ $payment_data->total_pay }}</strong> successfully done.</div>
                         </div>

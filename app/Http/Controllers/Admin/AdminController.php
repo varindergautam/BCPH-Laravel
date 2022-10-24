@@ -35,11 +35,10 @@ class AdminController extends Controller
                 }
             }
             else{
-                return response()->json(['message'=>'No user found', 'status' => false]);
+                return back()->with('error', 'Credential not matched');
             }
         } catch (\Throwable $th) {
-            return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
-            throw $th;
+            return $th->getMessage();
         }
     }
 

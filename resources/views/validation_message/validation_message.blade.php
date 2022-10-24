@@ -11,77 +11,61 @@
  * Time: 4:35 PM
 
  */
-
-
-
 ?>
 
 
- <div class="col-sm-12">
+<div class="col-sm-12">
 
-@if (Session::has('success'))
+    @if (Session::has('success'))
+        <div class="alert  alert-success">
 
-<div class="alert  alert-success">
+            <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close">
 
-    <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
 
-        <span aria-hidden="true">&times;</span>
+            </button>
 
-    </button>
+            {{ Session::get('success') }}
 
-    {{ Session::get('success') }}
-
-</div>
-
-@endif
+        </div>
+    @endif
 
 
 
-@if (Session::has('error'))
+    @if (Session::has('error'))
+        <div class="alert alert-danger">
 
-<div class="alert alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
-    <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close">
+            {{ Session::get('error') }}
 
-        <span aria-hidden="true">&times;</span>
-
-    </button>
-
-    {{ Session::get('error') }}
-
-</div>
-
-@endif
+        </div>
+    @endif
 
 
 
-@if ($errors->any())
+    @if ($errors->any())
 
-<div class="alert alert-danger">
+        <div class="alert alert-danger">
 
-    <ul>
+            <ul>
 
-        <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close">
 
-            <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
 
-        </button>
+                </button>
 
-        @foreach ($errors->all() as $error)
-
-        {{ $error }}<br>
-
-        @endforeach
+                @foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach
 
 
 
-    </ul>
+            </ul>
+
+        </div>
+
+    @endif
 
 </div>
-
-@endif
-
-
-
-
-

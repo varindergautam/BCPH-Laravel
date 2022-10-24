@@ -245,3 +245,10 @@ header{
 	font-size: 13px;
 	border-radius: 3px;
 }
+
+button.navbar-toggler {
+    height: auto;
+    background: transparent;
+    width: auto !important;
+    box-shadow: none;
+}

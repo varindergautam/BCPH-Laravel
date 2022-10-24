@@ -19,7 +19,7 @@ class FeeController extends Controller
      */
     public function index()
     {
-        $data['fees'] = Fee::all();
+        $data['fees'] = Fee::get();
         return view('admin.fee.list', $data);
     }
 
