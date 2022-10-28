@@ -31,7 +31,7 @@ class AdminController extends Controller
                     return redirect()->route('admin.dashboard');
                 }
                 else {
-                    return redirect()->route('admin.login');
+                    return back()->with('error', 'Credential not matched');
                 }
             }
             else{

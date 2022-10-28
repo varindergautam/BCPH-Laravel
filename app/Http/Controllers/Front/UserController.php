@@ -43,6 +43,16 @@ class UserController extends Controller
         }
         return $random_generator;
     }
+
+    public function uploadfile($file) {
+        $fileName = md5(time()). '.' . $file->getClientOriginalExtension();
+        $createFolder = public_path(). '/images/profile_signs';
+        if (! \File::exists($createFolder)) {
+            \File::makeDirectory($createFolder, 0777, true);
+        }
+        $file->move($createFolder, $fileName);
+        return $fileName;
+    }
     
     /**
      * This function open register form
@@ -72,6 +82,18 @@ class UserController extends Controller
             $user->adhaarno = $request->adhaarno;
             $user->permanent_address = $request->permanent_address;
             $user->correspondence_address = $request->correspondence_address;
+
+            if($request->file('profile_pic')){
+                $profile = $request->file('profile_pic');
+                $profile_pic = $this->uploadfile($profile);
+                $user->profile_pic =  $profile_pic;
+            }
+
+            if($request->file('sign')){
+                $sign = $request->file('sign');
+                $sign_img = $this->uploadfile($sign);
+                $user->sign =  $sign_img;
+            }
 
             $mailData['name'] = $request->applicant_name;
             $mailData['password'] = $this->generate_random_number();

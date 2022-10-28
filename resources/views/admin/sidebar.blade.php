@@ -75,5 +75,20 @@
               <p>Tatkaal Fees</p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ route('admin.university.list') }}" class="nav-link {{ (Request::segment(2) == "university") ? "active" : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Universities</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('admin.college.list') }}" class="nav-link {{ (Request::segment(2) == "college") ? "active" : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Colleges</p>
+            </a>
+          </li>
+
     </ul>
   </nav>
