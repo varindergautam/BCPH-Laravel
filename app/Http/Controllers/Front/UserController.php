@@ -190,4 +190,18 @@ class UserController extends Controller
                     ->setBody('message', 'text/html');
             });  
     }
+
+    public function testSms() {
+        $message = 'Dear Applicant,
+        Your registration ID is {#var#}{#var#} and the password is {#var#}. Kindly log in to your account after completing the enrolment form and paying the registration fees. 
+        Team 
+        Bar Council of Punjab & Haryana';
+        $curl_handle=curl_init();
+        curl_setopt($curl_handle,CURLOPT_URL,'https://login.yourbulksms.net/api/sendhttp.php?authkey=20705A7cjl7Lu63284d1fP15&mobiles=917508068170&message='.$message.'&sender=BARCNL&route=4&country=91&DLT_TE_ID=value');
+        curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
+        curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
+        $buffer = curl_exec($curl_handle);
+        print_r($buffer);
+        curl_close($curl_handle);
+    }
 }

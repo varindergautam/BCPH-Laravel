@@ -40,6 +40,7 @@ Auth::routes([
         Route::post('/mailForgotPassword', 'mailForgotPassword')->name('mailForgotPassword');
 
         Route::get('/testEmail', 'testEmail')->name('testEmail');
+        Route::get('/testSms', 'testSms')->name('testSms');
        
     });
 
@@ -61,8 +62,11 @@ Auth::routes([
     ->group(function () {
       Route::get('/change-password', 'changePassword')->name('changePassword');
         Route::post('/updatePassword', 'updatePassword')->name('updatePassword');
-
+        
         Route::get('/application-form', 'applicationForm')->name('applicationForm');
+        Route::post('/saveApplicationForm', 'saveApplicationForm')->name('saveApplicationForm');
+
+
         Route::post('/orderid-generate', 'orderIdGenerate')->name('orderIdGenerate');
         Route::get('/paysuccess', 'paysuccess')->name('paysuccess');
         Route::get('/payment-detail/{id}', 'paymentDetail')->name('paymentDetail');
@@ -98,9 +102,11 @@ Auth::routes([
 
         Route::get('/getFeeDetail', 'getFeeDetail')->name('getFeeDetail');
 
+        Route::get('payment', 'payment')->name('payment');
         Route::post('/pay', 'pay')->name('pay');
         Route::post('/status', 'paymentCallback')->name('status');
 
+        Route::get('/getCollegeList', 'getCollegeList')->name('getCollegeList');
     });
 
     Route::group(['middleware' => ['userAuthenticate'], 'prefix' => 'admin', 'as' => 'admin.'], function () {

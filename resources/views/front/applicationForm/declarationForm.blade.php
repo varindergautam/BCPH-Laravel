@@ -36,12 +36,12 @@
                                         apply for enrolment to any other State Bar Council.</li>
                                     <li>I have obtained Law degree from <input type="text remove_border_input"
                                             name="law_university_name" placeholder="Enter university"
-                                            value="{{ @$declaration_data->law_university_name }}"><strong
+                                            value="{{ @$payment_data->university->name }}"><strong
                                             id="law_university_name-error" class="error"></strong> University which has
                                         been recognised by the Bar Council of India u/s 24 (i)(c) (iii) of the Advocates Act
                                         1961 and the Law College <input type="text" name="law_college_name"
                                             placeholder="Enter college name"
-                                            value="{{ @$declaration_data->law_college_name }}"><strong
+                                            value="{{ @$payment_data->college->name }}"><strong
                                             id="law_college_name-error" class="error"></strong> where I studied for
                                         three/five years is also recognised by the Bar Council of India for imparting Legal
                                         Education and is affiliated with <input type="text"
@@ -68,7 +68,7 @@
                             <div class="row">
                                 <div class="col ">
                                     <div class=" margin_top_33">
-                                        <a href="{{ route('paymentDetail', $payment_data->paytm_order_id) }}"
+                                        <a href="{{ route('applicationForm') }}"
                                             name="" class="custom_btn previous_btn_padding">Previous</a>
                                     </div>
                                 </div>

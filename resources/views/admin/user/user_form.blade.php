@@ -828,7 +828,7 @@
                                                     id="benevolent_fees">{{ isset($user->fee) ? $user->fee->benevolent_fees : 0 }}</span>/-</label> benevolent fees
                                         </p>
                                     </li>
-                                    @if($applicationForm->tatkaal_fees)
+                                    @if(@$applicationForm->tatkaal_fees)
                                     <li>
                                         <p><label>Rs. <span
                                                     id="benevolent_fees">{{ $applicationForm->tatkaal_fees }}</span>/-</label> tatkaal fees
@@ -836,8 +836,14 @@
                                     </li>
                                     @endif
                                 </ul>
-                                <div class="col-md-12 mb-2">Your payment <strong>Rs.
-                                        {{ $applicationForm->total_pay }}</strong> successfully done.</div>
+                                <div class="col-md-12 mb-2">Your payment 
+                                    @if(@$applicationForm->total_pay)
+                                    <strong>Rs.
+                                        {{ $applicationForm->total_pay }}</strong> successfully done.
+                                    @else
+                                        not done yet.
+                                    @endif
+                                </div>
                             </div>
                         </form>
                     </div>

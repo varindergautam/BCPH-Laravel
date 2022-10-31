@@ -38,6 +38,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
+                                                    <th>University Name</th>
                                                     <th>College Name</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -82,6 +83,9 @@
                         "data": "sr_no"
                     },
                     {
+                        "data": "university.name"
+                    },
+                    {
                         "data": "name"
                     },
                     {
@@ -91,7 +95,7 @@
                 "columnDefs": [
 
                     {
-                        "targets": 2,
+                        "targets": 3,
                         render: function(data, type, row, meta) {
 
                             var status = row['status'] == 1 ? "checked" : "";

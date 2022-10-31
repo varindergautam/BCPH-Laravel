@@ -47,6 +47,19 @@
                                             @csrf
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
+                                                    <select class="form-control form-select" name="university">
+                                                        <option selected disabled>Select University</option>
+                                                        @forelse ($universities as $university)
+                                                            <option value="{{ $university->id }}" {{ @$college->university_id == $university->id ? 'selected' : '' }}>{{ $university->name }}</option>
+                                                        @empty
+                                                        <option disabled>No Data</option>                                                            
+                                                        @endforelse
+                                                    </select>
+                                                    <span class="error">{{ $errors->first('university') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
                                                     <input class="form-control" placeholder="Enter Name" name="name"
                                                         value="{{ isset($college) ? $college->name : old('name') }}">
                                                     <span class="error">{{ $errors->first('name') }}</span>

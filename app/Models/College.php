@@ -9,5 +9,9 @@ class College extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['name'];
+    protected $fillable = ['name' ,'university_id'];
+
+    public function university() {
+        return $this->belongsTo('App\Models\University', 'university_id');
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CollegeStoreRequest;
 use App\Http\Requests\CollegeUpdateRequest;
 use App\Models\College;
+use App\Models\University;
 use Illuminate\Http\Request;
 
 class CollegeController extends Controller
@@ -23,12 +24,13 @@ class CollegeController extends Controller
         //     die('ok');
         // }
 
-        $colleges = College::get();
+        $colleges = College::with('university')->get();
     
         if(count($colleges) > 0) {
             foreach($colleges as $key => $college) {
                 
                 $colleges[$key]['sr_no'] = $key + 1;
+                // $colleges[$key]['university_name'] = $college->university->name;
                 $colleges[$key]['name'] = $college->name;
                 $colleges[$key]['action'] = NULL;
                 $colleges[$key]['edit'] = route('admin.college.edit', $college->id);
@@ -42,12 +44,16 @@ class CollegeController extends Controller
     }
 
     public function create() {
-        return view('admin.college.create');
+        $data['universities'] = University::get();
+        return view('admin.college.create', $data);
     }
 
     public function store (CollegeStoreRequest $request) {
         try {
-            College::create($request->all());
+            $college = new College();
+            $college->university_id = $request->university;
+            $college->name = $request->name;
+            $college->save();
             return redirect()->route('admin.college.list')->with('success', 'Created successfully');
         } catch (\Throwable $th) {
             throw $th->getMessage();
@@ -57,15 +63,17 @@ class CollegeController extends Controller
     public function edit($id)
     {
         $data['college'] =  College::findOrFail($id);
+        $data['universities'] = University::get();
         return view('admin.college.create', $data);
     }
 
     public function update(CollegeUpdateRequest $request)
     {
         try {
-            College::updateOrCreate(['id' => $request->id], [
-                'name' => $request->name,
-            ]);
+            $college = College::find($request->id);
+            $college->university_id = $request->university;
+            $college->name = $request->name;
+            $college->save();
             return redirect()->route('admin.college.list')->with('success', 'Updated Successfully');
         } catch (\Throwable $th) {
             throw $th;

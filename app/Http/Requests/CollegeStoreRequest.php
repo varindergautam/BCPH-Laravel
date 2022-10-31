@@ -24,7 +24,8 @@ class CollegeStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:colleges,name'
+            'name' => 'required|unique:colleges,name',
+            'university' => 'required'
         ];
     }
 }

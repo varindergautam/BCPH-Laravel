@@ -76,8 +76,65 @@ class ApplicationFormController extends Controller
         $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         $data['tatkaal'] = TatkaalFee::first();
         $data['universities'] = University::get();
-        $data['colleges'] = College::get();
+        $data['colleges'] = College::where('university_id', $data['applicationForm']->university_name)->get();
         return view('Front.applicationForm.applicationForm', $data);
+    }
+
+    /**
+     * This function save a application form data
+     */
+    public function saveApplicationForm(ApplicationFormRequest $request) {
+        try {
+            $applicationFormData = ApplicationForm::where('user_id', Auth::user()->id)->first();
+            if(!$applicationFormData){
+                $applicationFormData = new ApplicationForm;
+            }
+            
+            $applicationFormData->user_id = Auth::user()->id;
+            $applicationFormData->university_name = $request->university_name;
+            $applicationFormData->which_univeristy = $request->which_univeristy;
+            $applicationFormData->which_univeristy_remarks = $request->which_univeristy_remarks;
+            $applicationFormData->date_of_law_degree = $request->date_of_law_degree;
+            $applicationFormData->plus_two_mark = $request->plus_two_mark;
+            $applicationFormData->graduate_before_admission = $request->graduate_before_admission;
+            $applicationFormData->college_university_name = $request->college_university_name;
+            $applicationFormData->no_of_years = $request->no_of_years;
+            $applicationFormData->college_pass_date = $request->college_pass_date;
+            $applicationFormData->english_compulsory = $request->english_compulsory;
+            $applicationFormData->law_college_name = $request->law_college_name;
+            $applicationFormData->law_college_join_date = $request->law_college_join_date;
+            $applicationFormData->law_college_duration_year = $request->law_college_duration_year;
+            $applicationFormData->law_college_passed = $request->law_college_passed;
+            $applicationFormData->name_of_degree_obtained = $request->name_of_degree_obtained;
+            $applicationFormData->medium_instruction = $request->medium_instruction;
+            $applicationFormData->private_study_duration_year = $request->private_study_duration_year;
+            $applicationFormData->city_for_pratice_after_enrollment = $request->city_for_pratice_after_enrollment;
+            $applicationFormData->appointment_holds = $request->appointment_holds;
+            $applicationFormData->appointment_holds_remarks = $request->appointment_holds_remarks;
+            $applicationFormData->business_or_profession = $request->business_or_profession;
+            $applicationFormData->business_or_profession_remark = $request->business_or_profession_remark;
+            $applicationFormData->criminal_court = $request->criminal_court;
+            $applicationFormData->criminal_court_remark = $request->criminal_court_remark;
+            $applicationFormData->criminal_proceeding_againest_applicant = $request->criminal_proceeding_againest_applicant;
+            $applicationFormData->criminal_proceeding_againest_applicant_remark = $request->criminal_proceeding_againest_applicant_remark;
+            $applicationFormData->suspension_type = $request->suspension_type;
+            $applicationFormData->suspension_type_remark = $request->suspension_type_remark;
+            $applicationFormData->declared_insolvent_type = $request->declared_insolvent_type;
+            $applicationFormData->declared_insolvent_type_remark = $request->declared_insolvent_type_remark;
+            $applicationFormData->already_apply_for_enrollment = $request->already_apply_for_enrollment;
+            $applicationFormData->already_apply_for_enrollment_remark = $request->already_apply_for_enrollment_remark;
+            $applicationFormData->date_of_completion = $request->date_of_completion;
+            $applicationFormData->stream = $request->stream;
+            $applicationFormData->save();
+
+            if($applicationFormData) {
+                return response()->json(['message'=>'Application form submitted successfully',
+                'redirect' => route('declarationForm'),
+                'status' => true]);
+            }
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     /**
@@ -278,7 +335,7 @@ class ApplicationFormController extends Controller
      * This function used to open the delcaration form
      */
     public function declarationForm() {
-        $data['payment_data'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+        $data['payment_data'] = ApplicationForm::with('university', 'college')->where('user_id', Auth::user()->id)->first();
         $data['declaration_data'] = DeclarationForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.declarationForm', $data);
     }
@@ -655,7 +712,7 @@ class ApplicationFormController extends Controller
             $documentUpload->obtain_mark_of_gradutation = $request->obtain_mark_of_gradutation;
             $documentUpload->graduation_percentage = $request->graduation_percentage;
             if($documentUpload->save()) {
-                return response()->json(['message'=>'Document upload successfully', 'redirect' => route('documentUpload'), 'status' => true]);
+                return response()->json(['message'=>'Document upload successfully', 'redirect' => route('payment'), 'status' => true]);
             }
         } catch (\Throwable $th) {
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
@@ -761,55 +818,28 @@ class ApplicationFormController extends Controller
         }
     }
 
+    function payment() {
+        try {
+            $data['tatkaal'] = TatkaalFee::first();
+            $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+            return view('front.applicationForm.payment', $data);
+        } catch (\Throwable $th) {
+            throw $th->getMessage();
+        }
+    }
+
     /** 
      * Payment with using paytm
     */
     public function pay(Request $request) {
         try {
+            ApplicationForm::where('user_id', Auth::user()->id)->update([
+                'total_pay' => $request->total_pay,
+                'tatkaal_fees' => $request->tatkaal_fee,
+                'paytm_order_id' => \Str::random(4).time(),
+            ]);
+
             $applicationFormData = ApplicationForm::where('user_id', Auth::user()->id)->first();
-            if(!$applicationFormData){
-                $applicationFormData = new ApplicationForm;
-            }
-            
-            $applicationFormData->user_id = Auth::user()->id;
-            $applicationFormData->university_name = $request->university_name;
-            $applicationFormData->which_univeristy = $request->which_univeristy;
-            $applicationFormData->which_univeristy_remarks = $request->which_univeristy_remarks;
-            $applicationFormData->date_of_law_degree = $request->date_of_law_degree;
-            $applicationFormData->plus_two_mark = $request->plus_two_mark;
-            $applicationFormData->graduate_before_admission = $request->graduate_before_admission;
-            $applicationFormData->college_university_name = $request->college_university_name;
-            $applicationFormData->no_of_years = $request->no_of_years;
-            $applicationFormData->college_pass_date = $request->college_pass_date;
-            $applicationFormData->english_compulsory = $request->english_compulsory;
-            $applicationFormData->law_college_name = $request->law_college_name;
-            $applicationFormData->law_college_join_date = $request->law_college_join_date;
-            $applicationFormData->law_college_duration_year = $request->law_college_duration_year;
-            $applicationFormData->law_college_passed = $request->law_college_passed;
-            $applicationFormData->name_of_degree_obtained = $request->name_of_degree_obtained;
-            $applicationFormData->medium_instruction = $request->medium_instruction;
-            $applicationFormData->private_study_duration_year = $request->private_study_duration_year;
-            $applicationFormData->city_for_pratice_after_enrollment = $request->city_for_pratice_after_enrollment;
-            $applicationFormData->appointment_holds = $request->appointment_holds;
-            $applicationFormData->appointment_holds_remarks = $request->appointment_holds_remarks;
-            $applicationFormData->business_or_profession = $request->business_or_profession;
-            $applicationFormData->business_or_profession_remark = $request->business_or_profession_remark;
-            $applicationFormData->criminal_court = $request->criminal_court;
-            $applicationFormData->criminal_court_remark = $request->criminal_court_remark;
-            $applicationFormData->criminal_proceeding_againest_applicant = $request->criminal_proceeding_againest_applicant;
-            $applicationFormData->criminal_proceeding_againest_applicant_remark = $request->criminal_proceeding_againest_applicant_remark;
-            $applicationFormData->suspension_type = $request->suspension_type;
-            $applicationFormData->suspension_type_remark = $request->suspension_type_remark;
-            $applicationFormData->declared_insolvent_type = $request->declared_insolvent_type;
-            $applicationFormData->declared_insolvent_type_remark = $request->declared_insolvent_type_remark;
-            $applicationFormData->already_apply_for_enrollment = $request->already_apply_for_enrollment;
-            $applicationFormData->already_apply_for_enrollment_remark = $request->already_apply_for_enrollment_remark;
-            $applicationFormData->total_pay = $request->total_pay;
-            $applicationFormData->tatkaal_fees = $request->tatkaal_fee;
-            $applicationFormData->paytm_order_id = \Str::random(4).time();;
-            $applicationFormData->date_of_completion = $request->date_of_completion;
-            $applicationFormData->stream = $request->stream;
-            $applicationFormData->save();
 
             $payment = PaytmWallet::with('receive');
             $payment->prepare([
@@ -879,12 +909,7 @@ class ApplicationFormController extends Controller
 
         } else if ($transaction->isFailed()) {
             ApplicationForm::where('paytm_order_id', $order_id)->update(['paytm_status' => 0, 'paytm_transaction_id' => $transaction->getTransactionId()]);
-            return response()->json([
-                'message'=>'Your payment is failed.', 
-                'redirect' => route('applicationForm'), 
-                'status' => true
-            ]);
-            return redirect(route('applicationForm'))->with('message', "Your payment is failed.");
+            return redirect(route('paymentDetail', $order_id));
             
         } else if ($transaction->isOpen()) {
             ApplicationForm::where('paytm_order_id', $order_id)->update(['paytm_status' => 2, 'paytm_transaction_id' => $transaction->getTransactionId()]);
@@ -895,4 +920,17 @@ class ApplicationFormController extends Controller
         
         // $transaction->getOrderId(); // Get order id
     }
+
+    /**
+     * This function is used to get the colleges list based on university id
+     */
+    public function getCollegeList(Request $request) {
+        try {
+            return College::where('university_id', $request->universityId)->get();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
+    
 }

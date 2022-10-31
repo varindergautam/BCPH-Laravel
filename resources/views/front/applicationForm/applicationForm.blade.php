@@ -10,7 +10,7 @@
             <div class="row ">
                 <div class="col-md-12">
                     <div class="form_section border p-3 rounded-1">
-                        <form method="post" action="{{ route('pay') }}" enctype="mutlipart/form-data" id="application-form">
+                        <form method="post" action="{{ route('saveApplicationForm') }}" enctype="mutlipart/form-data" id="application-form">
                             @csrf
                             <div class="form_heading">
                                 <h3>Application Form</h3>
@@ -110,7 +110,7 @@
                                         the applicant has obtained a degree in law: (Three or Five Years Law Course)</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-control" name="university_name" id="university_name">
+                                    <select class="form-control university form-select" name="university_name" id="university_name">
                                         <option selected="" disabled="">Select University</option>
                                         @forelse ($universities as $university)
                                             <option value="{{ $university->id }}"
@@ -312,15 +312,13 @@
                                     {{-- <input type="text" class="form-control" id="law_college_name"
                                         name="law_college_name" placeholder="Enter law college name"
                                         value="{{ @$applicationForm->law_college_name }}"> --}}
-                                        <select name="law_college_name" class="form-control">
+                                        <select name="law_college_name" class="form-control form-select" id="law_college_name">
                                         <option selected="" disabled="">Select College</option>
-                                        @forelse ($colleges as $college)
-                                            <option value="{{ $college->id }}"
-                                                {{ @$applicationForm->law_college_name == $college->id ? 'selected' : '' }}>
-                                                {{ $college->name }}</option>
-                                        @empty
-                                            <option value="">No data</option>
-                                        @endforelse
+                                        @if(@$colleges)
+                                            @foreach ($colleges as $college)
+                                        <option value="{{ $college->id }}" {{ $college->id == $applicationForm->law_college_name ? 'selected' : '' }}>{{$college->name}}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                     <strong id="law_college_name-error" class="error"></strong>
                                 </div>
@@ -766,8 +764,8 @@
                                     @php
                                         $tatkaal_display = isset($applicationForm->tatkaal_fees) ? 'display: block' : 'display: none';
                                     @endphp
-                                    <p id="tatkaal_fees" data-tatkaal_fee="{{ $tatkaal->tatkaal_fees }}"
-                                        style="{{ $tatkaal_display }}"><label>Rs. {{ $tatkaal->tatkaal_fees }}</label>
+                                    <p id="tatkaal_fees" data-tatkaal_fee="{{ isset($tatkaal->tatkaal_fees) ? $tatkaal->tatkaal_fees : 0 }}"
+                                        style="{{ $tatkaal_display }}"><label>Rs. {{ isset($tatkaal->tatkaal_fees) ? $tatkaal->tatkaal_fees : 0 }}</label>
                                     </p>
                                 </div>
                             </div>
@@ -815,10 +813,10 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         jQuery(document).ready(function() {
-            $('form').on('submit1', function(e) {
+            $('form').on('submit', function(e) {
                 e.preventDefault();
 
-                var url = baseUrl + '/pay';
+                var url = baseUrl + '/saveApplicationForm';
                 var method = $(this).attr('method');
                 var formData = new FormData(this);
 
@@ -946,22 +944,35 @@
                 });
             });
 
-            $('.tatkaal').click(function() {
-                var tatkaal_fees = $('#tatkaal_fees').data('tatkaal_fee');
-                var total_pay = $('#total_pay').val();
+            
 
-                if ($("#tatkaal").is(':checked')) {
-                    $('#tatkaal_fees').show();
-                    var grand_total_pay = parseInt(tatkaal_fees) + parseInt(total_pay);
-                    $('#total_pay').val(grand_total_pay);
-                    $('.tatkaal_fee').val(tatkaal_fees);
-                } else {
-                    $('#tatkaal_fees').hide();
-                    var grand_total_pay = parseInt(total_pay) - parseInt(tatkaal_fees);
-                    $('#total_pay').val(grand_total_pay);
-                    $('.tatkaal_fee').val(null);
-                }
-            })
+
+            $(document).on('change', '.university', function(e) {
+                var universityId = $(this).val();
+                console.log(universityId)
+                $.ajax({
+                    type: "get",
+                    url: baseUrl + '/getCollegeList/',
+                    universityId,
+                    data: {
+                        'universityId': universityId
+                    },
+                    success: function(data) {
+                        var op = '';
+                        if(data.length) {
+                            data.forEach(element => {
+                                console.log(element.name)
+                                
+                                op += '<option selected="" disabled="">Select College</option>';
+                                op += '<option value = ' +  element.id + '> ' +  element.name + '</option>';
+                                $('#law_college_name').html(op);
+                            });
+                            console.log(op);
+                        }
+                        
+                    }
+                });
+            });
         });
     </script>
 @endsection
