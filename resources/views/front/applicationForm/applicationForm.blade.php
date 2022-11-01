@@ -716,23 +716,12 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="text-dark" for="">17. Mode of payment of enrolment fee and
                                         particulars.</label>
                                 </div>
                                 <div class="col-md-6 text-dark">
-                                    {{-- <select class="form-control" id="mode_of_payment" name="mode_of_payment">
-                                    <option selected="" disabled="">Select Mode of Payment</option>
-                                    <option value="online" selected="">Online</option>
-                                    <option value="offline">Offline</option>
-                                </select>
-
-                                <select class="form-control mt-2 form-select" id="payment" name="payment" aria-label="Filter select">
-                                    <option value="9200">Rs. 9200/-</option>
-                                    <option value="1200">Rs. 1200/-</option>
-                                    <option value="1000">Rs. 1000/-</option>
-                                </select> --}}
                                     <p><label>Rs. <span
                                                 id="basic_fees">{{ isset(auth()->user()->fee) ? auth()->user()->fee->basic_fees : 0 }}</span>/-</label>
                                     </p>
@@ -773,7 +762,7 @@
                             <div class="row mb-3">
                                 <p class="text-dark">I {{ auth()->user()->applicant_name }} declare that the facts stated
                                     above are true to my knowledge and belief.</p>
-                            </div>
+                            </div> --}}
 
                             <div class="row mb-3">
                                 <div class="col-md-6">

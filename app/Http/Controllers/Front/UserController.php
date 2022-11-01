@@ -43,16 +43,6 @@ class UserController extends Controller
         }
         return $random_generator;
     }
-
-    public function uploadfile($file) {
-        $fileName = md5(time()). '.' . $file->getClientOriginalExtension();
-        $createFolder = public_path(). '/images/profile_signs';
-        if (! \File::exists($createFolder)) {
-            \File::makeDirectory($createFolder, 0777, true);
-        }
-        $file->move($createFolder, $fileName);
-        return $fileName;
-    }
     
     /**
      * This function open register form
@@ -112,6 +102,16 @@ class UserController extends Controller
             return response()->json(['message'=> json_encode($th->getMessage()), 'status' => config('CommonStatus.INACTIVE')]);
             throw $th;
         }
+    }
+
+    public function uploadfile($file) {
+        $fileName = md5((string)\Str::uuid()). '.' . $file->getClientOriginalExtension();
+        $createFolder = public_path(). '/images/profile_signs';
+        if (! \File::exists($createFolder)) {
+            \File::makeDirectory($createFolder, 0777, true);
+        }
+        $file->move($createFolder, $fileName);
+        return $fileName;
     }
 
     /**

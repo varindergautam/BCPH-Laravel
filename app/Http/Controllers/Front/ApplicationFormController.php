@@ -76,7 +76,9 @@ class ApplicationFormController extends Controller
         $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         $data['tatkaal'] = TatkaalFee::first();
         $data['universities'] = University::get();
-        $data['colleges'] = College::where('university_id', $data['applicationForm']->university_name)->get();
+        if(isset($data['applicationForm']->university_name)) {
+            $data['colleges'] = College::where('university_id', $data['applicationForm']->university_name)->get();
+        }
         return view('Front.applicationForm.applicationForm', $data);
     }
 
