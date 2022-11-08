@@ -87,7 +87,7 @@
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9791"><a
                                 href="http://112.196.117.52/bcph_website/members/">Members</a></li>
                         <li id="menu-item-9790"
-                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9790 ">
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9790  ">
                             <a href="http://112.196.117.52/bcph_website/events/">Events</a>
                             {{-- <ul role="menu" class=" dropdown-menu">
                                 <li id="menu-item-9796"
