@@ -10,7 +10,7 @@ Undertaking
         <div class="row ">
             <div class="col-md-12">
                 <div class="form_section border p-3 rounded-1">
-                    <form method="get" action="{{ route('affidavitForm') }}" enctype="mutlipart/form-data" id="step1-form">
+                    <form method="post" action="" enctype="mutlipart/form-data" id="step1-form">
                         <div class="form_heading">
                             <h3>UNDERTAKING</h3>
                         </div>
@@ -29,10 +29,11 @@ Undertaking
                         <div class="row margin_top">
                             <div class="col-md-6">
                                 <label class="text-dark">Date :</label>
-                                <span class="text-dark">03-09-2022</span>
+                                <input type="hidden" name="date_of_completion" value="{{ @$undertaking->date_of_completion ? @$undertaking->date_of_completion : date('d-m-Y') }}">
+                                <span id="date_of_completion" class="text-dark">{{ @$undertaking->date_of_completion ? @$undertaking->date_of_completion : date('d-m-Y') }}</span>
                             </div>
                             <div class="col-md-6">
-                                <span class="text-dark fw-bold">Dishant Thakur</span>
+                                <span class="text-dark fw-bold">{{ auth::user()->applicant_name }}</span>
                                 <p class="text-dark">Signature of Applicant</p>
                             </div>
                         </div>
@@ -59,6 +60,17 @@ Undertaking
 
 @section('script')
 <script>
-   
+    jQuery(document).ready(function(){
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            
+            var url = baseUrl+'/saveUndertakingForm';
+            var method = $(this).attr('method');
+            var formData = new FormData(this);
+
+            postAjax(url, method, formData)
+        });
+    });
+
 </script>
 @endsection

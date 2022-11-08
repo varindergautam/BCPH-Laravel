@@ -9,6 +9,10 @@ body {
 	line-height: 26px;
 }
 
+:root {
+	--primary: #ded04c;
+  }
+
 h1,
 h2,
 h3,
@@ -109,7 +113,7 @@ a {
 	font-weight: 600;
 	line-height: 37px;
 	margin-bottom: 24px;
-	border-bottom: 1px solid #ded04c;
+	border-bottom: 1px solid var(--primary);
 	padding-bottom: 17px;
 }
 
@@ -131,7 +135,7 @@ a {
 
 .submit_btn input[type="submit"], button {
 	height: 45px;
-	background-color: #ded04c;
+	background-color: var(--primary);
 	border: 0px;
 	margin-bottom: 0px;
 	text-transform: uppercase;
@@ -146,7 +150,7 @@ a {
 	color: #000;
 	padding: 12px 60px;
 	height: 48px;
-	background-color: #ded04c;
+	background-color: var(--primary);
 	border: 0px;
 	margin-bottom: 0px;
 	text-transform: uppercase;
@@ -178,7 +182,7 @@ a {
 #oath-commissioner input, 
 #document-upload-form input, 
 .verification_form input,
-.application_form1 input{
+.certify input{
 	border-top: 0 !important;
 	border-left: 0;
 	border-right: 0;
@@ -188,10 +192,11 @@ a {
 #oath-commissioner input:focus-visible,
  #document-upload-form input:focus-visible, 
  .verification_form input:focus-visible,
- .application_form1 input:focus-visible{
+ .certify input:focus-visible{
 	border-top: 0 !important;
 	border-left: 0;
 	border-right: 0;
+	outline: 0;
 }
 
 .horizontal_line{
@@ -208,7 +213,7 @@ a {
 }
 
 .dropdown-item.active, .dropdown-item:active, .dropdown-item:focus, .dropdown-item:hover{
-	background: #ded04c;
+	background: var(--primary);
 }
 
 .dropdown-item{
@@ -216,7 +221,7 @@ a {
 }
 
 header{
-	background-color: #ded04c
+	background-color: var(--primary);
 }
 
 .remove_border{
@@ -227,4 +232,23 @@ header{
 
 .error{
 	color: #f00;
+}
+
+.swal2-popup{
+	padding: 0 0 1.7em;
+}
+
+.view_document{
+	background-color: var(--primary);
+	padding: 5px 15px;
+	color: #000;
+	font-size: 13px;
+	border-radius: 3px;
+}
+
+button.navbar-toggler {
+    height: auto;
+    background: transparent;
+    width: auto !important;
+    box-shadow: none;
 }

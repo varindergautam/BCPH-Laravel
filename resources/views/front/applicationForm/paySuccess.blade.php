@@ -16,8 +16,42 @@ Payment Success
                             <h3>Payment Confirmation</h3>
                         </div>
 
-                        <div class="row text-center">
-                            <div class="col">Your payment Rs. {{ $payment_data->total_pay }} successfully done.</div>
+                        <div class="row text-center1 text-dark">
+                            <ul style="width: auto1; margin: 0 auto; list-style-type: none" >
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="basic_fees">{{ auth()->user()->fee->basic_fees }}</span>/-</label> basic fees
+                                    </p>
+                                </li>
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="bar_council_fees">{{ auth()->user()->fee->bar_council_fees }}</span>/-</label> bar council fees
+                                    </p>
+                                </li>
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="building_fees">{{ auth()->user()->fee->building_fees }}</span>/-</label> building fees
+                                    </p>
+                                </li>
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="advocate_welfare_fees">{{ auth()->user()->fee->advocate_welfare_fees }}</span>/-</label> advocate welfare fees
+                                    </p>
+                                </li>
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="benevolent_fees">{{ auth()->user()->fee->benevolent_fees }}</span>/-</label> benevolent fees
+                                    </p>
+                                </li>
+                                @if(@$payment_data->tatkaal_fee)
+                                <li>
+                                    <p><label>Rs. <span
+                                                id="benevolent_fees">{{ $payment_data->tatkaal_fee }}</span>/-</label> tatkaal fees
+                                    </p>
+                                </li>
+                                @endif
+                            </ul>
+                            <div class="col-md-12 mb-2">Your total payment <strong>Rs. {{ $payment_data->total_pay }}</strong> successfully done.</div>
                         </div>
 
 

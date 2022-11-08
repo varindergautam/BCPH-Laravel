@@ -16,8 +16,6 @@ function postAjax(url, method, formData){
             $('.loader').show();
         },
         success: function (response) {
-            console.log(response);
-            // var response = JSON.stringify(response);
             if(response.status == 0){
                 swalErrorMessage(response);
             }else{
@@ -25,6 +23,7 @@ function postAjax(url, method, formData){
             }
         },
         error: function(data) {
+            console.log(data);
             var errors = $.parseJSON(data.responseText);
             printErrorMsg(errors);
         },
@@ -43,22 +42,30 @@ function printErrorMsg (msg) {
 }
 
 function swalSuccessMessage(data) {
-    swal({
+    var message = '<strong>' + data.message + '</strong>';
+    Swal.fire({
       title: false,
-      text: data.message,
+      html: message,
       icon: "success",
-      button: false,
+    //   button: false,
+    // timer: 2000,
+    showCancelButton: false,
+    showConfirmButton: false
     });
 
     windowReload(data.redirect);
 }
 
 function swalErrorMessage(data) {
-    swal({
+    var message = '<strong>' + data.message + '</strong>';
+    Swal.fire({
       title: false,
-      text: data.message,
+    //   text: data.message,
+        html: message,
       icon: "error",
-      button: false,
+    //   button: false,
+    showCancelButton: false,
+    showConfirmButton: false
     });
 
     windowReload(data.redirect);
@@ -66,7 +73,7 @@ function swalErrorMessage(data) {
 
 function windowReload(url) {
     setTimeout(function(){
-    //    window.location.reload();
+
     if(url != undefined){
         window.location.replace(url)
     }
@@ -74,4 +81,14 @@ function windowReload(url) {
         window.location.reload();
     }
     }, 2000);
+}
+
+function calculatePercentage(totalMarks, obtainMarks){
+    return obtainMarks / totalMarks * 100;
+}
+
+function compareMarks(totalMarks, obtainMarks) {
+    if(obtainMarks > totalMarks){
+        alert(obtainMarks + ' not be greater than ' + totalMarks);
+    }
 }

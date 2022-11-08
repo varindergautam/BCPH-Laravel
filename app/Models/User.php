@@ -44,10 +44,14 @@ class User extends Authenticatable
     ];
 
     /**
- * Accessor for Age.
- */
+     * Access0or for Age.
+     */
     public function age()
     {
         return Carbon::parse($this->attributes['date_of_birth'])->age;
+    }
+
+    public function fee() {
+        return $this->hasOne('App\Models\Fee', 'id', 'category');
     }
 }

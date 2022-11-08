@@ -41,7 +41,7 @@ Login Form
                             </div>
                         </div>
                         <div class="col-md-12 mt-3">
-                                <a href="forgot-password.html" class="text-dark fw-bold">Forgot Password</a>
+                                <a href="{{ route('forgotPassword') }}" class="text-dark fw-bold">Forgot Password</a>
                             </div>
                     </div>
                     </form>

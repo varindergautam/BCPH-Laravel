@@ -46,7 +46,7 @@ Affidavit Form
                                     <div class="col-md-6"></div>
                                     <div class="col-md-6">
                                         <div class="mt-3 mb-3 text-center text-left">
-                                            <span class="fw-bolder ">Dishant Thakur</span><br>
+                                            <span class="fw-bolder ">{{ auth()->user()->applicant_name }}</span><br>
                                             <span class="fw-bold text-uppercase">Deponent</span>
                                         </div>
                                     </div>
@@ -64,14 +64,15 @@ Affidavit Form
                                                 <strong id="place_name-error" class="error"></strong>
                                             </p>
                                             <p>
-                                                <label class="">Dated : <strong>03-09-2022</strong>
+                                                <input type="hidden" name="date_of_completion" value="{{ @$affidavit_data->date_of_completion ? @$affidavit_data->date_of_completion : date('d-m-Y') }}">
+                                                <label class="">Dated : <strong><span id="date_of_completion" class="text-dark">{{ @$affidavit_data->date_of_completion ? @$affidavit_data->date_of_completion : date('d-m-Y') }}</span></strong>
                                                     <!-- <input type="text" name="place_name" id="place_name" placeholder="Date of Completion"> -->
                                                 </label>
                                             </p>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mt-3 mb-3 text-center text-left">
-                                                <span class="fw-bolder ">Dishant Thakur</span><br>
+                                                <span class="fw-bolder ">{{ auth()->user()->applicant_name }}</span><br>
                                                 <span class="fw-bold text-uppercase">Deponent</span>
                                             </div>
                                         </div>
@@ -134,7 +135,8 @@ Affidavit Form
                                                 <strong id="place_name_oath-error" class="error"></strong>
                                             </p>
                                             <p>
-                                                <label class="">Dated : <strong>03-09-2022</strong>
+                                                <input type="hidden" name="date_of_completion" value="{{ @$affidavit_data->date_of_completion ? @$affidavit_data->date_of_completion : date('d-m-Y') }}">
+                                                <label class="">Dated : <strong><span id="date_of_completion" class="text-dark">{{ @$affidavit_data->date_of_completion ? @$affidavit_data->date_of_completion : date('d-m-Y') }}</span></strong>
                                                     <!-- <input type="text" name="place_name" id="place_name" placeholder="Date of Completion"> -->
                                                 </label>
                                             </p>
