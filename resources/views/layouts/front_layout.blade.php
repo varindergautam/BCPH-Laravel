@@ -64,7 +64,9 @@
         <div class="navbar navbar-expand-lg menubar main-nav-right">
             <div class="container" style="max-width: 1240px;">
                 {{-- <div id="logo"> --}}
-                <a class="logo" href="http://112.196.117.52/bcph_website" title="BCPH">BCPH</a>
+                <a class="logo" href="http://112.196.117.52/bcph_website" title="BCPH">
+                    <img src="{{ asset('front/images/logo.png') }}">
+                </a>
                 {{-- </div> --}}
                 {{-- <div class="navbar-header page-scroll"> --}}
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#main-menu"
@@ -85,9 +87,9 @@
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9791"><a
                                 href="http://112.196.117.52/bcph_website/members/">Members</a></li>
                         <li id="menu-item-9790"
-                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-9790 dropdown">
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9790  ">
                             <a href="http://112.196.117.52/bcph_website/events/">Events</a>
-                            <ul role="menu" class=" dropdown-menu">
+                            {{-- <ul role="menu" class=" dropdown-menu">
                                 <li id="menu-item-9796"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9796"><a
                                         href="http://112.196.117.52/bcph_website/event-dashboard/">Event Dashboard</a>
@@ -107,20 +109,20 @@
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9793"><a
                                         href="http://112.196.117.52/bcph_website/post-an-event/">Post an Event</a></li>
                             </ul>
-                            <span class="mobile-dropdown"></span>
+                            <span class="mobile-dropdown"></span> --}}
                         </li>
                         <li id="menu-item-9786"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9786"><a
                                 href="http://112.196.117.52/bcph_website/downloads/">Downloads</a></li>
-                        <li id="menu-item-9783"
+                        {{-- <li id="menu-item-9783"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9783"><a
-                                href="http://112.196.117.52/bcph_website/blog/">Blog</a></li>
+                                href="http://112.196.117.52/bcph_website/blog/">Blog</a></li> --}}
                         <li id="menu-item-9829"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9829"><a
                                 href="http://112.196.117.52/bcph_website/useful-links/">Useful Links</a></li>
                         <li id="menu-item-9785"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9785"><a
-                                href="http://112.196.117.52/bcph_website/contact-us/">Contact Us</a></li>
+                                href="{{ env('FORM_URL') }}/contact-us/">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="main-nav-extra-content">
@@ -228,10 +230,10 @@
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9761">
                                         <a href="http://112.196.117.52/bcph_website/downloads/">Downloads</a>
                                     </li>
-                                    <li id="menu-item-9740"
+                                    {{-- <li id="menu-item-9740"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9740">
                                         <a href="http://112.196.117.52/bcph_website/blog/">Blog</a>
-                                    </li>
+                                    </li> --}}
                                     <li id="menu-item-9741"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9741">
                                         <a href="http://112.196.117.52/bcph_website/contact-us/">Contact Us</a>
@@ -267,7 +269,7 @@
         <div class="lower-footer copyright-center">
             <div class="container">
                 <span>
-                    Sway by KeyDesign. All rights reserved. </span>
+                    ALL RIGHT RESERVED BY SOLITAIREINFOSYS.COM</span>
             </div>
         </div>
     </footer>
