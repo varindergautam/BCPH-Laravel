@@ -44,16 +44,6 @@ class UserController extends Controller
         return $random_generator;
     }
 
-    public function uploadfile($file) {
-        $fileName = md5(time()). '.' . $file->getClientOriginalExtension();
-        $createFolder = public_path(). '/images/profile_signs';
-        if (! \File::exists($createFolder)) {
-            \File::makeDirectory($createFolder, 0777, true);
-        }
-        $file->move($createFolder, $fileName);
-        return $fileName;
-    }
-    
     /**
      * This function open register form
      */
@@ -61,7 +51,7 @@ class UserController extends Controller
         $data['fees'] = Fee::all();
         return view('front.user.register', $data);
     }
-    
+
     /**
      * This function save register form data with RegisterRequest validation
      */
@@ -114,6 +104,16 @@ class UserController extends Controller
         }
     }
 
+    public function uploadfile($file) {
+        $fileName = md5((string)\Str::uuid()). '.' . $file->getClientOriginalExtension();
+        $createFolder = public_path(). '/images/profile_signs';
+        if (! \File::exists($createFolder)) {
+            \File::makeDirectory($createFolder, 0777, true);
+        }
+        $file->move($createFolder, $fileName);
+        return $fileName;
+    }
+
     /**
      * This function open login form
      */
@@ -128,7 +128,7 @@ class UserController extends Controller
         try {
             $credentials = $request->except(['_token']);
             if (Auth::attempt($credentials)) {
-                return response()->json(['message'=>'You have successfull login', 
+                return response()->json(['message'=>'You have successfull login',
                 'redirect' => route('applicationForm'),
                 'status' => true]);
             }
@@ -161,7 +161,7 @@ class UserController extends Controller
                 $mailData['email'] = $user->email;
                 $mailData['mail_type'] = 'forgot';
                 $user->password = Hash::make($mailData['password']);
-    
+
                 if($user->save()) {
                     Mail::to($user->email)->send(new UserRegisterMail($mailData));
                     return response()->json(['message'=>'New password will send to mail, please check.', 'status' => true]);
@@ -188,13 +188,13 @@ class UserController extends Controller
                     ->to('varinder.slinfy@gmail.com')
                     ->subject('test')
                     ->setBody('message', 'text/html');
-            });  
+            });
     }
 
     public function testSms() {
         $message = 'Dear Applicant,
-        Your registration ID is {#var#}{#var#} and the password is {#var#}. Kindly log in to your account after completing the enrolment form and paying the registration fees. 
-        Team 
+        Your registration ID is {#var#}{#var#} and the password is {#var#}. Kindly log in to your account after completing the enrolment form and paying the registration fees.
+        Team
         Bar Council of Punjab & Haryana';
         $curl_handle=curl_init();
         curl_setopt($curl_handle,CURLOPT_URL,'https://login.yourbulksms.net/api/sendhttp.php?authkey=20705A7cjl7Lu63284d1fP15&mobiles=917508068170&message='.$message.'&sender=BARCNL&route=4&country=91&DLT_TE_ID=value');

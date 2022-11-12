@@ -34,13 +34,13 @@
     <div class="loader"
         style="position: fixed; top: 0;left: 0; width: 100%; height: 100%; background-color: #fff !important;
     z-index: 99999; margin: 0px auto; text-align: center; background-image: url({{ asset('front/images/loader.gif') }});
-    background-position: center center;background-repeat: no-repeat; 
+    background-position: center center;background-repeat: no-repeat;
     display:none">
     </div>
 
-    <nav class="no-print" style="    box-shadow: 0px 2px 40px 0px hsl(0deg 0% 6% / 5%);">
+    <nav class="no-print navbar-default" style="    box-shadow: 0px 2px 40px 0px hsl(0deg 0% 6% / 5%);">
         <div class="topbar tb-border-design visible-on-mobile">
-            <div class="container">
+            <div class="container" style="max-width: 1240px;">
                 <div class="topbar-left-content ">
                     <div class="topbar-contact"><span class="topbar-phone"><a href="tel:+91(0)172-2688519"><i
                                     class="sway-phone-topbar fas"
@@ -61,10 +61,12 @@
             </div>
         </div>
 
-        <div class="navbar navbar-expand-lg menubar main-nav-right">
+        <div class="navbar navbar-expand-lg menubar main-nav-right p-0">
             <div class="container" style="max-width: 1240px;">
                 {{-- <div id="logo"> --}}
-                <a class="logo" href="http://112.196.117.52/bcph_website" title="BCPH">BCPH</a>
+                <a class="logo" href="{{ env('WEBSITE_URL') }}" title="BCPH">
+                    <img src="{{ asset('front/images/logo.png') }}">
+                </a>
                 {{-- </div> --}}
                 {{-- <div class="navbar-header page-scroll"> --}}
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#main-menu"
@@ -76,51 +78,76 @@
                     <ul id="menu-logged-in-main-menu" class="nav navbar-nav">
                         <li id="menu-item-9782"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-9782 active">
-                            <a href="http://112.196.117.52/bcph_website/">Home</a>
+                            <a href="{{ env('WEBSITE_URL') }}/">Home</a>
                         </li>
                         <li id="menu-item-9784"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9784"><a
-                                href="http://112.196.117.52/bcph_website/about-us/">About Us</a></li>
+                                href="{{ env('WEBSITE_URL') }}/about-us/">About Us</a></li>
                         <li id="menu-item-9791"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9791"><a
-                                href="http://112.196.117.52/bcph_website/members/">Members</a></li>
+                                href="{{ env('WEBSITE_URL') }}/members/">Members</a></li>
                         <li id="menu-item-9790"
-                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-9790 dropdown">
-                            <a href="http://112.196.117.52/bcph_website/events/">Events</a>
-                            <ul role="menu" class=" dropdown-menu">
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9790 dropdown">
+                            <a href="{{ env('WEBSITE_URL') }}/events/">Events</a>
+                            {{-- <ul role="menu" class=" dropdown-menu">
                                 <li id="menu-item-9796"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9796"><a
-                                        href="http://112.196.117.52/bcph_website/event-dashboard/">Event Dashboard</a>
+                                        href="{{ env('WEBSITE_URL') }}/event-dashboard/">Event Dashboard</a>
                                 </li>
                                 <li id="menu-item-9788"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9788"><a
-                                        href="http://112.196.117.52/bcph_website/event-organizers/">Event Organizers</a>
+                                        href="{{ env('WEBSITE_URL') }}/event-organizers/">Event Organizers</a>
                                 </li>
                                 <li id="menu-item-9789"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9789"><a
-                                        href="http://112.196.117.52/bcph_website/event-venues/">Event Venues</a></li>
+                                        href="{{ env('WEBSITE_URL') }}/event-venues/">Event Venues</a></li>
                                 <li id="menu-item-9792"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9792"><a
-                                        href="http://112.196.117.52/bcph_website/organizer-dashboard/">Organizer
+                                        href="{{ env('WEBSITE_URL') }}/organizer-dashboard/">Organizer
                                         Dashboard</a></li>
                                 <li id="menu-item-9793"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9793"><a
-                                        href="http://112.196.117.52/bcph_website/post-an-event/">Post an Event</a></li>
+                                        href="{{ env('WEBSITE_URL') }}/post-an-event/">Post an Event</a></li>
                             </ul>
-                            <span class="mobile-dropdown"></span>
+                            <span class="mobile-dropdown"></span> --}}
                         </li>
                         <li id="menu-item-9786"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9786"><a
-                                href="http://112.196.117.52/bcph_website/downloads/">Downloads</a></li>
-                        <li id="menu-item-9783"
+                                href="{{ env('WEBSITE_URL') }}/downloads/">Downloads</a>
+                        </li>
+                        {{-- <li id="menu-item-9783"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9783"><a
-                                href="http://112.196.117.52/bcph_website/blog/">Blog</a></li>
+                                href="{{ env('WEBSITE_URL') }}/blog/">Blog</a></li> --}}
                         <li id="menu-item-9829"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9829"><a
-                                href="http://112.196.117.52/bcph_website/useful-links/">Useful Links</a></li>
+                                href="{{ env('WEBSITE_URL') }}/useful-links/">Useful Links</a>
+                        </li>
                         <li id="menu-item-9785"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9785"><a
-                                href="http://112.196.117.52/bcph_website/contact-us/">Contact Us</a></li>
+                                href="{{ env('WEBSITE_URL') }}/contact-us/">Contact Us</a>
+                        </li>
+                        @auth
+                        <li id=""
+                            class="menu-item menu-item-type-post_type menu-item-object-page dropdown menu-item-has-children mobile_li" style="display: none">
+                            <a type="button" class="text-decoration-none text-dark dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="padding: 10px 0;">
+                                    Welcome, <span class="fw-bold">{{ auth::user()->applicant_name }}</span>
+                                </a>
+                            <ul role="menu" class=" dropdown-menu">
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9788"><a class="dropdown-item" href="{{ route('changePassword') }}">Change Password</a>
+                                    </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9788"><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                            </ul>
+                            <span class="mobile-dropdown"></span>
+                        </li>
+                        @endauth
+                        @guest
+                        <li class="mobile_li" style="display: none">
+                            <a class="modal-menu-item tt_button tt_primary_button btn_primary_color default_header_btn default_header_btn"
+                                href="{{ env('FORM_URL') }}"
+                                style="color: #fff !important; background: #C8102E; font-weight: 500; margin-top:0px; padding:10px !important;">Apply Now</a>
+                        </li>
+                        @endguest
                     </ul>
                 </div>
                 <div class="main-nav-extra-content">
@@ -177,7 +204,7 @@
 
     <footer id="footer" class="fixed underline-effect no-print">
         <div class="upper-footer" style="">
-            <div class="container">
+            <div class="container" style="max-width: 1240px;">
                 <!-- <div class="footer-bar ">
                  <div class="footer-nav-menu">
                     <ul id="menu-footer-menu" class="navbar-footer">
@@ -210,31 +237,31 @@
                                 <ul id="menu-main-menu" class="menu">
                                     <li id="menu-item-9490"
                                         class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-9490">
-                                        <a href="http://112.196.117.52/bcph_website/" aria-current="page">Home</a>
+                                        <a href="{{ env('WEBSITE_URL') }}/" aria-current="page">Home</a>
                                     </li>
                                     <li id="menu-item-9743"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9743">
-                                        <a href="http://112.196.117.52/bcph_website/about-us/">About Us</a>
+                                        <a href="{{ env('WEBSITE_URL') }}/about-us/">About Us</a>
                                     </li>
                                     <li id="menu-item-9742"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9742">
-                                        <a href="http://112.196.117.52/bcph_website/members/">Members</a>
+                                        <a href="{{ env('WEBSITE_URL') }}/members/">Members</a>
                                     </li>
                                     <li id="menu-item-9776"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9776">
-                                        <a href="http://112.196.117.52/bcph_website/events/">Events</a>
+                                        <a href="{{ env('WEBSITE_URL') }}/events/">Events</a>
                                     </li>
                                     <li id="menu-item-9761"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9761">
-                                        <a href="http://112.196.117.52/bcph_website/downloads/">Downloads</a>
+                                        <a href="{{ env('WEBSITE_URL') }}/downloads/">Downloads</a>
                                     </li>
-                                    <li id="menu-item-9740"
+                                    {{-- <li id="menu-item-9740"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9740">
-                                        <a href="http://112.196.117.52/bcph_website/blog/">Blog</a>
-                                    </li>
+                                        <a href="{{ env('WEBSITE_URL') }}/blog/">Blog</a>
+                                    </li> --}}
                                     <li id="menu-item-9741"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9741">
-                                        <a href="http://112.196.117.52/bcph_website/contact-us/">Contact Us</a>
+                                        <a href="{{ env('WEBSITE_URL') }}/contact-us/">Contact Us</a>
                                     </li>
                                 </ul>
                             </div>
@@ -243,7 +270,7 @@
                     <div
                         class="third-widget-area footer-widget-column col-xs-12 col-sm-12 col-md-2 col-lg-2 text-left">
                         <div id="custom_html-1" class="widget_text footer_widget widget widget_custom_html">
-                            <h5 class="widget-title"><span>Contact</span></h5>
+                            <h5 class="widget-title"><span>CONTACT</span></h5>
                             <div class="textwidget custom-html-widget">Dakshin Marg,<br>
                                 Sector 37A, Sector 37,<br>
                                 Chandigarh, 160036
@@ -253,7 +280,7 @@
                     <div
                         class="fourth-widget-area footer-widget-column col-xs-12 col-sm-12 col-md-2 col-lg-2 text-left">
                         <div id="text-3" class="footer_widget widget widget_text">
-                            <h5 class="widget-title"><span>Reach Us</span></h5>
+                            <h5 class="widget-title"><span>REACH US</span></h5>
                             <div class="textwidget">
                                 <p><iframe loading="lazy" style="border: 0;"
                                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13716.587870265705!2d76.755!3d30.742373000000004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7889dfe360751e03!2sBar%20Council%20of%20Punjab%20and%20Haryana%20Chandigarh!5e0!3m2!1sen!2sin!4v1664616200899!5m2!1sen!2sin"
@@ -267,7 +294,7 @@
         <div class="lower-footer copyright-center">
             <div class="container">
                 <span>
-                    Sway by KeyDesign. All rights reserved. </span>
+                    ALL RIGHT RESERVED BY SOLITAIREINFOSYS.COM</span>
             </div>
         </div>
     </footer>

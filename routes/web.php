@@ -32,7 +32,6 @@ Auth::routes([
     ->group(function () {
         Route::get('/', 'register')->name('register');
         Route::post('/storeRegister', 'storeRegister')->name('storeRegister');
-
         Route::get('/login', 'login')->name('login');
         Route::post('/loginUser', 'loginUser')->name('loginUser');
 
@@ -41,7 +40,6 @@ Auth::routes([
 
         Route::get('/testEmail', 'testEmail')->name('testEmail');
         Route::get('/testSms', 'testSms')->name('testSms');
-
     });
 
     // Route::get('/testPaytm', 'App\Http\Controllers\Front\ApplicationFormController@testPaytm')->name('testPaytm');
@@ -62,7 +60,6 @@ Auth::routes([
     ->group(function () {
       Route::get('/change-password', 'changePassword')->name('changePassword');
         Route::post('/updatePassword', 'updatePassword')->name('updatePassword');
-
         Route::get('/application-form', 'applicationForm')->name('applicationForm');
         Route::post('/saveApplicationForm', 'saveApplicationForm')->name('saveApplicationForm');
 
@@ -104,10 +101,12 @@ Auth::routes([
 
         Route::get('payment', 'payment')->name('payment');
         Route::post('/pay', 'pay')->name('pay');
-        Route::post('/status', 'paymentCallback')->name('status');
+        // Route::post('/status', 'paymentCallback')->name('status');
 
         Route::get('/getCollegeList', 'getCollegeList')->name('getCollegeList');
     });
+
+    Route::post('/status', 'App\Http\Controllers\Front\ApplicationFormController@paymentCallback')->name('status');
 
     Route::group(['middleware' => ['userAuthenticate'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -166,6 +165,5 @@ Auth::routes([
       });
     });
   });
-
 
 

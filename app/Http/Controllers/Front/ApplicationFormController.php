@@ -33,9 +33,6 @@ class ApplicationFormController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-
-        $this->displayCurrency = 'INR';
-        $this->api = new Api(config('razorpay.RAZORPAY_KEY'), config('razorpay.RAZORPAY_SECRET'));
     }
 
     /**
@@ -55,7 +52,6 @@ class ApplicationFormController extends Controller
                 // The passwords matches
                 return response()->json(['message'=> 'Your current password does not matches with the password', 'status' => config('CommonStatus.INACTIVE')]);
             }
-
             //Change Password
             $user = Auth::user();
             $user->password = Hash::make($request->get('newpassword'));
@@ -67,7 +63,6 @@ class ApplicationFormController extends Controller
             throw $th;
         }
     }
-
     /**
      * This function open a application form view file
      */
@@ -75,7 +70,7 @@ class ApplicationFormController extends Controller
         $data['fees'] = Fee::all();
         $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         $data['tatkaal'] = TatkaalFee::first();
-        $data['universities'] = University::get();
+        $data['universities'] = University::orderBy('name', 'ASC')->get();
         if(isset($data['applicationForm']->university_name)) {
             $data['colleges'] = College::where('university_id', $data['applicationForm']->university_name)->get();
         }
@@ -91,7 +86,6 @@ class ApplicationFormController extends Controller
             if(!$applicationFormData){
                 $applicationFormData = new ApplicationForm;
             }
-
             $applicationFormData->user_id = Auth::user()->id;
             $applicationFormData->university_name = $request->university_name;
             $applicationFormData->which_univeristy = $request->which_univeristy;
@@ -234,7 +228,6 @@ class ApplicationFormController extends Controller
                 'payment_capture' => 1 // auto capture
             ];
 
-
             $razorpayOrder = $this->api->order->create($orderData);
             return response()->json(['order_id' => $razorpayOrder['id']]);
         } catch (\Throwable $th) {
@@ -265,7 +258,6 @@ class ApplicationFormController extends Controller
             if(!$applicationFormData){
                 $applicationFormData = new ApplicationForm;
             }
-
             $applicationFormData->user_id = Auth::user()->id;
             // $applicationFormData->permanent_address = $sessionApplicatonFormData->permanent_address;
             $applicationFormData->university_name = $sessionApplicatonFormData->university_name;
@@ -506,7 +498,6 @@ class ApplicationFormController extends Controller
         try {
             $userId = auth()->user()->id;
             $document_upload->userId = $userId;
-
             if(empty($document_upload->checkField('provisional_certificate_of_llb'))){
                 $provisional_certificate_of_llb_validation = 'required';
             } else {
@@ -536,19 +527,16 @@ class ApplicationFormController extends Controller
             } else {
                 $plus_two_certificate_validation = 'nullable';
             }
-
             if(empty($document_upload->checkField('all_dmc_certificate_of_llb'))){
                 $all_dmc_certificate_of_llb_validation = 'required';
             } else {
                 $all_dmc_certificate_of_llb_validation = 'nullable';
             }
-
             if(empty($document_upload->checkField('affidavit_of_law_degree'))){
                 $affidavit_of_law_degree_validation = 'required';
             } else {
                 $affidavit_of_law_degree_validation = 'nullable';
             }
-
             if(empty($document_upload->checkField('affidavit_of_stamp_duty'))){
                 $affidavit_of_stamp_duty_validation = 'required';
             } else {
@@ -560,13 +548,11 @@ class ApplicationFormController extends Controller
             } else {
                 $affidavit_of_aibe_validation = 'nullable';
             }
-
             if(empty($document_upload->checkField('service_certificate'))){
                 $service_certificate_validation = 'required';
             } else {
                 $service_certificate_validation = 'nullable';
             }
-
             if(empty($document_upload->checkField('document_of_column_12_13_14'))){
                 $document_of_column_12_13_14_validation = 'required';
             } else {
@@ -578,13 +564,11 @@ class ApplicationFormController extends Controller
             } else {
                 $gap_affidavit_validation = 'nullable';
             }
-
             if(empty($document_upload->checkField('additional_affidavit'))){
                 $additional_affidavit_validation = 'required';
             } else {
                 $additional_affidavit_validation = 'nullable';
             }
-
             if(empty($document_upload->checkField('any_other_infomation'))){
                 $any_other_infomation_validation = 'required';
             } else {
@@ -610,7 +594,6 @@ class ApplicationFormController extends Controller
                 'total_mark_of_gradutation' => 'required',
                 'obtain_mark_of_gradutation' => 'required',
             ]);
-
             if ($validator->fails()) {
                 return response()->json(['errors'=>$validator->getMessageBag()->toArray(), 'status' => false], 422);
             }
@@ -912,14 +895,12 @@ class ApplicationFormController extends Controller
         } else if ($transaction->isFailed()) {
             ApplicationForm::where('paytm_order_id', $order_id)->update(['paytm_status' => 0, 'paytm_transaction_id' => $transaction->getTransactionId()]);
             return redirect(route('paymentDetail', $order_id));
-
         } else if ($transaction->isOpen()) {
             ApplicationForm::where('paytm_order_id', $order_id)->update(['paytm_status' => 2, 'paytm_transaction_id' => $transaction->getTransactionId()]);
             return redirect(route('paymentDetail', $order_id));
             // return redirect(route('applicationForm'))->with('message', "Your payment is processing.");
         }
         $transaction->getResponseMessage(); //Get Response Message If Available
-
         // $transaction->getOrderId(); // Get order id
     }
 
@@ -928,7 +909,7 @@ class ApplicationFormController extends Controller
      */
     public function getCollegeList(Request $request) {
         try {
-            return College::where('university_id', $request->universityId)->get();
+            return College::where('university_id', $request->universityId)->orderBy('name', 'ASC')->get();
         } catch (\Throwable $th) {
             //throw $th;
         }
