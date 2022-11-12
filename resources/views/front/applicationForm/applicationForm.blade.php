@@ -938,7 +938,7 @@
 
             $(document).on('change', '.university', function(e) {
                 var universityId = $(this).val();
-                console.log(universityId)
+
                 $.ajax({
                     type: "get",
                     url: baseUrl + '/getCollegeList/',
@@ -948,16 +948,15 @@
                     },
                     success: function(data) {
                         var op = '';
-                        if(data.length) {
+                        op += '<option selected="" disabled="">Select College</option>';
+                        if(data.length != 0) {
                             data.forEach(element => {
-                                console.log(element.name)
-                                
-                                op += '<option selected="" disabled="">Select College</option>';
                                 op += '<option value = ' +  element.id + '> ' +  element.name + '</option>';
-                                $('#law_college_name').html(op);
+                                
                             });
-                            console.log(op);
-                        }
+                        } 
+                        
+                        $('#law_college_name').html(op);
                         
                     }
                 });

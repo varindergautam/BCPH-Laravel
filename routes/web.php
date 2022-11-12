@@ -104,10 +104,12 @@ Auth::routes([
 
         Route::get('payment', 'payment')->name('payment');
         Route::post('/pay', 'pay')->name('pay');
-        Route::post('/status', 'paymentCallback')->name('status');
+        // Route::post('/status', 'paymentCallback')->name('status');
 
         Route::get('/getCollegeList', 'getCollegeList')->name('getCollegeList');
     });
+
+    Route::post('/status', 'App\Http\Controllers\Front\ApplicationFormController@paymentCallback')->name('status');
 
     Route::group(['middleware' => ['userAuthenticate'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 

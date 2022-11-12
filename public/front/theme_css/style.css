@@ -16,6 +16,10 @@ h1,h2,h3,h4,h5,h6, #logo .logo {
     color: #fff !important;
 }
 
+.lower-footer{
+    color:#BDBEC8;
+}
+
 
 .scrollLock {
     position: fixed;
@@ -129,6 +133,7 @@ a{
     letter-spacing: 0.01em;
     font-weight: 500;
     height: 40px;
+    color: #232323 !important;
 }
 
 .topbar-opening-hours {
@@ -347,6 +352,7 @@ ul.redux-social-media-list {
     -o-transition: 0.25s;
     transition: 0.25s;
     font-weight: 500;
+    color: #232323 !important;
 }
 
 
@@ -1414,6 +1420,10 @@ body.maintenance-mode .wpcf7-submit:hover {
     opacity: 1;
 }
 
+#footer .widget-title{
+    font-family: Playfair Display SC;
+}
+
 #footer.fullwidth-footer .container {
     width: 100%;
     padding-left: 30px;
@@ -1487,7 +1497,7 @@ body.maintenance-mode .wpcf7-submit:hover {
 .lower-footer .container {
     padding: 17px 15px;
     text-align: center;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #C8102E26;
 }
 
 .lower-footer.copyright-left .container {text-align: left;}
@@ -1507,13 +1517,22 @@ body.maintenance-mode .wpcf7-submit:hover {
 .upper-footer {
     padding: 0;
     border-top: 1px solid rgba(132, 132, 132, 0.17);
-    background: #1E3274;
+    background: #212240;
     color: #fff;
 }
 
-.upper-footer .footer-widget-column:first-child {
-    padding-left: 0;
+.upper-footer{
+    border-color: #C8102E26;
 }
+
+.lower-footer{
+    background: #212240;
+
+}
+
+/* .upper-footer .footer-widget-column:first-child {
+    padding-left: 0;
+} */
 .upper-footer .footer-widget-column:last-child {
     padding-right: 0;
 }
@@ -1851,8 +1870,8 @@ body.maintenance-mode .wpcf7-submit:hover {
 }
 
 .upper-footer .widget-title {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 400;
     margin-bottom: 10px;
     letter-spacing: 0;
 }
@@ -2146,6 +2165,24 @@ footer.underline-effect .footer_widget ul li.cat-item a:hover:after,
 
 @media (max-width:959px) {
 
+    .mobile_li{
+        display:block !important;
+    }
+
+    .mobile_li a{
+        padding: 10px 0 !important;
+    }
+
+    #main-menu .navbar-nav .menu-item-has-children ul.dropdown-menu.show {
+        display: block;
+        margin: 0;
+        padding: 0px 10px;
+    }
+
+    .main-nav-extra-content{
+        display:none;
+    }
+
     .upper-footer .container {
         padding-left: 0;
         padding-right: 0;
@@ -2160,7 +2197,7 @@ footer.underline-effect .footer_widget ul li.cat-item a:hover:after,
 
 
     .upper-footer .footer-widget-column:first-child {
-        padding-left: 15px;
+        padding-left: 30px;
     }
     .upper-footer .footer-widget-column:last-child {
         padding-right: 15px;
@@ -2889,6 +2926,7 @@ footer.underline-effect .footer_widget ul li.cat-item a:hover:after,
     padding-bottom: 10px;
     margin: 0;
     opacity: 1;
+    display: block;
     }
     .navbar .modal-menu-item {
         margin: 0;
@@ -2896,3 +2934,591 @@ footer.underline-effect .footer_widget ul li.cat-item a:hover:after,
         margin-bottom: 10px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+@font-face{
+    font-family:sway-font;
+    src:url(core/assets/fonts/sway-font.eot);
+    src:url(core/assets/fonts/sway-font.eot#iefix)format('embedded-opentype'),url(core/assets/fonts/sway-font.woff)format('woff'),url(core/assets/fonts/sway-font.ttf)format('truetype');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap
+}
+.sway-arrow-left-feather,.sway-arrow-right-feather,.sway-arrow-left-circle,.sway-arrow-right-circle,.sway-times,.sway-search-header,.sway-shopping-cart-header,.sway-mail-topbar,.sway-schedule-topbar,.sway-phone-topbar,.sway-shopping-bag-header,.sway-comments-meta,.sway-categories-meta,.sway-author-meta,.sway-arrow-right,.sway-arrow-left,.sway-full-star,.sway-empty-star,.sway-map-pin,.sway-award,.sway-book,.sway-file-text,.sway-film,.sway-life-buoy,.sway-message-circle,.sway-message-square,.sway-user,.sway-users,.sway-video,.sway-youtube,.sway-play,.sway-maximize,.sway-maximize-2,.sway-minimize,.sway-minimize-2,.sway-minus-circle,.sway-minus-square,.sway-more-horizontal,.sway-more-vertical,.sway-plus-circle,.sway-plus-square,.sway-send,.sway-settings,.sway-share,.sway-share-2,.sway-tag,.sway-thumbs-down,.sway-thumbs-up,.sway-toggle-left,.sway-toggle-right,.sway-user,.sway-users,.sway-zoom-in,.sway-zoom-out,.sway-alert-circle,.sway-external-link,.sway-heart,.sway-help-circle,.sway-loader,.fa-behance,.fa-behance-square,.fa-btc,.fa-codepen,.fa-css3,.fa-delicious,.fa-deviantart,.fa-digg,.fa-dribbble,.fa-dropbox,.fa-drupal,.fa-empire,.fa-facebook-f,.fa-facebook-square,.fa-flickr,.fa-foursquare,.fa-git,.fa-github,.fa-github-alt,.fa-git-square,.fa-google,.fa-google-plus-square,.fa-gratipay,.fa-hacker-news,.fa-html5,.fa-instagram,.fa-joomla,.fa-jsfiddle,.fa-linkedin,.fa-linkedin-in,.fa-linux,.fa-maxcdn,.fa-medium,.fa-openid,.fa-pagelines,.fa-pied-piper,.fa-pied-piper-alt,.fa-pinterest,.fa-pinterest-square,.fa-qq,.fa-rebel,.fa-reddit,.fa-reddit-square,.fa-renren,.fa-skype,.fa-slack,.fa-soundcloud,.fa-spotify,.fa-stack-exchange,.fa-stack-overflow,.fa-steam,.fa-steam-square,.fa-stumbleupon,.fa-stumbleupon-circle,.fa-telegram,.fa-tencent-weibo,.fa-trello,.fa-tripadvisor,.fa-twitter,.fa-twitter-square,.fa-viber,.fa-vimeo-square,.fa-vine,.fa-vk,.fa-weibo,.fa-weixin,.fa-whatsapp,.fa-windows,.fa-wordpress,.fa-xing,.fa-xing-square,.fa-yahoo,.fa-yelp,.fa-youtube,.fa-youtube-square,.fa-adn,.fa-android,.fa-apple,.fa-arrows-alt,.fa-bell,.fa-check,.fa-chevron-down,.fa-chevron-left,.fa-chevron-right,.fa-chevron-up,.fa-comment,.fa-comments,.fa-exclamation-triangle,.fa-file-alt,.fa-file-image,.fa-folder-open,.fa-keyboard,.fa-map-marker-alt,.fa-play,.fa-question-circle,.fa-shopping-cart,.fa-star,.fa-star-o,.fa-thumbtack,.fa-angle-left,.fa-angle-right,.fa-angle-up,.fa-angle-down,.fa-envelope,.fa-clock,.fa-mobile-alt,.fa-phone-alt,.fa-search,.fa-times,.fa-tiktok,.fa-airbnb,.fa-amazon,.fa-bandcamp,.fa-blogger,.fa-discord,.fa-goodreads,.fa-google-play,.fa-houzz,.fa-kickstarter,.fa-patreon,.fa-quora,.fa-snapchat,.fa-tumblr,.fa-twitch,.fa-app-store,.fa-line{
+    font-family:sway-font!important;
+    font-display:auto;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-font-smoothing:antialiased;
+    display:inline-block;
+    font-style:normal;
+    font-variant:normal;
+    text-rendering:auto;
+    line-height:1;
+    speak:none;
+    font-weight:400!important
+}
+.sway-play:before{
+    content:"\e91c"
+}
+.sway-arrow-left-feather:before{
+    content:"\e90c"
+}
+.sway-arrow-right-feather:before{
+    content:"\e90d"
+}
+.sway-arrow-left-circle:before{
+    content:"\e90e"
+}
+.sway-arrow-right-circle:before{
+    content:"\e90f"
+}
+.sway-arrow-right:before{
+    content:"\e900"
+}
+.sway-arrow-left:before{
+    content:"\e901"
+}
+.sway-full-star:before{
+    content:"\53"
+}
+.sway-empty-star:before{
+    content:"\73"
+}
+.sway-search-header:before{
+    content:"\e905"
+}
+.sway-shopping-cart-header:before{
+    content:"\e906"
+}
+.sway-mail-topbar:before{
+    content:"\e907"
+}
+.sway-schedule-topbar:before{
+    content:"\e908"
+}
+.sway-phone-topbar:before{
+    content:"\e909"
+}
+.sway-shopping-bag-header:before{
+    content:"\e90a"
+}
+.sway-comments-meta:before{
+    content:"\e902"
+}
+.sway-categories-meta:before{
+    content:"\e903"
+}
+.sway-author-meta:before{
+    content:"\e904"
+}
+.sway-times:before{
+    content:"\e90b"
+}
+.sway-map-pin:before{
+    content:"\e910"
+}
+.sway-award:before{
+    content:"\e911"
+}
+.sway-book:before{
+    content:"\e912"
+}
+.sway-file-text:before{
+    content:"\e913"
+}
+.sway-film:before{
+    content:"\e914"
+}
+.sway-life-buoy:before{
+    content:"\e915"
+}
+.sway-message-circle:before{
+    content:"\e916"
+}
+.sway-message-square:before{
+    content:"\e917"
+}
+.sway-user:before{
+    content:"\e918"
+}
+.sway-users:before{
+    content:"\e919"
+}
+.sway-video:before{
+    content:"\e91a"
+}
+.sway-youtube:before{
+    content:"\e91b"
+}
+.sway-maximize:before{
+    content:"\e91d"
+}
+.sway-maximize-2:before{
+    content:"\e91e"
+}
+.sway-minimize:before{
+    content:"\e91f"
+}
+.sway-minimize-2:before{
+    content:"\e920"
+}
+.sway-minus-circle:before{
+    content:"\e921"
+}
+.sway-minus-square:before{
+    content:"\e922"
+}
+.sway-more-horizontal:before{
+    content:"\e923"
+}
+.sway-more-vertical:before{
+    content:"\e924"
+}
+.sway-plus-circle:before{
+    content:"\e925"
+}
+.sway-plus-square:before{
+    content:"\e926"
+}
+.sway-send:before{
+    content:"\e927"
+}
+.sway-settings:before{
+    content:"\e928"
+}
+.sway-share:before{
+    content:"\e929"
+}
+.sway-share-2:before{
+    content:"\e92a"
+}
+.sway-tag:before{
+    content:"\e92b"
+}
+.sway-thumbs-down:before{
+    content:"\e92c"
+}
+.sway-thumbs-up:before{
+    content:"\e92d"
+}
+.sway-toggle-left:before{
+    content:"\e92e"
+}
+.sway-toggle-right:before{
+    content:"\e92f"
+}
+.sway-user:before{
+    content:"\e930"
+}
+.sway-users:before{
+    content:"\e931"
+}
+.sway-zoom-in:before{
+    content:"\e932"
+}
+.sway-zoom-out:before{
+    content:"\e933"
+}
+.sway-alert-circle:before{
+    content:"\e934"
+}
+.sway-external-link:before{
+    content:"\e935"
+}
+.sway-heart:before{
+    content:"\e936"
+}
+.sway-help-circle:before{
+    content:"\e937"
+}
+.sway-loader:before{
+    content:"\e938"
+}
+.fa-behance:before{
+    content:"\f1b4"
+}
+.fa-behance-square:before{
+    content:"\f1b5"
+}
+.fa-btc:before{
+    content:"\f15a"
+}
+.fa-codepen:before{
+    content:"\f1cb"
+}
+.fa-css3:before{
+    content:"\f13c"
+}
+.fa-delicious:before{
+    content:"\f1a5"
+}
+.fa-deviantart:before{
+    content:"\f1bd"
+}
+.fa-digg:before{
+    content:"\f1a6"
+}
+.fa-dribbble:before{
+    content:"\f17d"
+}
+.fa-dropbox:before{
+    content:"\f16b"
+}
+.fa-drupal:before{
+    content:"\f1a9"
+}
+.fa-empire:before{
+    content:"\f1d1"
+}
+.fa-facebook-f:before{
+    content:"\f39e"!important
+}
+.fa-facebook-square:before{
+    content:"\f082"
+}
+.fa-flickr:before{
+    content:"\f16e"
+}
+.fa-foursquare:before{
+    content:"\f180"
+}
+.fa-git:before{
+    content:"\f1d3"
+}
+.fa-github:before{
+    content:"\f09b"
+}
+.fa-github-alt:before{
+    content:"\f113"
+}
+.fa-git-square:before{
+    content:"\f1d2"
+}
+.fa-google:before{
+    content:"\f1a0"
+}
+.fa-google-plus-square:before{
+    content:"\f0d4"
+}
+.fa-gratipay:before{
+    content:"\f184"
+}
+.fa-hacker-news:before{
+    content:"\f1d4"
+}
+.fa-html5:before{
+    content:"\f13b"
+}
+.fa-instagram:before{
+    content:"\f16d"
+}
+.fa-joomla:before{
+    content:"\f1aa"
+}
+.fa-jsfiddle:before{
+    content:"\f1cc"
+}
+.fa-linkedin:before{
+    content:"\f08c"
+}
+.fa-linkedin-in:before{
+    content:"\f0e1"
+}
+.fa-linux:before{
+    content:"\f17c"
+}
+.fa-maxcdn:before{
+    content:"\f136"
+}
+.fa-medium:before{
+    content:"\f23a"
+}
+.fa-openid:before{
+    content:"\f19b"
+}
+.fa-pagelines:before{
+    content:"\f18c"
+}
+.fa-pied-piper:before{
+    content:"\f2ae"
+}
+.fa-pied-piper-alt:before{
+    content:"\f1a8"
+}
+.fa-pinterest:before{
+    content:"\f0d2"
+}
+.fa-pinterest-square:before{
+    content:"\f0d3"
+}
+.fa-qq:before{
+    content:"\f1d6"
+}
+.fa-rebel:before{
+    content:"\f1d0"
+}
+.fa-reddit:before{
+    content:"\f1a1"
+}
+.fa-reddit-square:before{
+    content:"\f1a2"
+}
+.fa-renren:before{
+    content:"\f18b"
+}
+.fa-skype:before{
+    content:"\f17e"
+}
+.fa-slack:before{
+    content:"\f198"
+}
+.fa-soundcloud:before{
+    content:"\f1be"
+}
+.fa-spotify:before{
+    content:"\f1bc"
+}
+.fa-stack-exchange:before{
+    content:"\f18d"
+}
+.fa-stack-overflow:before{
+    content:"\f16c"
+}
+.fa-steam:before{
+    content:"\f1b6"
+}
+.fa-steam-square:before{
+    content:"\f1b7"
+}
+.fa-stumbleupon:before{
+    content:"\f1a4"
+}
+.fa-stumbleupon-circle:before{
+    content:"\f1a3"
+}
+.fa-telegram:before{
+    content:"\f2c6"
+}
+.fa-tencent-weibo:before{
+    content:"\f1d5"
+}
+.fa-trello:before{
+    content:"\f181"
+}
+.fa-tripadvisor:before{
+    content:"\f262"
+}
+.fa-twitter:before{
+    content:"\f099"
+}
+.fa-twitter-square:before{
+    content:"\f081"
+}
+.fa-viber:before{
+    content:"\f409"
+}
+.fa-vimeo-square:before{
+    content:"\f194"
+}
+.fa-vine:before{
+    content:"\f1ca"
+}
+.fa-vk:before{
+    content:"\f189"
+}
+.fa-weibo:before{
+    content:"\f18a"
+}
+.fa-weixin:before{
+    content:"\f1d7"
+}
+.fa-whatsapp:before{
+    content:"\f232"
+}
+.fa-windows:before{
+    content:"\f17a"
+}
+.fa-wordpress:before{
+    content:"\f19a"
+}
+.fa-xing:before{
+    content:"\f168"
+}
+.fa-xing-square:before{
+    content:"\f169"
+}
+.fa-yahoo:before{
+    content:"\f19e"
+}
+.fa-yelp:before{
+    content:"\f1e9"
+}
+.fa-youtube:before{
+    content:"\f167"
+}
+.fa-youtube-square:before{
+    content:"\f431"
+}
+.fa-adn:before{
+    content:"\f170"
+}
+.fa-android:before{
+    content:"\f17b"
+}
+.fa-apple:before{
+    content:"\f179"
+}
+.fa-arrows-alt:before{
+    content:"\f0b2"
+}
+.fa-bell:before{
+    content:"\f0f3"
+}
+.fa-check:before{
+    content:"\f00c"
+}
+.fa-chevron-down:before{
+    content:"\f078"
+}
+.fa-chevron-left:before{
+    content:"\f053"
+}
+.fa-chevron-right:before{
+    content:"\f054"
+}
+.fa-chevron-up:before{
+    content:"\f077"
+}
+.fa-comment:before{
+    content:"\f075"
+}
+.fa-comments:before{
+    content:"\f086"
+}
+.fa-exclamation-triangle:before{
+    content:"\f071"
+}
+.fa-file-alt:before{
+    content:"\f15c"
+}
+.fa-file-image:before{
+    content:"\f1c5"
+}
+.fa-folder-open:before{
+    content:"\f07c"
+}
+.fa-keyboard:before{
+    content:"\f11c"
+}
+.fa-map-marker-alt:before{
+    content:"\f3c5"
+}
+.fa-play:before{
+    content:"\f04b"
+}
+.fa-question-circle:before{
+    content:"\f059"
+}
+.fa-shopping-cart:before{
+    content:"\f07a"
+}
+.fa-star:before{
+    content:"\f005"
+}
+.fa-star-o:before{
+    content:"\f006"
+}
+.fa-thumbtack:before{
+    content:"\f08d"
+}
+.fa-angle-left:before{
+    content:"\f104"
+}
+.fa-angle-right:before{
+    content:"\f105"
+}
+.fa-angle-up:before{
+    content:"\f106"
+}
+.fa-angle-down:before{
+    content:"\f107"
+}
+.fa-envelope:before{
+    content:"\f0e0"
+}
+.fa-clock:before{
+    content:"\f017"
+}
+.fa-mobile-alt:before{
+    content:"\f3cd"
+}
+.fa-phone-alt:before{
+    content:"\f879"
+}
+.fa-search:before{
+    content:"\f002"
+}
+.fa-times:before{
+    content:"\f00d"
+}
+.fa-tiktok:before{
+    content:"\e07b"
+}
+.fa-airbnb:before{
+    content:"\f834"
+}
+.fa-amazon:before{
+    content:"\f270"
+}
+.fa-bandcamp:before{
+    content:"\f2d5"
+}
+.fa-blogger:before{
+    content:"\f37c"
+}
+.fa-discord:before{
+    content:"\f392"
+}
+.fa-goodreads:before{
+    content:"\f3a8"
+}
+.fa-google-play:before{
+    content:"\f3ab"
+}
+.fa-houzz:before{
+    content:"\f27c"
+}
+.fa-kickstarter:before{
+    content:"\f3bb"
+}
+.fa-patreon:before{
+    content:"\f3d9"
+}
+.fa-quora:before{
+    content:"\f2c4"
+}
+.fa-snapchat:before{
+    content:"\f2ab"
+}
+.fa-tumblr:before{
+    content:"\f173"
+}
+.fa-twitch:before{
+    content:"\f1e8"
+}
+.fa-app-store:before{
+    content:"\f36f"
+}
+.fa-line:before{
+    content:"\f3c0"
+}
+

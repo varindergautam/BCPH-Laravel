@@ -33,9 +33,6 @@ class ApplicationFormController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-
-        $this->displayCurrency = 'INR';
-        $this->api = new Api(config('razorpay.RAZORPAY_KEY'), config('razorpay.RAZORPAY_SECRET'));
     }
 
     /**
@@ -75,7 +72,7 @@ class ApplicationFormController extends Controller
         $data['fees'] = Fee::all();
         $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         $data['tatkaal'] = TatkaalFee::first();
-        $data['universities'] = University::get();
+        $data['universities'] = University::orderBy('name', 'ASC')->get();
         if(isset($data['applicationForm']->university_name)) {
             $data['colleges'] = College::where('university_id', $data['applicationForm']->university_name)->get();
         }
@@ -928,7 +925,7 @@ class ApplicationFormController extends Controller
      */
     public function getCollegeList(Request $request) {
         try {
-            return College::where('university_id', $request->universityId)->get();
+            return College::where('university_id', $request->universityId)->orderBy('name', 'ASC')->get();
         } catch (\Throwable $th) {
             //throw $th;
         }

@@ -126,7 +126,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-6  mb-3">
                                     <label class="text-dark" for="permanent_address">Upload Profile Pic</label>
                                     <input type="file" name="profile_pic" id="profile_pic" class="form-control image">
@@ -139,7 +139,7 @@
                                     <img src="" id="sign_img" class="sign_img" style="display: none; width : 100px; margin-top : 5px;">
                                     <strong id="sign-error" class="error"></strong>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row">
                                 <div class="col ">
