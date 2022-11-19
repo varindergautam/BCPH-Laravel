@@ -52,6 +52,13 @@
                                                     <span class="error">{{ $errors->first('name') }}</span>
                                                 </div>
                                             </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <input class="form-control" placeholder="Enter Email" name="email"
+                                                        value="{{ isset($university) ? $university->email : old('email') }}">
+                                                    <span class="error">{{ $errors->first('email') }}</span>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <input class="btn btn-primary" type="submit" style="width:100px">

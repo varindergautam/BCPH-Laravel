@@ -29,13 +29,14 @@ class UniversityController extends Controller
         //     die('ok');
         // }
 
-        $universitys = University::get();
+        $universitys = University::orderBy('id', 'desc')->get();
     
         if(count($universitys) > 0) {
             foreach($universitys as $key => $university) {
                 
                 $universitys[$key]['sr_no'] = $key + 1;
                 $universitys[$key]['name'] = $university->name;
+                $universitys[$key]['email'] = $university->email;
                 $universitys[$key]['action'] = NULL;
                 $universitys[$key]['edit'] = route('admin.university.edit', $university->id);
             }
@@ -108,6 +109,7 @@ class UniversityController extends Controller
         try {
             University::updateOrCreate(['id' => $request->id], [
                 'name' => $request->name,
+                'email' => $request->email,
             ]);
             return redirect()->route('admin.university.list')->with('success', 'Updated Successfully');
         } catch (\Throwable $th) {
