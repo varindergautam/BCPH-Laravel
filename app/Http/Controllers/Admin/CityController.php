@@ -29,7 +29,7 @@ class CityController extends Controller
         //     die('ok');
         // }
 
-        $cities = City::get();
+        $cities = City::orderBy('id', 'DESC')->get();
     
         if(count($cities) > 0) {
             foreach($cities as $key => $city) {

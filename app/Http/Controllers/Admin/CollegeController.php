@@ -24,7 +24,7 @@ class CollegeController extends Controller
         //     die('ok');
         // }
 
-        $colleges = College::with('university')->get();
+        $colleges = College::with('university')->orderBy('id', 'DESC')->get();
     
         if(count($colleges) > 0) {
             foreach($colleges as $key => $college) {
