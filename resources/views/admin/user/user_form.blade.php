@@ -1386,7 +1386,7 @@
                                     <p class="text-center ">Number on the Roll / PH / ................ /201.....</p>
                                 </div>
                                 <div class="col">
-                                    <img src="{{ asset('front/images/dummy-image.jpg') }}" width="100">
+                                    <img src="{{ asset('images/profile_signs') .'/' . $user->profile_pic }}" width="100">
                                 </div>
                             </div>
 
@@ -1444,7 +1444,7 @@
                                 </p>
                             </div>
                             <div class="col">
-                                <img src="{{ asset('front/images/dummy-image.jpg') }}" class="" width="100">
+                                <img src="{{ asset('images/profile_signs') .'/' . $user->profile_pic }}" class="" width="100">
                             </div>
                             <div class="col-md-12">
                                 <p class="text-dark">Dear Sir,</p>

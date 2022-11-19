@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\College;
 use App\Models\Fee;
 use App\Models\University;
@@ -16,6 +17,7 @@ class DashboardController extends Controller
         $data['total_fee_category'] = Fee::count();
         $data['total_univeristies'] = University::count();
         $data['total_colleges'] = College::count();
+        $data['total_cities'] = City::count();
         return view('admin.dashboard.dashboard', $data);
     }
 }

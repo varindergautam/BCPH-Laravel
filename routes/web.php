@@ -138,6 +138,9 @@ Auth::routes([
         Route::get('/userAjax', 'userAjax')->name('userAjax');
         Route::get('/view/{id}', 'show')->name('show');
         Route::get('/viewForm/{id}', 'viewForm')->name('viewForm');
+
+        Route::get('/testPdf', 'testPdf')->name('testPdf');
+
       });
 
       Route::controller(App\Http\Controllers\Admin\CollegeController::class)
@@ -158,6 +161,28 @@ Auth::routes([
       ->group(function () {
         Route::get('/', 'index')->name('list');
         Route::get('/universityAjax', 'universityAjax')->name('universityAjax');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update', 'update')->name('update');
+      });
+
+      Route::controller(App\Http\Controllers\Admin\CityController::class)
+      ->prefix('city')
+      ->as('city.')
+      ->group(function () {
+        Route::get('/', 'index')->name('list');
+        Route::get('/cityAjax', 'cityAjax')->name('cityAjax');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update', 'update')->name('update');
+      });
+
+      Route::controller(App\Http\Controllers\Admin\SignatureController::class)
+      ->prefix('signature')
+      ->as('signature.')
+      ->group(function () {
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id}', 'edit')->name('edit');

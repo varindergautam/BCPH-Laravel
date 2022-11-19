@@ -25,6 +25,7 @@ use Validator;
 use Session;
 
 use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
+use App\Models\City;
 use App\Models\College;
 use App\Models\University;
 
@@ -71,6 +72,7 @@ class ApplicationFormController extends Controller
         $data['applicationForm'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
         $data['tatkaal'] = TatkaalFee::first();
         $data['universities'] = University::orderBy('name', 'ASC')->get();
+        $data['cities'] = City::orderBy('name', 'ASC')->get();
         if(isset($data['applicationForm']->university_name)) {
             $data['colleges'] = College::where('university_id', $data['applicationForm']->university_name)->get();
         }

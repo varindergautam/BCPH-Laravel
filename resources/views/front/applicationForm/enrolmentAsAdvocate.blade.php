@@ -76,7 +76,7 @@ Enrolment As Advocate Form
                                     <p class="text-center ">Number on the Roll / PH / ................ /201.....</p>
                                 </div>
                                 <div class="col">
-                                    <img src="{{ asset('front/images/dummy-image.jpg')}}" width="100">
+                                    <img src="{{ asset('images/profile_signs') .'/' . auth()->user()->profile_pic}}" width="100">
                                 </div>
                             </div>
 
