@@ -26,6 +26,7 @@ class UniversityUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', Rule::unique('universities', 'name')->ignore($this->id)],
+            'email' => ['required', Rule::unique('universities', 'email')->ignore($this->id)],
         ];
     }
 }

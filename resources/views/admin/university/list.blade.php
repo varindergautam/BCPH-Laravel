@@ -38,7 +38,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>university Name</th>
+                                                    <th>University Name</th>
+                                                    <th>Email</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -85,13 +86,16 @@
                         "data": "name"
                     },
                     {
+                        "data": "email"
+                    },
+                    {
                         "data": "action"
                     },
                 ],
                 "columnDefs": [
 
                     {
-                        "targets": 2,
+                        "targets": 3,
                         render: function(data, type, row, meta) {
 
                             var status = row['status'] == 1 ? "checked" : "";
