@@ -177,6 +177,8 @@ return [
 
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
+
+        Elibyy\TCPDF\ServiceProvider::class,
     ],
 
     /*
@@ -233,7 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
         'PaytmWallet' => Anand\LaravelPaytmWallet\Facades\PaytmWallet::class,
-
+        'PDF' => Elibyy\TCPDF\Facades\TCPDF::class
     ],
 
 ];

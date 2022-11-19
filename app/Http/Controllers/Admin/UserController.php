@@ -13,6 +13,9 @@ use App\Models\Undertaking;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf;
+use Elibyy\TCPDF\Facades\TCPDF;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -62,5 +65,27 @@ class UserController extends Controller
         $data['certify_form'] = CertifyForm::where('user_id', $id)->first();
         $data['documentUpload'] = DocumentUpload::where('user_id', $id)->first();
         return view('admin.user.user_form', $data);
+    }
+
+    public function testPdf () {
+        try {
+            TCPDF::reset();
+            // TCPDF::SetFont('aealarabiya', '', 12);
+
+            $html = view('license_card.license_card');
+
+            TCPDF::SetTitle("Card");
+            $tagvs = array('p' => array(0 => array('h' => 0, 'n' => 0), 1 => array('h' => 0, 'n' => 0)));
+            TCPDF::setHtmlVSpace($tagvs);
+            TCPDF::AddPage();
+            TCPDF::writeHTML($html, true, false, true, false, '');
+            $path = Storage::disk('public')->path('license_card');
+
+            $fileName = 'test.pdf';
+
+            TCPDF::Output($path.'/'.$fileName,'I');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

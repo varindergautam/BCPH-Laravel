@@ -46,7 +46,7 @@
                                         three/five years is also recognised by the Bar Council of India for imparting Legal
                                         Education and is affiliated with <input type="text"
                                             placeholder="Enter affiliated university" name="law_affiliated_university"
-                                            value="{{ @$declaration_data->law_affiliated_university }}"><strong
+                                            value="{{ @$payment_data->university->name }}"><strong
                                             id="law_affiliated_university-error" class="error"></strong> University.</li>
                                     <li>The statements made in this application are true to my own knowledge, information
                                         and belief.</li>

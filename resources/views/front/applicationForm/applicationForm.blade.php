@@ -456,7 +456,15 @@
                                     <select class="form-control form-select" name="city_for_pratice_after_enrollment"
                                         id="city_for_pratice_after_enrollment">
                                         <option selected="" disabled="">Select City</option>
-                                        <option value="1"
+
+                                        @forelse ($cities as $city)
+                                            <option value="{{$city->id}}"
+                                            {{ @$applicationForm->city_for_pratice_after_enrollment == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
+                                        @empty
+                                        <option value="">No City found</option>
+                                        @endforelse
+
+                                        {{-- <option value="1"
                                             {{ @$applicationForm->city_for_pratice_after_enrollment == '1' ? 'selected' : '' }}>
                                             City - 1 </option>
                                         <option value="2"
@@ -464,7 +472,7 @@
                                             City - 2 </option>
                                         <option value="3"
                                             {{ @$applicationForm->city_for_pratice_after_enrollment == '3' ? 'selected' : '' }}>
-                                            City - 3 </option>
+                                            City - 3 </option> --}}
                                     </select>
                                     <strong id="city_for_pratice_after_enrollment-error" class="error"></strong>
                                 </div>

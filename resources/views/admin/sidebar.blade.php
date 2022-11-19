@@ -63,14 +63,14 @@
           </li>
   
           <li class="nav-item">
-            <a href="{{ route('admin.fee.list') }}" class="nav-link {{ (Request::segment(2) == "fee") ? "active" : '' }}">
+            <a href="{{ route('admin.fee.list') }}" class="nav-link {{ (Request::segment(2) == "fee") && (Request::segment(3) == "") ? "active" : '' }}">
               <i class="far fa-circle nav-icon"></i>
               <p>Fees</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('admin.fee.tatkaalFee') }}" class="nav-link {{ (Request::segment(3) == "tatkaal") ? "active" : '' }}">
+            <a href="{{ route('admin.fee.tatkaalFee') }}" class="nav-link {{ (Request::segment(2) == "fee") && (Request::segment(3) == "tatkaal") ? "active" : '' }}">
               <i class="far fa-circle nav-icon"></i>
               <p>Tatkaal Fees</p>
             </a>
@@ -87,6 +87,21 @@
             <a href="{{ route('admin.college.list') }}" class="nav-link {{ (Request::segment(2) == "college") ? "active" : '' }}">
               <i class="far fa-circle nav-icon"></i>
               <p>Colleges</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('admin.city.list') }}" class="nav-link {{ (Request::segment(2) == "city") ? "active" : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>City</p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="{{ route('admin.signature.create') }}" class="nav-link {{ (Request::segment(2) == "signature") ? "active" : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Signature</p>
             </a>
           </li>
 

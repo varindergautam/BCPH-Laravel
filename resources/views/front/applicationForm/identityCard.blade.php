@@ -29,7 +29,7 @@ Identity Card
                                 <p class="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Secretary, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Bar Council of Punjab & Haryana <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chandigarh</p>
                             </div>
                             <div class="col">
-                                <img src="{{ asset('front/images/dummy-image.jpg')}}" class="" width="100">
+                                <img src="{{ asset('images/profile_signs') .'/' . auth()->user()->profile_pic}}" class="" width="100">
                             </div>
                             <div class="col-md-12">
                                 <p class="text-dark">Dear Sir,</p>
