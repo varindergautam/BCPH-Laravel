@@ -18,8 +18,8 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="applicant_name">1. Name of the applicant : In full as
-                                        given in the Law</label>
+                                    <label class="text-dark" for="applicant_name">1. Name of the applicant : As in the Law Degree
+                                        </label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="applicant_name" id="applicant_name"
@@ -83,7 +83,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="father_name">4. Father's/Husband's name in full</label>
+                                    <label class="text-dark" for="father_name">4. Father's/Husband's name</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="father_name" id="father_name"
@@ -94,9 +94,8 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="permanent_address">5. Permanent address of the applicant,
-                                        any change of address in future is to be intimated to the Bar Council at once (in
-                                        Block Letter)</label>
+                                    <label class="text-dark" for="permanent_address">5. Permanent address of the applicant
+                                       </label>
                                 </div>
                                 <div class="col-md-6">
                                     <textarea class="form-control" name="permanent_address" id="permanent_address" placeholder="Enter permanent address">{{ auth()->user()->permanent_address }}</textarea>
@@ -106,8 +105,8 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="university_name">6. (a) Name of the University from which
-                                        the applicant has obtained a degree in law: (Three or Five Years Law Course)</label>
+                                    <label class="text-dark" for="university_name">6. (a) Name of the University of LL.B Course
+                                     </label>
                                 </div>
                                 <div class="col-md-6">
                                     <select class="form-control university form-select" name="university_name" id="university_name">
@@ -126,9 +125,9 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="which_univeristy">6. (b) Whether the application has
-                                        passed Two Years Law Course (Academic degree) by Private Study, before admission to
-                                        LLB. 3rd Year, if so, form which University?</label>
+                                    <label class="text-dark" for="which_univeristy">6. (b) If the applicant has passed Two Years L.L.B Course through correspondence only, it’s particular.
+
+                                    </label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
@@ -160,9 +159,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="date_of_law_degree">7. Date on which the applicant
-                                        obtained the law degree or provisional certificate in law or became a
-                                        Barrister:</label>
+                                    <label class="text-dark" for="date_of_law_degree">7. 7.	Date on which the applicant obtained the law degree or provisional certificate in law:</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="date" class="form-control" name="date_of_law_degree"
@@ -448,9 +445,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="city_for_pratice_after_enrollment">10. Place and
-                                        district where the applicant intends ordinarily to practice after enrollment within
-                                        the jurisdiction of the Bar Council of Punjab & Haryana</label>
+                                    <label class="text-dark" for="city_for_pratice_after_enrollment">10. Place and District of practice after Enrolment within the jurisdiction of the Bar Council of Punjab & Haryana</label>
                                 </div>
                                 <div class="col-md-6">
                                     <select class="form-control form-select" name="city_for_pratice_after_enrollment"
@@ -548,10 +543,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="">13. (a) Whether the applicant has been
-                                        convicted by the Criminal Court : If so full particulars of conviction with
-                                        certified copy of final order and proof should be given to show that the conviction
-                                        was not due to conduct rendering him unfit to be enrolled as an Advocate.</label>
+                                    <label class="text-dark" for="">13. (a) Whether the applicant has been convicted by a Criminal Court: If so full particulars of conviction with certified copy of final order.</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
@@ -581,11 +573,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="">13. (b) Whether there are any Criminal
-                                        Proceedings pending against the applicant : If so, full particulars should be given
-                                        as to the name
-                                        of the Court, date and nature of proceedings. Attested copy of FIR, certified copy
-                                        of Bail order if any should be attached.</label>
+                                    <label class="text-dark" for="">13. (b) WWhether any Criminal Proceedings pending against the applicant: If so, its full particulars as to the name of the Court, date and nature of proceedings. Attached attested copy of FIR, certified copy of Bail order if any.</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
@@ -690,9 +678,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="">16. Whether the applicant has previously
-                                        applied for enrollment as an Advocate to any High Court or Bar Council. If so, with
-                                        what result? & certified copy of final order be produced.</label>
+                                    <label class="text-dark" for="">16. 16.	Whether the applicant has previously applied for Enrolment as an Advocate to any High Court or Bar Council. If so, with what result? Also attached certified copy of final order</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
