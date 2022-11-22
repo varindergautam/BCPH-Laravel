@@ -30,6 +30,11 @@
     @yield('style')
 
     @auth
+    @php
+    $checkPayment = paymentConfirmaton();
+    @endphp
+
+    @if($checkPayment)
     <style>
         .form_heading h3 {
             text-align: center;
@@ -48,10 +53,8 @@
             border-right: 0px;
         }
     </style>
-
-    @php
-    $checkPayment = paymentConfirmaton();
-    @endphp
+    @endif
+    
     @endauth
 </head>
 

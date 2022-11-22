@@ -31,7 +31,9 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">1.</td>
-                                    <td width="80%">Original Provisional Certificate of L.L.B & Its Attested Copy or Two Attested Copies in case of original degree (See enclosure page No. 2)</td>
+                                    <td width="80%">L.L.B Original Provisional Certificate and its Two self attested Photocopies. 
+                                        OR Two self attested photocopies in case of original L.L.B degree
+                                        </td>
                                     <td width="12%">
                                         <input type="file" name="provisional_certificate_of_llb" class="mb-1">
                                         @if(@$documentUpload->provisional_certificate_of_llb)
@@ -42,7 +44,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">2.</td>
-                                    <td width="80%">Original Attendance Certificate with 70% &  Its Attested Copy (See enclosure page No. 2)</td>
+                                    <td width="80%">Original Attendance Certificate with minimum 70 % attendance and its two self attested photocopies</td>
                                     <td width="12%">
                                         <input type="file" name="attendance_certificate" class="mb-1">
                                         @if(@$documentUpload->attendance_certificate)
@@ -53,7 +55,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">3.</td>
-                                    <td width="80%">Attested Copy of all DMC of L.L.B Three Year/Five Year (See enclosure page No. 2)</td>
+                                    <td width="80%">Self attested photocopy of all DMC of LL.B. Three Year/Five Year</td>
                                     <td width="12%">
                                         <input type="file" name="dmc_of_llb" class="mb-1">
                                         @if(@$documentUpload->dmc_of_llb)
@@ -64,7 +66,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">4.</td>
-                                    <td width="80%">Attested Copy of matriculation Certificate(DOB) (See enclosure page No. 2)</td>
+                                    <td width="80%">Self attested photocopy of Matriculation Certificate with (DOB)</td>
                                     <td width="12%">
                                         <input type="file" name="matriculation_certificate" class="mb-1">
                                         @if(@$documentUpload->matriculation_certificate)
@@ -75,7 +77,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">5.</td>
-                                    <td width="80%">Attested Copy of 10+2 Certificate, Calculated & write on copy DMC with Total Marks:-
+                                    <td width="80%">Self attested photocopy of 10+2 Certificate, Also calculate percentage of marks with Total Marks:-
                                         <span><input type="text" name="total_mark_of_plus_two" placeholder="Enter total marks" class="total_mark_of_plus_two" value="{{ @$documentUpload->total_mark_of_plus_two }}">
                                             <strong id="total_mark_of_plus_two-error" class="error"></strong>
                                         </span>, 
@@ -94,7 +96,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">6.</td>
-                                    <td width="80%">Attested Copy of  all DMC of Graduation Part I,II,III & degree Kindly Enter Total Marks:- 
+                                    <td width="80%">Self attested photocopy of all DMC of Graduation and degree with Total Marks:- 
                                         <span>
                                             <input type="text" name="total_mark_of_gradutation" placeholder="Enter Graduation marks"  class="total_mark_of_gradutation" value="{{ @$documentUpload->total_mark_of_gradutation }}">
                                             <strong id="total_mark_of_gradutation-error" class="error"></strong>
@@ -113,7 +115,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">7.</td>
-                                    <td width="80%">Affidavit of Law Degree  as per formats (See enclosure page No. 2)</td>
+                                    <td width="80%">Affidavit of Law Degree</td>
                                     <td width="12%">
                                         <input type="file" name="affidavit_of_law_degree" class="mb-1">
                                         @if(@$documentUpload->affidavit_of_law_degree)
@@ -124,7 +126,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">8.</td>
-                                    <td width="80%">Affidavit of stamp duty  as per formats (See enclosure page No. 2)</td>
+                                    <td width="80%">Affidavit of stamp duty</td>
                                     <td width="12%">
                                         <input type="file" name="affidavit_of_stamp_duty" class="mb-1">
                                         @if(@$documentUpload->affidavit_of_stamp_duty)
@@ -135,7 +137,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">9.</td>
-                                    <td width="80%">Affidavit of AIBE  as per formats (See enclosure page No. 2)</td>
+                                    <td width="80%">Affidavit of AIBE</td>
                                     <td width="12%">
                                         <input type="file" name="affidavit_of_aibe" class="mb-1">
                                         @if(@$documentUpload->affidavit_of_aibe)
@@ -146,7 +148,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">10.</td>
-                                    <td width="80%">Service Certificate (Column No. 11)if any (See enclosure page No. 2)</td>
+                                    <td width="80%">Service Certificate (Column No.11,if any)</td>
                                     <td width="12%">
                                         <input type="file" name="service_certificate" class="mb-1">
                                         @if(@$documentUpload->service_certificate)
@@ -157,7 +159,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">11.</td>
-                                    <td width="80%">Document relating to column No. 12,13(a),(b) and 14 if any (See enclosure page No. 2)</td>
+                                    <td width="80%">Documents relating to column No.12,13 (A) & (B and 14,if any)</td>
                                     <td width="12%">
                                         <input type="file" name="document_of_column_12_13_14" class="mb-1">
                                         @if(@$documentUpload->document_of_column_12_13_14)
@@ -168,7 +170,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">12.</td>
-                                    <td width="80%">Gap Affidavit, Before joining L.L.B or after L.L.B. if any (See enclosure page No. 2)</td>
+                                    <td width="80%">Gap Affidavit, if any, before joining graduation/LL.B or after LL.B</td>
                                     <td width="12%">
                                         <input type="file" name="gap_affidavit" class="mb-1">
                                         @if(@$documentUpload->gap_affidavit)
@@ -179,7 +181,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">13.</td>
-                                    <td width="80%">Additional affidavit or document if any & additional Qualification</td>
+                                    <td width="80%">Additional affidavit/ documents, if any</td>
                                     <td width="12%">
                                         <input type="file" name="additional_affidavit" class="mb-1">
                                         @if(@$documentUpload->additional_affidavit)
@@ -190,7 +192,7 @@ $path = asset('images/documentUploads/'. auth()->user()->id);
                                 </tr>
                                 <tr>
                                     <td width="8%">14.</td>
-                                    <td width="80%">Any other infomation</td>
+                                    <td width="80%">Any other documents</td>
                                     <td width="12%">
                                         <input type="file" name="any_other_infomation" class="mb-1">
                                         @if(@$documentUpload->any_other_infomation)

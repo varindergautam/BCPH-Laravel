@@ -11,6 +11,16 @@ function totalFees() {
     return false;
 }
 
+function uploadfile($file, $path) {
+    $fileName = md5((string)\Str::uuid()). '.' . $file->getClientOriginalExtension();
+    $createFolder = public_path(). '/' .$path;
+    if (! \File::exists($createFolder)) {
+        \File::makeDirectory($createFolder, 0777, true);
+    }
+    $file->move($createFolder, $fileName);
+    return $fileName;
+}
+
 function paymentConfirmaton() {
     try {
         $payment = ApplicationForm::where('user_id', auth()->user()->id)

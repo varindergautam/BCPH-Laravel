@@ -126,6 +126,16 @@ class ApplicationFormController extends Controller
             $applicationFormData->already_apply_for_enrollment_remark = $request->already_apply_for_enrollment_remark;
             $applicationFormData->date_of_completion = $request->date_of_completion;
             $applicationFormData->stream = $request->stream;
+            $applicationFormData->plus_two_name_of_board = $request->plus_two_name_of_board;
+            $applicationFormData->plus_two_date_of_certificate = $request->plus_two_date_of_certificate;
+            $applicationFormData->graduation_degree_college_name = $request->graduation_degree_college_name;
+            $applicationFormData->graduation_degree_university_name = $request->graduation_degree_university_name;
+            $applicationFormData->graduation_degree_session_period = $request->graduation_degree_session_period;
+            $applicationFormData->graduation_degree_date_of_graduation = $request->graduation_degree_date_of_graduation;
+            $applicationFormData->graduation_degree_marks = $request->graduation_degree_marks;
+            $applicationFormData->graduation_degree_course_name = $request->graduation_degree_course_name;
+            $applicationFormData->law_college_completion_date = $request->law_college_completion_date;
+            $applicationFormData->law_college_issuance_date = $request->law_college_issuance_date;
             $applicationFormData->save();
 
             if($applicationFormData) {

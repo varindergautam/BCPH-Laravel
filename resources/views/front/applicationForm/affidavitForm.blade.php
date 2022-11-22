@@ -80,7 +80,7 @@ Affidavit Form
                                 </div>
                             </div>
 
-                            <div class="horizontal_line mt-3 mb-3"></div>
+                            {{-- <div class="horizontal_line mt-3 mb-3"></div>
 
                             <div class="form_heading">
                                 <!-- <h4 class="text-center">(To be attested by Notary/Oath Commissioner)</h4> -->
@@ -149,7 +149,7 @@ Affidavit Form
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                  <div class="col ">
                                     <div class=" margin_top_33">
