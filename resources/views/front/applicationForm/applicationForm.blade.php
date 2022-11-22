@@ -941,9 +941,6 @@
                 });
             });
 
-            
-
-
             $(document).on('change', '.university', function(e) {
                 var universityId = $(this).val();
 

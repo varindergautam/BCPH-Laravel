@@ -88,12 +88,16 @@ class UserController extends Controller
             $mailData['name'] = $request->applicant_name;
             $mailData['password'] = $this->generate_random_number();
             $mailData['email'] = $request->email;
+            $mailData['mobile_number'] = $request->mobile_number;
             $mailData['mail_type'] = 'create';
 
+            $this->sendSms($mailData);
+           
             $user->password = Hash::make($mailData['password']);
             $user->save();
 
             if($user) {
+                $this->sendSms($mailData);
                 Mail::to($request->email)->send(new UserRegisterMail($mailData));
                 return response()->json(['message'=>'You have successfull registered, now you can login..', 'redirect' => route('login'), 'status' => true]);
             }
@@ -191,17 +195,42 @@ class UserController extends Controller
             });  
     }
 
-    public function testSms() {
-        $message = 'Dear Applicant,
-        Your registration ID is {#var#}{#var#} and the password is {#var#}. Kindly log in to your account after completing the enrolment form and paying the registration fees. 
-        Team 
-        Bar Council of Punjab & Haryana';
-        $curl_handle=curl_init();
-        curl_setopt($curl_handle,CURLOPT_URL,'https://login.yourbulksms.net/api/sendhttp.php?authkey=20705A7cjl7Lu63284d1fP15&mobiles=917508068170&message='.$message.'&sender=BARCNL&route=4&country=91&DLT_TE_ID=value');
-        curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,2);
-        curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
-        $buffer = curl_exec($curl_handle);
-        print_r($buffer);
-        curl_close($curl_handle);
+    public function sendSms($userDetails) {
+        try {
+            // $userDetails['email']  = 'varinder2gmail.com';
+        // $userDetails['password']  = 'varinder2gmail.com';
+
+        $url = 'https://login.yourbulksms.com/api/sendhttp.php?authkey=2326AD0y9UmRXx5a75457f&mobiles='.$userDetails['mobile_number'].'&message=Dear Applicant, Your registration ID is {'.$userDetails['email'].'} and the password is {'.$userDetails['password'].'}. Kindly log in to your account after completing the enrolment form and paying the registration fees. Team Bar Council of Punjab %26 Haryana&sender=BARCNL&route=4&country=91&DLT_TE_ID= 1707166695141110243';
+
+        $options = [
+            'verify' => false,
+        ];
+        $data['name'] = "LaravelCode";
+        $params = [
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+        ];
+        $client = new \GuzzleHttp\Client(['verify' => false,
+            'base_uri' => 'https://login.yourbulksms.com/api'
+        ]);
+        // $client->setDefaultOption(['verify' => false,
+            // 'base_uri' => 'https://login.yourbulksms.com/api'
+        // ]);
+        $response =  $client->request('GET', $url, []);
+        if ($response->getStatusCode() == '200') {
+            // $recordCreated = json_decode($response->getBody());
+            return true;
+        } else {
+            return true;
+        }
+
+
+        } catch (\GuzzleHttp\Exception\RequestException $requestError) {
+            return $requestError;
+            return $requestJson = json_decode($requestError->getResponse()->getBody()->getContents(), true);
+            \Illuminate\Support\Facades\Log::error($requestJson);
+        }
+
     }
 }

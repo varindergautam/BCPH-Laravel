@@ -41,6 +41,7 @@
                                                 <th>Email</th>
                                                 <th>Phone No.</th>
                                                 <th>Category</th>
+                                                <th>Verification</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead> 
@@ -87,6 +88,7 @@
                     { "data": "email" },
                     { "data": "mobile_number" },
                     { "data": "category" },
+                    { "data": "verified_user" },
                     { "data": "action" },                    
                 ],
                 "columnDefs":
@@ -94,6 +96,49 @@
                     
                     {
                         "targets": 5,
+                        render: function (data, type, row, meta) {
+
+                            var status = row['verified_user'] == 1 ? "checked" : "";
+
+                            html = `<ul class="p-0">`+
+                                    
+                                        `<li class="list-inline-item">
+
+                                        <div style="position: relative;" data-table=""
+
+                                        data-id="`+row.id+`"
+
+                                        data-status=" `+row.verified_user+`"
+
+                                        class="switch update_status "
+
+                                        data-url="`+row.verified_url+`"
+
+                                        data-title="Are you sure want to verified the user?" data-icon=""
+
+                                        data-success="User verified successfully!"
+
+                                        data-cancel="Verified  status did not changed!" title="Update">
+
+                                        <label>
+
+                                        <input class="status" id="togle-`+row.id+`" `+status+` type="checkbox">
+
+                                        <span class="lever slider round"></span>
+
+                                        </label>
+
+                                        </div>
+
+                                        </li>`
+                                        ;
+
+
+                            return html + `</ul>`;
+                        }
+                    },
+                    {
+                        "targets": 6,
                         render: function (data, type, row, meta) {
                             
                             console.log(row.edit);

@@ -7,6 +7,8 @@ use App\Http\Requests\UniversityStoreRequest;
 use App\Http\Requests\UniversityUpdateRequest;
 use App\Models\University;
 use Illuminate\Http\Request;
+use Mail;
+use PhpParser\Node\Stmt\TryCatch;
 
 class UniversityController extends Controller
 {
@@ -36,9 +38,11 @@ class UniversityController extends Controller
                 
                 $universitys[$key]['sr_no'] = $key + 1;
                 $universitys[$key]['name'] = $university->name;
+                $universitys[$key]['id'] = $university->id;
                 $universitys[$key]['email'] = $university->email;
                 $universitys[$key]['action'] = NULL;
                 $universitys[$key]['edit'] = route('admin.university.edit', $university->id);
+                $universitys[$key]['send_mail'] = url('admin/university/sendMail', $university->email);
             }
         }
 
@@ -126,5 +130,20 @@ class UniversityController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function sendMail($email) {
+        try {
+            \Mail::send([], [],
+                function ($message)  {
+                    $message
+                        ->from('noreplay@bervorapp.com', 'Bervor')
+                        ->to('varinder.slinfy@gmail.com')
+                        ->subject('test')
+                        ->setBody('message', 'text/html');
+                }); 
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }
