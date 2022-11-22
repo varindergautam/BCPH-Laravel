@@ -58,7 +58,7 @@ Payment Success
                         <div class="row">
                            <div class="col ">
                               <div class=" margin_top_33">
-                                  <a href="{{ route('applicationForm') }}" name="" class="custom_btn previous_btn_padding">Previous</a>
+                                  <a href="{{ route('payment') }}" name="" class="custom_btn previous_btn_padding">Previous</a>
                               </div>
                           </div>
                           <div class="col ">
