@@ -26,29 +26,23 @@
 
 <body>
     <div class="" style="width: 300px; margin: 0px auto">
-        <table width="60%" style="background-color:#ce920d;margin-left: 100px;" border="3px">
+        <table width="60%" style="" border="3px" cellspacing="0px">
             <tr>
-                <td width="15%" style="text-align: center;">
+                <td width="15%" style="text-align: center;border-bottom-color:#000000;background-color:#ce920d;">
                     <img src="{{ asset('front/images/logo.png') }}" style="width: 50px; height:50px;" />
                 </td>
-                <td width="85%" style="text-align: center; padding:0" >
+                <td width="85%" style="text-align: center; border-bottom-color:#000000;background-color:#ce920d;" >
                     <p><u>IDENTITY CARD</u></p>
                     <p style="color:#d53419; font-size:12px;"><b>BAR COUNCIL OF PUNJAB & HARYANA</b></p>
                     <span style="color: #524949;">(Under Advocates Act, 1981)</span>
                 </td>
             </tr>
-        </table>
-
-        <table width="60%"  border="3px">
             <tr>
-                <td colspan="2"></td>
-            </tr>
-            <tr>
-                <td width="20%" style="text-align: center;">
-                    <img src="{{ asset('front/images/logo.png') }}" width=""/>
+                <td width="20%" style="text-align: center; border-right-color:#fff;border-left-color:#000; border-bottom-color:#fff;">
+                    <img src="{{ asset('front/profile_signs/'. $user->profile_pic) }}" width=""/>
                 </td>
-                <td width="70%">
-                    <table width="100%" class="user_details">
+                <td width="80%" style="border-right-color:black;border-collapse:collapse; border-spacing:0px; cell-margin:0px; padding:0px">
+                    <table width="100%" class="user_details" cellspacing="0px" cellpadding="0px" style="border-right-color:black;border-collapse:collapse; border-spacing:0px; cell-margin:0px;">
                         <tr>
                             <td width="35%">
                                 <p>NAME</p>
@@ -98,24 +92,18 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2"></td>
-            </tr>
-        </table>
-
-        <table width="60%"  border="3px">
-            <tr>
-                <td width="33.3%" style="text-align: center">
+                <td width="33.3%" style="text-align: center; border-top-color:#fff;">
                     <p><img src="{{ asset('front/images/logo.png') }}" style="width: 50px; height:50px;" /></p>
                     <p>Valid Upto</p>
                     <p>25-10-2024</p>
                 </td>
-                <td style="text-align: center">
+                <td width="33.3%" style="text-align: center;border-top-color:#fff;">
                     <p>
                         <img src="{{ asset('front/images/logo.png') }}" style="width: 50px; height:50px;" />
                     </p>
                     <p>Holder Sign</p>
                 </td>
-                <td style="text-align: center">
+                <td width="33.3%" style="text-align: center;border-top-color:#fff;">
                     <p>
                         <img src="{{ asset('front/images/logo.png') }}" style="width: 50px; height:50px;" />
                     </p>
@@ -124,6 +112,86 @@
                 </td>
             </tr>
         </table>
+
+        {{-- <table width="60%" >
+            <tr>
+                <td width="20%" style="text-align: center; border-right-color:#fff;border-left-color:#000; border-bottom-color:#fff;">
+                    <img src="{{ asset('front/images/logo.png') }}" width=""/>
+                </td>
+                <td width="80%" style="border-right-color:black;">
+                    <table width="100%" class="user_details">
+                        <tr>
+                            <td width="35%">
+                                <p>NAME</p>
+                            </td>
+                            <td width="5%">:</td>
+                            <td width="60%">
+                                <p>Dishant</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Enrolment No</p>
+                            </td>
+                            <td width="5%">:</td>
+                            <td>
+                                <p>PH/7148/2022</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>F. Name</p>
+                            </td>
+                            <td width="5%">:</td>
+                            <td>
+                                <p>BHIM CHAND</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>DOB</p>
+                            </td>
+                            <td width="5%">:</td>
+                            <td>
+                                <p>08-08-1988</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: baseline;">
+                                <p>Address</p>
+                            </td>
+                            <td width="5%">:</td>
+                            <td>
+                                <p>H NO 1278 CHATTARGARH PATTI SIRSA</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table> --}}
+{{-- 
+        <table width="60%"  border="3px">
+            <tr>
+                <td width="33.3%" style="text-align: center; border-top-color:#fff;">
+                    <p><img src="{{ asset('front/images/logo.png') }}" style="width: 50px; height:50px;" /></p>
+                    <p>Valid Upto</p>
+                    <p>25-10-2024</p>
+                </td>
+                <td style="text-align: center;border-top-color:#fff;">
+                    <p>
+                        <img src="{{ asset('front/images/logo.png') }}" style="width: 50px; height:50px;" />
+                    </p>
+                    <p>Holder Sign</p>
+                </td>
+                <td style="text-align: center;border-top-color:#fff;">
+                    <p>
+                        <img src="{{ asset('front/images/logo.png') }}" style="width: 50px; height:50px;" />
+                    </p>
+                    <p>(Gurtej Singh Grewal)</p>
+                    <p>Hony. Secretary</p>
+                </td>
+            </tr>
+        </table> --}}
 
         <br>
         <br>

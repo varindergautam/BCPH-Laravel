@@ -28,6 +28,31 @@
 
     <title>BCPH - @yield('title')</title>
     @yield('style')
+
+    @auth
+    <style>
+        .form_heading h3 {
+            text-align: center;
+        }
+
+        .form-check-input, .form-control {
+            pointer-events: none;
+            background-color: #e9ecef;
+            border: none;
+            margin-top: 5px;
+        }
+
+        .remove_border {
+            border-left: 0px;
+            border-top: 0px;
+            border-right: 0px;
+        }
+    </style>
+
+    @php
+    $checkPayment = paymentConfirmaton();
+    @endphp
+    @endauth
 </head>
 
 <body>
@@ -313,6 +338,18 @@
         });
     </script>
     @yield('script')
+
+    @auth
+        <script>
+            $(document).ready(function() {
+                var checkPayment = '{{ $checkPayment }}';
+                if(checkPayment) {
+                    $('.form-control').attr("readonly", true);
+                    $('input[type=text]').attr("readonly", true);
+                }
+            });
+        </script>
+    @endauth
 </body>
 
 </html>

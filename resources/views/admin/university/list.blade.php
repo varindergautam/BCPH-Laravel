@@ -98,7 +98,6 @@
                         "targets": 3,
                         render: function(data, type, row, meta) {
 
-                            var status = row['status'] == 1 ? "checked" : "";
 
                             html = `<ul class="p-0">` +
                                 `<li class="list-inline-item">` +
@@ -111,7 +110,35 @@
 
                                 `</a>` +
 
-                                `</li>`;
+                                `</li>` + 
+
+                                `<li class="list-inline-item">
+
+                                    <div style="position: relative;" data-table=""
+
+                                    data-id="`+row.id+`"
+
+                                    data-status=" `+row.send_mail+`"
+
+                                    class=" update_status "
+
+                                    data-url="`+row.send_mail+`"
+
+                                    data-title="Are you sure want to send the email?" data-icon=""
+
+                                    data-success="Email send successfully!"
+
+                                    data-cancel="Email send cancel!" title="Send Email">
+
+                                    <label>
+
+                                    Send Mail
+
+                                    </label>
+
+                                    </div>
+
+                                    </li>`;
 
 
                             return html + `</ul>`;

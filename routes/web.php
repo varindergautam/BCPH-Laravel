@@ -39,7 +39,8 @@ Auth::routes([
         Route::post('/mailForgotPassword', 'mailForgotPassword')->name('mailForgotPassword');
 
         Route::get('/testEmail', 'testEmail')->name('testEmail');
-        Route::get('/testSms', 'testSms')->name('testSms');
+        Route::get('/testSms', 'sendSms')->name('testSms');
+       
     });
 
     // Route::get('/testPaytm', 'App\Http\Controllers\Front\ApplicationFormController@testPaytm')->name('testPaytm');
@@ -138,6 +139,7 @@ Auth::routes([
         Route::get('/userAjax', 'userAjax')->name('userAjax');
         Route::get('/view/{id}', 'show')->name('show');
         Route::get('/viewForm/{id}', 'viewForm')->name('viewForm');
+        Route::get('/verified/{id}/{verified}', 'verify_user')->name('verified');
 
         Route::get('/testPdf', 'testPdf')->name('testPdf');
 
@@ -165,6 +167,8 @@ Auth::routes([
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update', 'update')->name('update');
+
+        Route::get('/sendMail/{email}', 'sendMail')->name('sendMail');
       });
 
       Route::controller(App\Http\Controllers\Admin\CityController::class)

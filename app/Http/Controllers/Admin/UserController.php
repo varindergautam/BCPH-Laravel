@@ -9,12 +9,16 @@ use App\Models\CertifyForm;
 use App\Models\DeclarationForm;
 use App\Models\DocumentUpload;
 use App\Models\Fee;
+use App\Models\Signature;
 use App\Models\Undertaking;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
-use PhpOffice\PhpSpreadsheet\Writer\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf; 
+use Dompdf\Options;
 use Elibyy\TCPDF\Facades\TCPDF;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -34,6 +38,7 @@ class UserController extends Controller
             foreach($users as $key => $user) {
                 $fee = Fee::where('id', $user->category)->first();
                 $users[$key]['sr_no'] = $key + 1;
+                $users[$key]['id'] = $user->id;
                 $users[$key]['applicant_name'] = $user->applicant_name;
                 $users[$key]['email'] = $user->email;
                 $users[$key]['mobile_number'] = $user->mobile_number;
@@ -41,12 +46,14 @@ class UserController extends Controller
                 $users[$key]['action'] = NULL;
                 $users[$key]['show'] = route('admin.user.show', $user->id);
                 $users[$key]['viewForm'] = route('admin.user.viewForm', $user->id);
+                $users[$key]['verified_user'] = $user->verified;
+                $users[$key]['verified_url'] = url('admin/user/verified/'. $user->id .'/'.$user->verified);
             }
         }
 
         return Datatables::of($users)
             // ->addColumn('checkbox', '<input type="checkbox" name="checkbox[]" class="delete_check" value="" id="delcheck_"'.$row['id'].'/>')            
-            ->rawColumns(['action'])
+            ->rawColumns(['Verification', 'action'])
             ->make(true);
     }
 
@@ -67,12 +74,103 @@ class UserController extends Controller
         return view('admin.user.user_form', $data);
     }
 
+    public function verify_user($userId, $verified) {
+        try {
+            $user = User::find($userId);
+            $status = $verified;
+            if ($user) {
+                $user->verified = ($status == '0') ? '1' : '0';
+       
+                // $user->save();
+
+                $data['user'] = $user;
+
+                $data['signature'] = Signature::first();
+
+                $options = new Options();
+                $options->setIsRemoteEnabled(true);
+
+                $dompdf = new Dompdf($options);
+
+                $html = view('license_card.dom_pdf_card', $data);
+
+                $dompdf->loadHtml($html); 
+            
+                // (Optional) Setup the paper size and orientation 
+                $dompdf->setPaper('A4', 'portrait'); 
+                
+                // Render the HTML as PDF 
+                $dompdf->render();
+
+                // Output the generated PDF to Browser 
+                $fileName = $user->applicant_name .'_' . $user->id . '.pdf';
+
+                $path = Storage::disk('public')->path('license_card');
+                // $dompdf->stream($path .'/'.$fileName, array("Attachment" => 1));
+                $content = $dompdf->output();
+                Storage::put('public/license_card/' . $fileName, $content);
+
+                $filePAth = Storage::disk('local')->url('app/public/license_card/'.$fileName);
+
+                $fullPath = url() . '/' . $filePAth;
+
+                // $mail = Mail::send('mail', $data, function($message, $fullPath) {
+                //     $message->to('varindergautam48@gmail.com', 'Tutorials Point')->subject
+                //        ('Laravel Testing Mail with Attachment');
+                //     $message->attach($fullPath);
+                //     $message->from('varinder.slinfy@gmail.com','Virat Gandhi');
+                //  });
+
+                //  print_r($mail);
+
+                Mail::send([], [],
+                function ($message, $fullPath)  {
+                    $message
+                        ->from('noreplay@bervorapp.com', 'Bervor')
+                        ->to('varinder.slinfy@gmail.com')
+                        ->subject('test')
+                        ->setBody('message', 'text/html');
+                }); 
+
+                 die();
+    
+                $result['status'] = 1;
+                return response()->json($result, 200);
+            } else {
+                $result['status'] = 0;
+                return response()->json($result, 200);
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
     public function testPdf () {
         try {
             TCPDF::reset();
-            // TCPDF::SetFont('aealarabiya', '', 12);
 
-            $html = view('license_card.license_card');
+            $data['signature'] = Signature::first();
+
+            $options = new Options();
+            $options->setIsRemoteEnabled(true);
+
+            $dompdf = new Dompdf($options);
+
+            // $html = view('license_card.license_card');
+            $html = view('license_card.dom_pdf_card', $data);
+
+            $dompdf->loadHtml($html); 
+         
+            // (Optional) Setup the paper size and orientation 
+            $dompdf->setPaper('A4', 'portrait'); 
+            
+            // Render the HTML as PDF 
+            $dompdf->render();
+
+            // Output the generated PDF to Browser 
+            $dompdf->stream("invoice", array("Attachment" => 0));
+
+            die();
 
             TCPDF::SetTitle("Card");
             $tagvs = array('p' => array(0 => array('h' => 0, 'n' => 0), 1 => array('h' => 0, 'n' => 0)));
