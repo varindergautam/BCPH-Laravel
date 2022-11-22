@@ -159,7 +159,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="date_of_law_degree">7. 7.	Date on which the applicant obtained the law degree or provisional certificate in law:</label>
+                                    <label class="text-dark" for="date_of_law_degree">7. Date on which the applicant obtained the law degree or provisional certificate in law:</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="date" class="form-control" name="date_of_law_degree"
@@ -169,10 +169,34 @@
                             </div>
 
                             <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label class="text-dark" for="plus_two_mark">8. In case of 5 year Law course, give details of 10+2 Examination, </label>
+                                </div>
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="plus_two_mark">8. Whether the applicant passed 10+2
-                                        Examination before admission to 5 year Law Course, give full particulars. (An
-                                        attested copy to be enclosed), with percentage & Marks</label>
+                                    <label class="text-dark">a) Name of Board</label>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control " name="plus_two_name_of_board" id="plus_two_name_of_board"
+                                        placeholder="Enter name of board" value="{{ @$applicationForm->plus_two_name_of_board }}">
+                                    <strong id="plus_two_name_of_board-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark">b) Date of certificate</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control " name="plus_two_date_of_certificate" id="plus_two_date_of_certificate"
+                                        placeholder="Enter date of certificate" value="{{ @$applicationForm->plus_two_date_of_certificate }}">
+                                    <strong id="plus_two_date_of_certificate-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark">c) Percentage of marks</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control " name="plus_two_mark" id="plus_two_mark"
@@ -191,11 +215,9 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="">8. (a) Whether the applicant was graduate
-                                        before admission to the Law Course: Answer specifically "Yes or No," if yes give the
-                                        following particulars of graduation with percentage & Marks</label>
+                                    <label class="text-dark" for="">8. (A)  In case of 3 year LL.B Course, give details of Graduation Degree, </label>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input graduate_before_admission" type="radio"
                                             name="graduate_before_admission" id="graduate_before_admission0"
@@ -212,7 +234,86 @@
                                         <label class="form-check-label text-dark"
                                             for="graduate_before_admission1">Yes</label>
                                     </div>
+                                </div> --}}
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark" for="">a)  Name and place of College </label>
                                 </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control " name="graduation_degree_college_name" id="graduation_degree_college_name"
+                                        placeholder="Enter Name and place of College" value="{{ @$applicationForm->graduation_degree_college_name }}">
+                                    <strong id="graduation_degree_college_name-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark" for="">b) Name and place of University </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control " name="graduation_degree_university_name" id="graduation_degree_university_name"
+                                        placeholder="Enter Name and place of University" value="{{ @$applicationForm->graduation_degree_university_name }}">
+                                    <strong id="graduation_degree_university_name-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark" for="">c) Sessions/Period of Graduation</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control " name="graduation_degree_session_period" id="graduation_degree_session_period"
+                                        placeholder="Enter Sessions/Period of Graduation" value="{{ @$applicationForm->graduation_degree_session_period }}">
+                                    <strong id="graduation_degree_session_period-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark" for="">d) Date of Graduation Degree</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control " name="graduation_degree_date_of_graduation" id="graduation_degree_date_of_graduation"
+                                        placeholder="Enter Date of Graduation Degree" value="{{ @$applicationForm->graduation_degree_date_of_graduation }}">
+                                    <strong id="graduation_degree_date_of_graduation-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark" for="">e) Percentage of marks in Graduation</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control " name="graduation_degree_marks" id="graduation_degree_marks"
+                                        placeholder="Enter Percentage of marks in Graduation" value="{{ @$applicationForm->graduation_degree_marks }}">
+                                    <strong id="graduation_degree_marks-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark" for="">f) Name/Nature of Graduation course</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control " name="graduation_degree_course_name" id="graduation_degree_course_name"
+                                        placeholder="Enter Name/Nature of Graduation course" value="{{ @$applicationForm->graduation_degree_course_name }}">
+                                    <strong id="graduation_degree_course_name-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label class="text-dark" for="">8 (B) In case, admission in LL.B Three Year Course <br>
+                                        Is based upon Post Graduation degree give details of    such post Graduation like a column 8(A) (with original duly signed and stamp certificate from the concerned college/university to the effect that admission in LL.B Course was based upon Post Graduation
+                                        </label>
+                                </div>
+                                {{-- <div class="col-md-6">
+                                    <input type="text" class="form-control " name="graduation_degree_course_name" id="graduation_degree_course_name"
+                                        placeholder="Enter Name/Nature of Graduation course" value="{{ @$applicationForm->graduation_degree_course_name }}">
+                                    <strong id="graduation_degree_course_name-error" class="error"></strong>
+                                </div> --}}
                             </div>
 
                             <div class="row mb-3 was_graduate" style="{{ $graduate_before_admission }}">
@@ -267,7 +368,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="text-dark" for="english_compulsory">(v) Whether English was one of the
                                         compulsory Subject.</label>
@@ -286,7 +387,7 @@
                                         <label class="form-check-label text-dark" for="english_compulsory0">No</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -301,9 +402,27 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="law_college_name">9. The name of the College at which
-                                        the course of instructions in law was taken in LLB. Ist year and the name of the
-                                        University from which the degree in law was obtained</label>
+                                    <label class="text-dark" for="llb_university_name">9. Name and Place of University which issued LL.B Degree
+                                     </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control university form-select" name="llb_university_name" id="llb_university_name">
+                                        <option selected="" disabled="">Select University</option>
+                                        @forelse ($universities as $university)
+                                            <option value="{{ $university->id }}"
+                                                {{ @$applicationForm->llb_university_name == $university->id ? 'selected' : '' }}>
+                                                {{ $university->name }}</option>
+                                        @empty
+                                            <option value="">No data</option>
+                                        @endforelse
+                                    </select>
+                                    <strong id="llb_university_name-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark" for="law_college_name">9. (a) Name and Place of LL.B College</label>
                                 </div>
                                 <div class="col-md-6">
                                     {{-- <input type="text" class="form-control" id="law_college_name"
@@ -323,9 +442,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="law_college_join_date">(i) The month and the year in
-                                        which he/she started/commenced the course of instruction in LLB. Ist year, i.e. date
-                                        of joining of LL.B. course.</label>
+                                    <label class="text-dark" for="law_college_join_date">(i) Date/Month of Admission in LL.B Course</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="date" class="form-control" id="law_college_join_date"
@@ -337,8 +454,19 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="law_college_duration_year">(ii) The duration of the
-                                        course of instruction law. (whether 3 years or 5 years course)</label>
+                                    <label class="text-dark" for="law_college_completion_date">(ii) Date/Month of Completion of LL.B Course</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" id="law_college_completion_date"
+                                        name="law_college_completion_date" placeholder="Enter law college completion date"
+                                        value="{{ @$applicationForm->law_college_completion_date }}">
+                                    <strong id="law_college_completion_date-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark" for="law_college_duration_year">(iii) Duration of LL.B Course (3 or 5 Year)</label>
                                 </div>
                                 <div class="col-md-6">
                                     <select class="form-control form-select" name="law_college_duration_year"
@@ -357,8 +485,19 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="law_college_passed">(iii) The date on which the
-                                        examination passed/declared and the degree in law was taken/issued.</label>
+                                    <label class="text-dark" for="law_college_passed">(iv)	Date of issuance of LL.B Provisional Certificate/Degree </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" id="law_college_issuance_date"
+                                        name="law_college_issuance_date" placeholder="Enter law college issuance date"
+                                        value="{{ @$applicationForm->law_college_issuance_date }}">
+                                    <strong id="law_college_issuance_date-error" class="error"></strong>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="text-dark" for="law_college_passed">(v) Date/Month of LL.B Final Year Examination.</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="date" class="form-control" id="law_college_passed"
@@ -370,8 +509,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="name_of_degree_obtained">(iv) The name of degree
-                                        obtained. (Whether LL.B Professional OR Academic)</label>
+                                    <label class="text-dark" for="name_of_degree_obtained">(vi)	The Name/Nature of Professional LL.B degree)</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
@@ -393,8 +531,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="medium_instruction">(v) The medium of instructions in
-                                        the law Course</label>
+                                    <label class="text-dark" for="medium_instruction">(vii)	The medium of instructions in the law Course</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
@@ -424,9 +561,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="private_study_duration_year">(vi) Whether the law degree
-                                        was taken by private Study OR by Regular Attendance at classes for 3 or 5 years as
-                                        required under the Bar Council of India Rules</label>
+                                    <label class="text-dark" for="private_study_duration_year">(viii)	State as to LLB Course is done by private Study or by attending regular classes</label>
                                 </div>
                                 <div class="col-md-6">
                                     <select class="form-control form-select" name="private_study_duration_year"
@@ -475,10 +610,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="">11. Whether or not, the applicant holds or has
-                                        ever held any appointment under Government, Local body, statutory authority or in
-                                        any other concern if so, the nature of such appointment holds or held. Particulars
-                                        of service, with date of joining & date of retirement be furnished.</label>
+                                    <label class="text-dark" for="">11. Whether or not, the applicant holds or ever held any appointment under Government, Local body, statutory authority or in any other concern if so, the nature of such appointment. Particulars of service, with date ofjoining & date of retirement. (attached necessary proof with duly issued character certificate in original from HOD).</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
@@ -573,7 +705,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="">13. (b) WWhether any Criminal Proceedings pending against the applicant: If so, its full particulars as to the name of the Court, date and nature of proceedings. Attached attested copy of FIR, certified copy of Bail order if any.</label>
+                                    <label class="text-dark" for="">13. (b) Whether any Criminal Proceedings pending against the applicant: If so, its full particulars as to the name of the Court, date and nature of proceedings. Attached attested copy of FIR, certified copy of Bail order if any.</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
@@ -608,12 +740,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="">14. Whether the applicant has been
-                                        dismissed/terminated/retired/suspended/removed from Government Service, the service
-                                        of any Local Body or other Statutory Authority or from any other service : If so,
-                                        particulars and proof should be given to show that
-                                        dismissal/termination/retirement/removal or suspension was not due to conduct
-                                        rendering him unfit to be enrolled as an Advocate.</label>
+                                    <label class="text-dark" for="">14. Whether the applicant has been dismissed/ terminated/suspended/removed from the  Service of Govt., Local Body, other Statutory Authority or from any other service :If so, give its particulars to show that dismissal/ termination/removal or suspension was not due to conduct rendering him unfit to be enrolled as an Advocate (also attach  the order of such dismissal etc.)</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">
@@ -678,7 +805,7 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="text-dark" for="">16. 16.	Whether the applicant has previously applied for Enrolment as an Advocate to any High Court or Bar Council. If so, with what result? Also attached certified copy of final order</label>
+                                    <label class="text-dark" for="">16.	Whether the applicant has previously applied for Enrolment as an Advocate to any High Court or Bar Council. If so, with what result? Also attached certified copy of final order</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline">

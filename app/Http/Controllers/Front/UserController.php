@@ -202,15 +202,6 @@ class UserController extends Controller
 
         $url = 'https://login.yourbulksms.com/api/sendhttp.php?authkey=2326AD0y9UmRXx5a75457f&mobiles='.$userDetails['mobile_number'].'&message=Dear Applicant, Your registration ID is {'.$userDetails['email'].'} and the password is {'.$userDetails['password'].'}. Kindly log in to your account after completing the enrolment form and paying the registration fees. Team Bar Council of Punjab %26 Haryana&sender=BARCNL&route=4&country=91&DLT_TE_ID= 1707166695141110243';
 
-        $options = [
-            'verify' => false,
-        ];
-        $data['name'] = "LaravelCode";
-        $params = [
-            'headers' => [
-                'Accept' => 'application/json',
-            ],
-        ];
         $client = new \GuzzleHttp\Client(['verify' => false,
             'base_uri' => 'https://login.yourbulksms.com/api'
         ]);

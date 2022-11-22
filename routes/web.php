@@ -43,6 +43,15 @@ Auth::routes([
        
     });
 
+    Route::controller(App\Http\Controllers\Front\InsuranceController::class)
+    ->prefix('insurance')
+    ->as('insurance.')
+    ->group(function () {
+        Route::get('/', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+       
+    });
+
     // Route::get('/testPaytm', 'App\Http\Controllers\Front\ApplicationFormController@testPaytm')->name('testPaytm');
     // Route::post('/status', 'App\Http\Controllers\Front\ApplicationFormController@paymentCallback')->name('status');
 
@@ -191,6 +200,16 @@ Auth::routes([
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update', 'update')->name('update');
+      });
+
+      Route::controller(App\Http\Controllers\Admin\InsuranceController::class)
+      ->prefix('insurance')
+      ->as('insurance.')
+      ->group(function () {
+        Route::get('/', 'index')->name('list');
+        Route::get('/insuranceAjax', 'insuranceAjax')->name('insuranceAjax');
+        Route::get('/remark/{id}', 'remark')->name('remark');
+
       });
     });
   });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\College;
 use App\Models\Fee;
+use App\Models\Insurance;
 use App\Models\University;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class DashboardController extends Controller
         $data['total_univeristies'] = University::count();
         $data['total_colleges'] = College::count();
         $data['total_cities'] = City::count();
+        $data['total_insurance'] = Insurance::count();
         return view('admin.dashboard.dashboard', $data);
     }
 }

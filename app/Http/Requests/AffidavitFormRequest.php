@@ -28,9 +28,9 @@ class AffidavitFormRequest extends FormRequest
             'district_name' => 'required',
             'bachelor_law_degree_college_name' => 'required',
             'place_name' => 'required',
-            'type_born_in_oath' => 'required',
-            'college_name_oath' => 'required',
-            'place_name_oath' => 'required',
+            // 'type_born_in_oath' => 'required',
+            // 'college_name_oath' => 'required',
+            // 'place_name_oath' => 'required',
         ];
     }
 }
