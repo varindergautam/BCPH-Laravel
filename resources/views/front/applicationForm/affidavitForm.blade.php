@@ -36,7 +36,7 @@ Affidavit Form
                                         <p>That my nationality is Indian and I am a citizen of India.</p>
                                     </li>
                                     <li>
-                                        <p>	That I have obtained my Bachelor of Laws Degree from the <input type="text" name="bachelor_law_degree_college_name" placeholder="Enter college name" value="{{ @$affidavit_data->bachelor_law_degree_college_name }}"><strong id="bachelor_law_degree_college_name-error" class="error"></strong> </p>
+                                        <p>	That I have obtained my Bachelor of Laws Degree from the <input type="text" name="bachelor_law_degree_college_name" placeholder="Enter college name" value="{{ @$application_data->college->name }}"><strong id="bachelor_law_degree_college_name-error" class="error"></strong> </p>
                                     </li>
                                 </ol>
 
@@ -176,7 +176,7 @@ Affidavit Form
     jQuery(document).ready(function(){
         $('form').on('submit', function (e) {
             e.preventDefault();
-            
+
             var url = baseUrl+'/saveAffidavitForm';
             var method = $(this).attr('method');
             var formData = new FormData(this);

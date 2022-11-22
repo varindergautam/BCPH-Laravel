@@ -401,6 +401,7 @@ class ApplicationFormController extends Controller
      * This function used to open the affidavit form
      */
     public function affidavitForm() {
+        $data['application_data'] = ApplicationForm::with('university', 'college')->where('user_id', Auth::user()->id)->first();
         $data['affidavit_data'] = AffidavitForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.affidavitForm', $data);
     }
@@ -436,7 +437,7 @@ class ApplicationFormController extends Controller
      * This function used to open the certify form
      */
     public function certifyForm() {
-        $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+        $data['application_form'] = ApplicationForm::with('university', 'college')->where('user_id', Auth::user()->id)->first();
         $data['certify_form'] = CertifyForm::where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.certify', $data);
     }
@@ -472,7 +473,7 @@ class ApplicationFormController extends Controller
      * This function used to open the enrolment committte form
      */
     public function enrolmentCommittteForm() {
-        $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+        $data['application_form'] = ApplicationForm::with('university', 'college')->where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.enrolmentCommittteForm', $data);
     }
 
@@ -487,7 +488,7 @@ class ApplicationFormController extends Controller
      * This function used to open the identity card form
      */
     public function identityCard() {
-        $data['application_form'] = ApplicationForm::where('user_id', Auth::user()->id)->first();
+        $data['application_form'] = ApplicationForm::with('university', 'college')->where('user_id', Auth::user()->id)->first();
         return view('front.applicationForm.identityCard', $data);
     }
 
