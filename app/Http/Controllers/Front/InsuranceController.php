@@ -61,7 +61,7 @@ class InsuranceController extends Controller
             }
         
         } catch (\Throwable $th) {
-            throw $th->getMessage();
+            return $th->getMessage();
         }
     }
 }

@@ -86,7 +86,15 @@ Payment
                       </div> --}}
                             <div class="col ">
                                 <div class="submit_btn">
+                                    @php
+                                        $checkPayment = paymentConfirmaton();
+                                    @endphp
+                                    @if($checkPayment)
+                                    <a href="{{ route('paymentDetail', @$applicationForm->paytm_order_id) }}" name="" class="custom_btn previous_btn_padding float-end">Next</a>
+                                    @else
                                     <input type="submit" name="" value="Next" class="float-end">
+
+                                    @endif
                                 </div>
                             </div>
                         </div>

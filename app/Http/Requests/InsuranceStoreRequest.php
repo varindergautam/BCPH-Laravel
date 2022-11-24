@@ -30,6 +30,17 @@ class InsuranceStoreRequest extends FormRequest
             'mobile_no' => 'required|unique:insurances,mobile_no',
             'email_address' => 'required|unique:insurances,email_address',
             'selection'=> 'required',
+            'address'=> 'required',
+            'nominee_name'=> 'required',
+            'enrolment_year'=> 'required',
+            'birth_date'=> 'required',
+            'age'=> 'required',
+            'enrolment_date'=> 'required',
+            'bar_association'=> 'required',
+            'profile_pic'=> 'required',
+            'sign'=> 'required',
+            'enrolment_certificate'=> 'required',
+            'residence_certificate'=> 'required',
         ];
     }
 }

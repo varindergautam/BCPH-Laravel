@@ -30,11 +30,10 @@ class CreateIdCardsTable extends Migration
             $table->string('card_number')->nullable();
             $table->string('sign')->nullable();
             $table->string('profile_pic')->nullable();
-
             $table->timestamps();
             $table->softDeletes();
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.
