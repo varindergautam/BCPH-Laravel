@@ -48,7 +48,7 @@
                                                     <th>Sign</th>
                                                     <th>Enrolment Certificate</th>
                                                     <th>Residence Certificate</th>
-                                                    <th>Action</th>
+                                                    {{-- <th>Action</th> --}}
                                                 </tr>
                                             </thead>
                                         </table>
@@ -147,28 +147,28 @@
                             return '<img src='+data+' width="100px">' ;
                         }
                     },
-                    { "orderable": false, "data": "action",
-                    render: function(data, type, row, meta) {
+                    // { "orderable": false, "data": "action",
+                    // render: function(data, type, row, meta) {
 
-                        var status = row['status'] == 1 ? "checked" : "";
+                    //     var status = row['status'] == 1 ? "checked" : "";
 
-                        html = `<ul class="p-0">` +
-                            `<li class="list-inline-item">` +
+                    //     html = `<ul class="p-0">` +
+                    //         `<li class="list-inline-item">` +
 
-                            `<a href=""` +
+                    //         `<a href=""` +
 
-                            `class="info-btn1 openRemark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-url="`+row.remarks_url+`">` +
+                    //         `class="info-btn1 openRemark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-url="`+row.remarks_url+`">` +
 
-                            `Verify` +
+                    //         `Verify` +
 
-                            `</a>` +
+                    //         `</a>` +
 
-                            `</li>`;
+                    //         `</li>`;
 
 
-                        return html + `</ul>`;
-                        }
-                    },
+                    //     return html + `</ul>`;
+                    //     }
+                    // },
                 ],
                 // "dom": 'lBfrtip',
                 // "buttons": [        

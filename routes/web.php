@@ -40,7 +40,7 @@ Auth::routes([
 
         Route::get('/testEmail', 'testEmail')->name('testEmail');
         Route::get('/testSms', 'sendSms')->name('testSms');
-       
+
     });
 
     Route::controller(App\Http\Controllers\Front\InsuranceController::class)
@@ -49,8 +49,38 @@ Auth::routes([
     ->group(function () {
         Route::get('/', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
-       
+
     });
+
+
+    /// This code by kamlesh
+Route::controller(App\Http\Controllers\Front\IdCardController::class)
+->prefix('id_card')
+->as('id_card.')
+->group(function(){
+   Route::get('/','create')->name('create');
+   Route::post('/store','store')->name('store');
+
+});
+
+    /// This code by kamlesh
+    Route::controller(App\Http\Controllers\Front\ContinuityController::class)
+    ->prefix('continuity')
+    ->as('continuity.')
+    ->group(function(){
+       Route::get('/','create')->name('create');
+       Route::post('/store','store')->name('store');
+
+    });
+
+        /// This code by kamlesh
+        Route::controller(App\Http\Controllers\Front\RegularFromControlar::class)
+        ->prefix('regular')
+        ->as('regular.')
+        ->group(function(){
+           Route::get('/','create')->name('create');
+           Route::post('/store','store')->name('store');
+        });
 
     // Route::get('/testPaytm', 'App\Http\Controllers\Front\ApplicationFormController@testPaytm')->name('testPaytm');
     // Route::post('/status', 'App\Http\Controllers\Front\ApplicationFormController@paymentCallback')->name('status');
@@ -208,6 +238,34 @@ Auth::routes([
       ->group(function () {
         Route::get('/', 'index')->name('list');
         Route::get('/insuranceAjax', 'insuranceAjax')->name('insuranceAjax');
+        Route::get('/remark/{id}', 'remark')->name('remark');
+
+      });
+// Code by kamlesh
+      Route::controller(App\Http\Controllers\Admin\IdCardController::class)
+      ->prefix('id_card')
+      ->as('id_card.')
+      ->group(function () {
+        Route::get('/', 'index')->name('list');
+        Route::get('/id_cardAjax', 'id_cardAjax')->name('id_cardAjax');
+        Route::get('/remark/{id}', 'remark')->name('remark');
+
+      });
+      Route::controller(App\Http\Controllers\Admin\ContinuityController::class)
+      ->prefix('continuity')
+      ->as('continuity.')
+      ->group(function () {
+        Route::get('/', 'index')->name('list');
+        Route::get('/continuityAjax', 'continuityAjax')->name('continuityAjax');
+        Route::get('/remark/{id}', 'remark')->name('remark');
+
+      });
+      Route::controller(App\Http\Controllers\Admin\RegularFromControlar::class)
+      ->prefix('regular')
+      ->as('regular.')
+      ->group(function () {
+        Route::get('/', 'index')->name('list');
+        Route::get('/regularAjax', 'regularAjax')->name('regularAjax');
         Route::get('/remark/{id}', 'remark')->name('remark');
 
       });
